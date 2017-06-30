@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="Active" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="Name2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Position" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="RequirementStatusId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RemoteRequirementStatus", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "active",
-    "name2",
+    "name",
     "position",
     "requirementStatusId"
 })
@@ -48,8 +48,8 @@ public class RemoteRequirementStatus {
 
     @XmlElement(name = "Active")
     protected Boolean active;
-    @XmlElementRef(name = "Name2", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> name2;
+    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> name;
     @XmlElement(name = "Position")
     protected Integer position;
     @XmlElement(name = "RequirementStatusId")
@@ -80,27 +80,27 @@ public class RemoteRequirementStatus {
     }
 
     /**
-     * Gets the value of the name2 property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public JAXBElement<String> getName2() {
-        return name2;
+    public JAXBElement<String> getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the name2 property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public void setName2(JAXBElement<String> value) {
-        this.name2 = value;
+    public void setName(JAXBElement<String> value) {
+        this.name = value;
     }
 
     /**

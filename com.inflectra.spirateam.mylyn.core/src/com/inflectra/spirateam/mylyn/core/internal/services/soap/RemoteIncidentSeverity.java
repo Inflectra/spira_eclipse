@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="Active" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="Color" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Name2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="SeverityId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "RemoteIncidentSeverity", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "active",
     "color",
-    "name2",
+    "name",
     "severityId"
 })
 public class RemoteIncidentSeverity {
@@ -50,8 +50,8 @@ public class RemoteIncidentSeverity {
     protected Boolean active;
     @XmlElementRef(name = "Color", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> color;
-    @XmlElementRef(name = "Name2", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> name2;
+    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> name;
     @XmlElementRef(name = "SeverityId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> severityId;
 
@@ -104,27 +104,27 @@ public class RemoteIncidentSeverity {
     }
 
     /**
-     * Gets the value of the name2 property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public JAXBElement<String> getName2() {
-        return name2;
+    public JAXBElement<String> getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the name2 property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public void setName2(JAXBElement<String> value) {
-        this.name2 = value;
+    public void setName(JAXBElement<String> value) {
+        this.name = value;
     }
 
     /**
