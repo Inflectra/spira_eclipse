@@ -9,6 +9,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraImportExport;
+import com.inflectra.spirateam.mylyn.core.internal.services.soap.ArrayOfint;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteIncident;
 /**
  * Represents a single incident in SpiraTeam
@@ -22,7 +23,8 @@ public class Incident extends Artifact
     protected int incidentStatusId;
     protected int incidentTypeId;
     protected int openerId;
-    protected Integer testRunStepId;
+    //changed below from Integer to ArrayOfint
+    protected ArrayOfint testRunStepIds;
     protected Integer detectedReleaseId;
     protected Integer resolvedReleaseId;
     protected Integer verifiedReleaseId;
@@ -121,7 +123,7 @@ public class Incident extends Artifact
         this.incidentStatusId = remoteIncident.getIncidentStatusId().getValue();
         this.incidentTypeId = remoteIncident.getIncidentTypeId().getValue();
         this.openerId = remoteIncident.getOpenerId().getValue();
-        this.testRunStepId = remoteIncident.getTestRunStepId().getValue();
+        this.testRunStepIds = remoteIncident.getTestRunStepIds().getValue();
         this.detectedReleaseId = remoteIncident.getDetectedReleaseId().getValue();
         this.resolvedReleaseId = remoteIncident.getResolvedReleaseId().getValue();
         this.verifiedReleaseId = remoteIncident.getVerifiedReleaseId().getValue();
@@ -170,7 +172,8 @@ public class Incident extends Artifact
     	remoteIncident.setIncidentStatusId(SpiraImportExport.CreateJAXBInteger("IncidentStatusId",this.incidentStatusId));
     	remoteIncident.setIncidentTypeId(SpiraImportExport.CreateJAXBInteger("IncidentTypeId",this.incidentTypeId));
     	remoteIncident.setOpenerId(SpiraImportExport.CreateJAXBInteger("OpenerId",this.openerId));
-    	remoteIncident.setTestRunStepId(SpiraImportExport.CreateJAXBInteger("TestRunStepId",this.testRunStepId));
+    	remoteIncident.setTestRunStepIds(SpiraImportExport.CreateJAXBArrayOfInt("TestRunStepIds", this.testRunStepIds));
+    	//changed above to work with a list of int's instead of a singular int
     	remoteIncident.setDetectedReleaseId(SpiraImportExport.CreateJAXBInteger("DetectedReleaseId",this.detectedReleaseId));
     	remoteIncident.setResolvedReleaseId(SpiraImportExport.CreateJAXBInteger("ResolvedReleaseId",this.resolvedReleaseId));
     	remoteIncident.setVerifiedReleaseId(SpiraImportExport.CreateJAXBInteger("VerifiedReleaseId",this.verifiedReleaseId));
@@ -323,32 +326,29 @@ public class Incident extends Artifact
     }
 
      /**
-     * Gets the value of the testRunStepId property.
+     * Gets the value of the testRunStepIds property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
      *     
      */
-    public Integer getTestRunStepId() {
-        return testRunStepId;
+    public ArrayOfint getTestRunStepIds() {
+        return testRunStepIds;
     }
 
     /**
-     * Sets the value of the testRunStepId property.
+     * Sets the value of the testRunStepIds property.
      * 
      * @param value
      *     allowed object is
      *     {@link Integer }
      *     
      */
-    public void setTestRunStepId(Integer value)
+    public void setTestRunStepIds(ArrayOfint value)
     {
-    	if (hasChanged(this.testRunStepId, value))
+    	if (hasChanged(this.testRunStepIds, value))
     	{
     		this.dataChanged = true;
     	}
-        this.testRunStepId = value;
+        this.testRunStepIds = value;
     }
 
     /**

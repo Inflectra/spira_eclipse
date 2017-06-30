@@ -23,7 +23,8 @@ public class Requirement
     protected Integer releaseId;
     protected String releaseVersionNumber;
     protected boolean summary;
-    protected Integer plannedEffort;
+    //changed planned to estimated
+    protected Integer estimatedEffort;
     
     //Contains the collection of comments
     protected List<RequirementComment> comments = new ArrayList<RequirementComment>();
@@ -94,7 +95,7 @@ public class Requirement
         this.releaseId = remoteRequirement.getReleaseId().getValue();
         this.releaseVersionNumber = remoteRequirement.getReleaseVersionNumber().getValue();
         this.summary = remoteRequirement.isSummary();
-        this.plannedEffort = remoteRequirement.getPlannedEffort().getValue();
+        this.estimatedEffort = remoteRequirement.getEstimatedEffort().getValue();
     }
     
     /**
@@ -121,7 +122,7 @@ public class Requirement
     	remoteRequirement.setStatusId(SpiraImportExport.CreateJAXBInteger("StatusId", this.statusId));
     	remoteRequirement.setReleaseId(SpiraImportExport.CreateJAXBInteger("ReleaseId", this.releaseId));
     	remoteRequirement.setImportanceId(SpiraImportExport.CreateJAXBInteger("ImportanceId", this.importanceId));
-    	remoteRequirement.setPlannedEffort(SpiraImportExport.CreateJAXBInteger("PlannedEffort", this.plannedEffort));
+    	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("PlannedEffort", this.estimatedEffort));
             	
         return remoteRequirement;
     }
@@ -281,27 +282,27 @@ public class Requirement
     }
 
     /**
-     * Gets the value of the plannedEffort property.
-     * 
+     * Gets the value of the estimatedEffort property.
+     * Changed from planned in 4.0 to estimated in 5.0
      * @return
      *     possible object is
      *     {@link Integer }
      *     
      */
-    public Integer getPlannedEffort() {
-        return plannedEffort;
+    public Integer getEstimatedEffort() {
+        return estimatedEffort;
     }
 
     /**
-     * Sets the value of the plannedEffort property.
-     * 
+     * Sets the value of the estimatedEffort property.
+     * Changed from planned in 4.0 to estimated in 5.0
      * @param value
      *     allowed object is
      *     {@link Integer }
      *     
      */
-    public void setPlannedEffort(Integer value) {
-        this.plannedEffort = value;
+    public void setEstimatedEffort(Integer value) {
+        this.estimatedEffort = value;
     }
 
 	/**
