@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "TestCase_CreateParameterToken")
 public class TestCaseCreateParameterToken {
 
-    @XmlElementRef(name = "parameterName", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "parameterName", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> parameterName;
 
     /**
@@ -59,7 +59,7 @@ public class TestCaseCreateParameterToken {
      *     
      */
     public void setParameterName(JAXBElement<String> value) {
-        this.parameterName = ((JAXBElement<String> ) value);
+        this.parameterName = value;
     }
 
 }

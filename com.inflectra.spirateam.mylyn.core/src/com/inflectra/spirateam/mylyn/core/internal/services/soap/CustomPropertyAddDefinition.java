@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteCustomProperty" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteCustomProperty" minOccurs="0"/>
+ *         &lt;element name="remoteCustomProperty" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteCustomProperty" minOccurs="0"/>
  *         &lt;element name="customListId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -37,9 +37,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "CustomProperty_AddDefinition")
 public class CustomPropertyAddDefinition {
 
-    @XmlElementRef(name = "remoteCustomProperty", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteCustomProperty", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteCustomProperty> remoteCustomProperty;
-    @XmlElementRef(name = "customListId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "customListId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> customListId;
 
     /**
@@ -63,7 +63,7 @@ public class CustomPropertyAddDefinition {
      *     
      */
     public void setRemoteCustomProperty(JAXBElement<RemoteCustomProperty> value) {
-        this.remoteCustomProperty = ((JAXBElement<RemoteCustomProperty> ) value);
+        this.remoteCustomProperty = value;
     }
 
     /**
@@ -87,7 +87,7 @@ public class CustomPropertyAddDefinition {
      *     
      */
     public void setCustomListId(JAXBElement<Integer> value) {
-        this.customListId = ((JAXBElement<Integer> ) value);
+        this.customListId = value;
     }
 
 }

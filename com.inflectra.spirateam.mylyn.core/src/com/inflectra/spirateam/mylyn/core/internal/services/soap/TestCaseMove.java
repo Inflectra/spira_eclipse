@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="testCaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="destinationTestCaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="testCaseFolderId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,14 +32,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "testCaseId",
-    "destinationTestCaseId"
+    "testCaseFolderId"
 })
 @XmlRootElement(name = "TestCase_Move")
 public class TestCaseMove {
 
     protected Integer testCaseId;
-    @XmlElementRef(name = "destinationTestCaseId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
-    protected JAXBElement<Integer> destinationTestCaseId;
+    @XmlElementRef(name = "testCaseFolderId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> testCaseFolderId;
 
     /**
      * Gets the value of the testCaseId property.
@@ -66,27 +66,27 @@ public class TestCaseMove {
     }
 
     /**
-     * Gets the value of the destinationTestCaseId property.
+     * Gets the value of the testCaseFolderId property.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
      *     
      */
-    public JAXBElement<Integer> getDestinationTestCaseId() {
-        return destinationTestCaseId;
+    public JAXBElement<Integer> getTestCaseFolderId() {
+        return testCaseFolderId;
     }
 
     /**
-     * Sets the value of the destinationTestCaseId property.
+     * Sets the value of the testCaseFolderId property.
      * 
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
      *     
      */
-    public void setDestinationTestCaseId(JAXBElement<Integer> value) {
-        this.destinationTestCaseId = ((JAXBElement<Integer> ) value);
+    public void setTestCaseFolderId(JAXBElement<Integer> value) {
+        this.testCaseFolderId = value;
     }
 
 }

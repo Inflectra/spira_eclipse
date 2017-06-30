@@ -24,7 +24,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;sequence>
  *         &lt;element name="ArtifactTypeId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ConcurrencyDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="CustomProperties" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteArtifactCustomProperty" minOccurs="0"/>
+ *         &lt;element name="CustomProperties" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteArtifactCustomProperty" minOccurs="0"/>
+ *         &lt;element name="IsAttachments" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="ProjectId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -35,22 +36,24 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteArtifact", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteArtifact", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "artifactTypeId",
     "concurrencyDate",
     "customProperties",
+    "isAttachments",
     "projectId"
 })
 @XmlSeeAlso({
-    RemoteRelease.class,
-    RemoteTestStep.class,
-    RemoteTestRun.class,
     RemoteTestSet.class,
-    RemoteIncident.class,
-    RemoteTask.class,
-    RemoteRequirement.class,
     RemoteAutomationHost.class,
-    RemoteTestCase.class
+    RemoteTestCase.class,
+    RemoteTestStep.class,
+    RemoteIncident.class,
+    RemoteRequirement.class,
+    RemoteDocument.class,
+    RemoteRelease.class,
+    RemoteTask.class,
+    RemoteTestRun.class
 })
 public class RemoteArtifact {
 
@@ -59,9 +62,11 @@ public class RemoteArtifact {
     @XmlElement(name = "ConcurrencyDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar concurrencyDate;
-    @XmlElementRef(name = "CustomProperties", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CustomProperties", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteArtifactCustomProperty> customProperties;
-    @XmlElementRef(name = "ProjectId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElement(name = "IsAttachments")
+    protected Boolean isAttachments;
+    @XmlElementRef(name = "ProjectId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> projectId;
 
     /**
@@ -133,7 +138,31 @@ public class RemoteArtifact {
      *     
      */
     public void setCustomProperties(JAXBElement<ArrayOfRemoteArtifactCustomProperty> value) {
-        this.customProperties = ((JAXBElement<ArrayOfRemoteArtifactCustomProperty> ) value);
+        this.customProperties = value;
+    }
+
+    /**
+     * Gets the value of the isAttachments property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isIsAttachments() {
+        return isAttachments;
+    }
+
+    /**
+     * Sets the value of the isAttachments property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIsAttachments(Boolean value) {
+        this.isAttachments = value;
     }
 
     /**
@@ -157,7 +186,7 @@ public class RemoteArtifact {
      *     
      */
     public void setProjectId(JAXBElement<Integer> value) {
-        this.projectId = ((JAXBElement<Integer> ) value);
+        this.projectId = value;
     }
 
 }

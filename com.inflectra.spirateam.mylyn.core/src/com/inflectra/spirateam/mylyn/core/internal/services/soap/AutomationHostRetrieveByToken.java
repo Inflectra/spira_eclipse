@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "AutomationHost_RetrieveByToken")
 public class AutomationHostRetrieveByToken {
 
-    @XmlElementRef(name = "token", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "token", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> token;
 
     /**
@@ -59,7 +59,7 @@ public class AutomationHostRetrieveByToken {
      *     
      */
     public void setToken(JAXBElement<String> value) {
-        this.token = ((JAXBElement<String> ) value);
+        this.token = value;
     }
 
 }

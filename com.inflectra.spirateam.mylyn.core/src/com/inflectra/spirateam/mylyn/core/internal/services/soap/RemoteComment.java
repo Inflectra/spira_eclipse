@@ -24,6 +24,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="CommentId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CreationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="IsDeleted" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="IsPermanent" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="Text" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="UserId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="UserName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -36,11 +37,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteComment", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteComment", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "artifactId",
     "commentId",
     "creationDate",
     "isDeleted",
+    "isPermanent",
     "text",
     "userId",
     "userName"
@@ -49,17 +51,19 @@ public class RemoteComment {
 
     @XmlElement(name = "ArtifactId")
     protected Integer artifactId;
-    @XmlElementRef(name = "CommentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CommentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> commentId;
-    @XmlElementRef(name = "CreationDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CreationDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> creationDate;
     @XmlElement(name = "IsDeleted")
     protected Boolean isDeleted;
-    @XmlElementRef(name = "Text", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElement(name = "IsPermanent")
+    protected Boolean isPermanent;
+    @XmlElementRef(name = "Text", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> text;
-    @XmlElementRef(name = "UserId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "UserId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> userId;
-    @XmlElementRef(name = "UserName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "UserName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> userName;
 
     /**
@@ -107,7 +111,7 @@ public class RemoteComment {
      *     
      */
     public void setCommentId(JAXBElement<Integer> value) {
-        this.commentId = ((JAXBElement<Integer> ) value);
+        this.commentId = value;
     }
 
     /**
@@ -131,7 +135,7 @@ public class RemoteComment {
      *     
      */
     public void setCreationDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.creationDate = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.creationDate = value;
     }
 
     /**
@@ -159,6 +163,30 @@ public class RemoteComment {
     }
 
     /**
+     * Gets the value of the isPermanent property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isIsPermanent() {
+        return isPermanent;
+    }
+
+    /**
+     * Sets the value of the isPermanent property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIsPermanent(Boolean value) {
+        this.isPermanent = value;
+    }
+
+    /**
      * Gets the value of the text property.
      * 
      * @return
@@ -179,7 +207,7 @@ public class RemoteComment {
      *     
      */
     public void setText(JAXBElement<String> value) {
-        this.text = ((JAXBElement<String> ) value);
+        this.text = value;
     }
 
     /**
@@ -203,7 +231,7 @@ public class RemoteComment {
      *     
      */
     public void setUserId(JAXBElement<Integer> value) {
-        this.userId = ((JAXBElement<Integer> ) value);
+        this.userId = value;
     }
 
     /**
@@ -227,7 +255,7 @@ public class RemoteComment {
      *     
      */
     public void setUserName(JAXBElement<String> value) {
-        this.userName = ((JAXBElement<String> ) value);
+        this.userName = value;
     }
 
 }

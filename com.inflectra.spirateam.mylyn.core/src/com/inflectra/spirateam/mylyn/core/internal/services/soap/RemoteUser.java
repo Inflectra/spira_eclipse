@@ -13,9 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 Represents a single User in the system
- *               &lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;Represents a single User in the system&lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -51,7 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteUser", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteUser", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "active",
     "admin",
     "approved",
@@ -78,27 +76,27 @@ public class RemoteUser {
     protected Boolean admin;
     @XmlElement(name = "Approved")
     protected Boolean approved;
-    @XmlElementRef(name = "Department", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Department", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> department;
-    @XmlElementRef(name = "EmailAddress", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "EmailAddress", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> emailAddress;
-    @XmlElementRef(name = "FirstName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "FirstName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> firstName;
-    @XmlElementRef(name = "FullName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "FullName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> fullName;
-    @XmlElementRef(name = "LastName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "LastName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> lastName;
-    @XmlElementRef(name = "LdapDn", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "LdapDn", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> ldapDn;
     @XmlElement(name = "Locked")
     protected Boolean locked;
-    @XmlElementRef(name = "MiddleInitial", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "MiddleInitial", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> middleInitial;
-    @XmlElementRef(name = "RssToken", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "RssToken", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> rssToken;
-    @XmlElementRef(name = "UserId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "UserId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> userId;
-    @XmlElementRef(name = "UserName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "UserName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> userName;
 
     /**
@@ -194,7 +192,7 @@ public class RemoteUser {
      *     
      */
     public void setDepartment(JAXBElement<String> value) {
-        this.department = ((JAXBElement<String> ) value);
+        this.department = value;
     }
 
     /**
@@ -218,7 +216,7 @@ public class RemoteUser {
      *     
      */
     public void setEmailAddress(JAXBElement<String> value) {
-        this.emailAddress = ((JAXBElement<String> ) value);
+        this.emailAddress = value;
     }
 
     /**
@@ -242,7 +240,7 @@ public class RemoteUser {
      *     
      */
     public void setFirstName(JAXBElement<String> value) {
-        this.firstName = ((JAXBElement<String> ) value);
+        this.firstName = value;
     }
 
     /**
@@ -266,7 +264,7 @@ public class RemoteUser {
      *     
      */
     public void setFullName(JAXBElement<String> value) {
-        this.fullName = ((JAXBElement<String> ) value);
+        this.fullName = value;
     }
 
     /**
@@ -290,7 +288,7 @@ public class RemoteUser {
      *     
      */
     public void setLastName(JAXBElement<String> value) {
-        this.lastName = ((JAXBElement<String> ) value);
+        this.lastName = value;
     }
 
     /**
@@ -314,7 +312,7 @@ public class RemoteUser {
      *     
      */
     public void setLdapDn(JAXBElement<String> value) {
-        this.ldapDn = ((JAXBElement<String> ) value);
+        this.ldapDn = value;
     }
 
     /**
@@ -362,7 +360,7 @@ public class RemoteUser {
      *     
      */
     public void setMiddleInitial(JAXBElement<String> value) {
-        this.middleInitial = ((JAXBElement<String> ) value);
+        this.middleInitial = value;
     }
 
     /**
@@ -386,7 +384,7 @@ public class RemoteUser {
      *     
      */
     public void setRssToken(JAXBElement<String> value) {
-        this.rssToken = ((JAXBElement<String> ) value);
+        this.rssToken = value;
     }
 
     /**
@@ -410,7 +408,7 @@ public class RemoteUser {
      *     
      */
     public void setUserId(JAXBElement<Integer> value) {
-        this.userId = ((JAXBElement<Integer> ) value);
+        this.userId = value;
     }
 
     /**
@@ -434,7 +432,7 @@ public class RemoteUser {
      *     
      */
     public void setUserName(JAXBElement<String> value) {
-        this.userName = ((JAXBElement<String> ) value);
+        this.userName = value;
     }
 
 }

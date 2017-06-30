@@ -14,11 +14,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 Represents a single Release or Iteration artifact in the system
- *               &lt;/summary&gt;&lt;remarks&gt;
- *                 Although the fields refer to Release, they are the same fields for an Iteration
- *               &lt;/remarks&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * Represents a single Release or Iteration artifact in the system
+ * &lt;/summary&gt;&lt;remarks&gt;
+ * Although the fields refer to Release, they are the same fields for an Iteration
+ * &lt;/remarks&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -29,10 +29,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <pre>
  * &lt;complexType name="RemoteRelease">
  *   &lt;complexContent>
- *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteArtifact">
+ *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteArtifact">
  *       &lt;sequence>
  *         &lt;element name="Active" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="AvailableEffort" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="CountBlocked" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="CountCaution" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="CountFailed" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="CountNotApplicable" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="CountNotRun" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="CountPassed" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CreationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="CreatorId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CreatorName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -41,11 +47,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="EndDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="FullName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="IndentLevel" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Iteration" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="LastUpdateDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="OwnerId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="OwnerName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="PlannedEffort" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ReleaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="ReleaseStatusId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="ReleaseStatusName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ReleaseTypeId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="ReleaseTypeName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ResourceCount" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="StartDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="Summary" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
@@ -62,9 +73,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteRelease", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteRelease", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "active",
     "availableEffort",
+    "countBlocked",
+    "countCaution",
+    "countFailed",
+    "countNotApplicable",
+    "countNotRun",
+    "countPassed",
     "creationDate",
     "creatorId",
     "creatorName",
@@ -73,11 +90,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "endDate",
     "fullName",
     "indentLevel",
-    "iteration",
     "lastUpdateDate",
     "name",
+    "ownerId",
+    "ownerName",
     "plannedEffort",
     "releaseId",
+    "releaseStatusId",
+    "releaseStatusName",
+    "releaseTypeId",
+    "releaseTypeName",
     "resourceCount",
     "startDate",
     "summary",
@@ -92,37 +114,59 @@ public class RemoteRelease
 
     @XmlElement(name = "Active")
     protected Boolean active;
-    @XmlElementRef(name = "AvailableEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AvailableEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> availableEffort;
+    @XmlElement(name = "CountBlocked")
+    protected Integer countBlocked;
+    @XmlElement(name = "CountCaution")
+    protected Integer countCaution;
+    @XmlElement(name = "CountFailed")
+    protected Integer countFailed;
+    @XmlElement(name = "CountNotApplicable")
+    protected Integer countNotApplicable;
+    @XmlElement(name = "CountNotRun")
+    protected Integer countNotRun;
+    @XmlElement(name = "CountPassed")
+    protected Integer countPassed;
     @XmlElement(name = "CreationDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar creationDate;
-    @XmlElementRef(name = "CreatorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CreatorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> creatorId;
-    @XmlElementRef(name = "CreatorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CreatorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> creatorName;
     @XmlElement(name = "DaysNonWorking")
     protected Integer daysNonWorking;
-    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> description;
     @XmlElement(name = "EndDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar endDate;
-    @XmlElementRef(name = "FullName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "FullName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> fullName;
-    @XmlElementRef(name = "IndentLevel", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IndentLevel", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> indentLevel;
-    @XmlElement(name = "Iteration")
-    protected Boolean iteration;
     @XmlElement(name = "LastUpdateDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastUpdateDate;
-    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> name;
-    @XmlElementRef(name = "PlannedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> ownerId;
+    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> ownerName;
+    @XmlElementRef(name = "PlannedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> plannedEffort;
-    @XmlElementRef(name = "ReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> releaseId;
+    @XmlElement(name = "ReleaseStatusId")
+    protected Integer releaseStatusId;
+    @XmlElementRef(name = "ReleaseStatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> releaseStatusName;
+    @XmlElement(name = "ReleaseTypeId")
+    protected Integer releaseTypeId;
+    @XmlElementRef(name = "ReleaseTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> releaseTypeName;
     @XmlElement(name = "ResourceCount")
     protected Integer resourceCount;
     @XmlElement(name = "StartDate")
@@ -130,13 +174,13 @@ public class RemoteRelease
     protected XMLGregorianCalendar startDate;
     @XmlElement(name = "Summary")
     protected Boolean summary;
-    @XmlElementRef(name = "TaskActualEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TaskActualEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> taskActualEffort;
-    @XmlElementRef(name = "TaskCount", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TaskCount", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> taskCount;
-    @XmlElementRef(name = "TaskEstimatedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TaskEstimatedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> taskEstimatedEffort;
-    @XmlElementRef(name = "VersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "VersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> versionNumber;
 
     /**
@@ -184,7 +228,151 @@ public class RemoteRelease
      *     
      */
     public void setAvailableEffort(JAXBElement<Integer> value) {
-        this.availableEffort = ((JAXBElement<Integer> ) value);
+        this.availableEffort = value;
+    }
+
+    /**
+     * Gets the value of the countBlocked property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getCountBlocked() {
+        return countBlocked;
+    }
+
+    /**
+     * Sets the value of the countBlocked property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setCountBlocked(Integer value) {
+        this.countBlocked = value;
+    }
+
+    /**
+     * Gets the value of the countCaution property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getCountCaution() {
+        return countCaution;
+    }
+
+    /**
+     * Sets the value of the countCaution property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setCountCaution(Integer value) {
+        this.countCaution = value;
+    }
+
+    /**
+     * Gets the value of the countFailed property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getCountFailed() {
+        return countFailed;
+    }
+
+    /**
+     * Sets the value of the countFailed property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setCountFailed(Integer value) {
+        this.countFailed = value;
+    }
+
+    /**
+     * Gets the value of the countNotApplicable property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getCountNotApplicable() {
+        return countNotApplicable;
+    }
+
+    /**
+     * Sets the value of the countNotApplicable property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setCountNotApplicable(Integer value) {
+        this.countNotApplicable = value;
+    }
+
+    /**
+     * Gets the value of the countNotRun property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getCountNotRun() {
+        return countNotRun;
+    }
+
+    /**
+     * Sets the value of the countNotRun property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setCountNotRun(Integer value) {
+        this.countNotRun = value;
+    }
+
+    /**
+     * Gets the value of the countPassed property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getCountPassed() {
+        return countPassed;
+    }
+
+    /**
+     * Sets the value of the countPassed property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setCountPassed(Integer value) {
+        this.countPassed = value;
     }
 
     /**
@@ -232,7 +420,7 @@ public class RemoteRelease
      *     
      */
     public void setCreatorId(JAXBElement<Integer> value) {
-        this.creatorId = ((JAXBElement<Integer> ) value);
+        this.creatorId = value;
     }
 
     /**
@@ -256,7 +444,7 @@ public class RemoteRelease
      *     
      */
     public void setCreatorName(JAXBElement<String> value) {
-        this.creatorName = ((JAXBElement<String> ) value);
+        this.creatorName = value;
     }
 
     /**
@@ -304,7 +492,7 @@ public class RemoteRelease
      *     
      */
     public void setDescription(JAXBElement<String> value) {
-        this.description = ((JAXBElement<String> ) value);
+        this.description = value;
     }
 
     /**
@@ -352,7 +540,7 @@ public class RemoteRelease
      *     
      */
     public void setFullName(JAXBElement<String> value) {
-        this.fullName = ((JAXBElement<String> ) value);
+        this.fullName = value;
     }
 
     /**
@@ -376,31 +564,7 @@ public class RemoteRelease
      *     
      */
     public void setIndentLevel(JAXBElement<String> value) {
-        this.indentLevel = ((JAXBElement<String> ) value);
-    }
-
-    /**
-     * Gets the value of the iteration property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isIteration() {
-        return iteration;
-    }
-
-    /**
-     * Sets the value of the iteration property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setIteration(Boolean value) {
-        this.iteration = value;
+        this.indentLevel = value;
     }
 
     /**
@@ -448,7 +612,55 @@ public class RemoteRelease
      *     
      */
     public void setName(JAXBElement<String> value) {
-        this.name = ((JAXBElement<String> ) value);
+        this.name = value;
+    }
+
+    /**
+     * Gets the value of the ownerId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getOwnerId() {
+        return ownerId;
+    }
+
+    /**
+     * Sets the value of the ownerId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setOwnerId(JAXBElement<Integer> value) {
+        this.ownerId = value;
+    }
+
+    /**
+     * Gets the value of the ownerName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getOwnerName() {
+        return ownerName;
+    }
+
+    /**
+     * Sets the value of the ownerName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setOwnerName(JAXBElement<String> value) {
+        this.ownerName = value;
     }
 
     /**
@@ -472,7 +684,7 @@ public class RemoteRelease
      *     
      */
     public void setPlannedEffort(JAXBElement<Integer> value) {
-        this.plannedEffort = ((JAXBElement<Integer> ) value);
+        this.plannedEffort = value;
     }
 
     /**
@@ -496,7 +708,103 @@ public class RemoteRelease
      *     
      */
     public void setReleaseId(JAXBElement<Integer> value) {
-        this.releaseId = ((JAXBElement<Integer> ) value);
+        this.releaseId = value;
+    }
+
+    /**
+     * Gets the value of the releaseStatusId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getReleaseStatusId() {
+        return releaseStatusId;
+    }
+
+    /**
+     * Sets the value of the releaseStatusId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setReleaseStatusId(Integer value) {
+        this.releaseStatusId = value;
+    }
+
+    /**
+     * Gets the value of the releaseStatusName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getReleaseStatusName() {
+        return releaseStatusName;
+    }
+
+    /**
+     * Sets the value of the releaseStatusName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setReleaseStatusName(JAXBElement<String> value) {
+        this.releaseStatusName = value;
+    }
+
+    /**
+     * Gets the value of the releaseTypeId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getReleaseTypeId() {
+        return releaseTypeId;
+    }
+
+    /**
+     * Sets the value of the releaseTypeId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setReleaseTypeId(Integer value) {
+        this.releaseTypeId = value;
+    }
+
+    /**
+     * Gets the value of the releaseTypeName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getReleaseTypeName() {
+        return releaseTypeName;
+    }
+
+    /**
+     * Sets the value of the releaseTypeName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setReleaseTypeName(JAXBElement<String> value) {
+        this.releaseTypeName = value;
     }
 
     /**
@@ -592,7 +900,7 @@ public class RemoteRelease
      *     
      */
     public void setTaskActualEffort(JAXBElement<Integer> value) {
-        this.taskActualEffort = ((JAXBElement<Integer> ) value);
+        this.taskActualEffort = value;
     }
 
     /**
@@ -616,7 +924,7 @@ public class RemoteRelease
      *     
      */
     public void setTaskCount(JAXBElement<Integer> value) {
-        this.taskCount = ((JAXBElement<Integer> ) value);
+        this.taskCount = value;
     }
 
     /**
@@ -640,7 +948,7 @@ public class RemoteRelease
      *     
      */
     public void setTaskEstimatedEffort(JAXBElement<Integer> value) {
-        this.taskEstimatedEffort = ((JAXBElement<Integer> ) value);
+        this.taskEstimatedEffort = value;
     }
 
     /**
@@ -664,7 +972,7 @@ public class RemoteRelease
      *     
      */
     public void setVersionNumber(JAXBElement<String> value) {
-        this.versionNumber = ((JAXBElement<String> ) value);
+        this.versionNumber = value;
     }
 
 }

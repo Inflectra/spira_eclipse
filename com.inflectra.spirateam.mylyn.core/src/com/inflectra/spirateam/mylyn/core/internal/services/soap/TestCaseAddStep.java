@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteTestStep" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteTestStep" minOccurs="0"/>
+ *         &lt;element name="remoteTestStep" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteTestStep" minOccurs="0"/>
  *         &lt;element name="testCaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "TestCase_AddStep")
 public class TestCaseAddStep {
 
-    @XmlElementRef(name = "remoteTestStep", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteTestStep", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteTestStep> remoteTestStep;
     protected Integer testCaseId;
 
@@ -62,7 +62,7 @@ public class TestCaseAddStep {
      *     
      */
     public void setRemoteTestStep(JAXBElement<RemoteTestStep> value) {
-        this.remoteTestStep = ((JAXBElement<RemoteTestStep> ) value);
+        this.remoteTestStep = value;
     }
 
     /**

@@ -19,7 +19,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteFilters" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteFilter" minOccurs="0"/>
+ *         &lt;element name="remoteFilters" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteFilter" minOccurs="0"/>
+ *         &lt;element name="releaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -30,13 +31,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "remoteFilters"
+    "remoteFilters",
+    "releaseId"
 })
 @XmlRootElement(name = "TestCase_Count")
 public class TestCaseCount {
 
-    @XmlElementRef(name = "remoteFilters", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteFilters", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteFilter> remoteFilters;
+    @XmlElementRef(name = "releaseId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> releaseId;
 
     /**
      * Gets the value of the remoteFilters property.
@@ -59,7 +63,31 @@ public class TestCaseCount {
      *     
      */
     public void setRemoteFilters(JAXBElement<ArrayOfRemoteFilter> value) {
-        this.remoteFilters = ((JAXBElement<ArrayOfRemoteFilter> ) value);
+        this.remoteFilters = value;
+    }
+
+    /**
+     * Gets the value of the releaseId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getReleaseId() {
+        return releaseId;
+    }
+
+    /**
+     * Sets the value of the releaseId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setReleaseId(JAXBElement<Integer> value) {
+        this.releaseId = value;
     }
 
 }

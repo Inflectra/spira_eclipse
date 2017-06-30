@@ -1,6 +1,7 @@
 
 package com.inflectra.spirateam.mylyn.core.internal.services.soap;
 
+import java.math.BigDecimal;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,9 +15,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 Represents a single Requirement artifact in the system
- *               &lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * Represents a single Requirement artifact in the system
+ * &lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -27,10 +28,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <pre>
  * &lt;complexType name="RemoteRequirement">
  *   &lt;complexContent>
- *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteArtifact">
+ *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteArtifact">
  *       &lt;sequence>
  *         &lt;element name="AuthorId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="AuthorName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ComponentId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CoverageCountBlocked" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CoverageCountCaution" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CoverageCountFailed" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -38,6 +40,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="CoverageCountTotal" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CreationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="EstimatePoints" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
+ *         &lt;element name="EstimatedEffort" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ImportanceId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ImportanceName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="IndentLevel" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -45,13 +49,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="OwnerId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="OwnerName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="PlannedEffort" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ProjectName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ReleaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ReleaseVersionNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="RequirementId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="RequirementTypeId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="RequirementTypeName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="StatusId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="StatusName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Steps" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteRequirementStep" minOccurs="0"/>
  *         &lt;element name="Summary" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="TaskActualEffort" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TaskCount" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -65,9 +71,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteRequirement", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteRequirement", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "authorId",
     "authorName",
+    "componentId",
     "coverageCountBlocked",
     "coverageCountCaution",
     "coverageCountFailed",
@@ -75,6 +82,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "coverageCountTotal",
     "creationDate",
     "description",
+    "estimatePoints",
+    "estimatedEffort",
     "importanceId",
     "importanceName",
     "indentLevel",
@@ -82,13 +91,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "name",
     "ownerId",
     "ownerName",
-    "plannedEffort",
     "projectName",
     "releaseId",
     "releaseVersionNumber",
     "requirementId",
+    "requirementTypeId",
+    "requirementTypeName",
     "statusId",
     "statusName",
+    "steps",
     "summary",
     "taskActualEffort",
     "taskCount",
@@ -98,61 +109,71 @@ public class RemoteRequirement
     extends RemoteArtifact
 {
 
-    @XmlElementRef(name = "AuthorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AuthorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> authorId;
-    @XmlElementRef(name = "AuthorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AuthorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> authorName;
-    @XmlElementRef(name = "CoverageCountBlocked", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ComponentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> componentId;
+    @XmlElementRef(name = "CoverageCountBlocked", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> coverageCountBlocked;
-    @XmlElementRef(name = "CoverageCountCaution", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CoverageCountCaution", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> coverageCountCaution;
-    @XmlElementRef(name = "CoverageCountFailed", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CoverageCountFailed", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> coverageCountFailed;
-    @XmlElementRef(name = "CoverageCountPassed", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CoverageCountPassed", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> coverageCountPassed;
-    @XmlElementRef(name = "CoverageCountTotal", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CoverageCountTotal", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> coverageCountTotal;
     @XmlElement(name = "CreationDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar creationDate;
-    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> description;
-    @XmlElementRef(name = "ImportanceId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "EstimatePoints", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<BigDecimal> estimatePoints;
+    @XmlElementRef(name = "EstimatedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> estimatedEffort;
+    @XmlElementRef(name = "ImportanceId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> importanceId;
-    @XmlElementRef(name = "ImportanceName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ImportanceName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> importanceName;
-    @XmlElementRef(name = "IndentLevel", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IndentLevel", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> indentLevel;
     @XmlElement(name = "LastUpdateDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastUpdateDate;
-    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> name;
-    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> ownerId;
-    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> ownerName;
-    @XmlElementRef(name = "PlannedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
-    protected JAXBElement<Integer> plannedEffort;
-    @XmlElementRef(name = "ProjectName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ProjectName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> projectName;
-    @XmlElementRef(name = "ReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> releaseId;
-    @XmlElementRef(name = "ReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> releaseVersionNumber;
-    @XmlElementRef(name = "RequirementId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "RequirementId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> requirementId;
-    @XmlElementRef(name = "StatusId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElement(name = "RequirementTypeId")
+    protected Integer requirementTypeId;
+    @XmlElementRef(name = "RequirementTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> requirementTypeName;
+    @XmlElementRef(name = "StatusId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> statusId;
-    @XmlElementRef(name = "StatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "StatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> statusName;
+    @XmlElementRef(name = "Steps", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfRemoteRequirementStep> steps;
     @XmlElement(name = "Summary")
     protected Boolean summary;
-    @XmlElementRef(name = "TaskActualEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TaskActualEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> taskActualEffort;
-    @XmlElementRef(name = "TaskCount", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TaskCount", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> taskCount;
-    @XmlElementRef(name = "TaskEstimatedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TaskEstimatedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> taskEstimatedEffort;
 
     /**
@@ -176,7 +197,7 @@ public class RemoteRequirement
      *     
      */
     public void setAuthorId(JAXBElement<Integer> value) {
-        this.authorId = ((JAXBElement<Integer> ) value);
+        this.authorId = value;
     }
 
     /**
@@ -200,7 +221,31 @@ public class RemoteRequirement
      *     
      */
     public void setAuthorName(JAXBElement<String> value) {
-        this.authorName = ((JAXBElement<String> ) value);
+        this.authorName = value;
+    }
+
+    /**
+     * Gets the value of the componentId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getComponentId() {
+        return componentId;
+    }
+
+    /**
+     * Sets the value of the componentId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setComponentId(JAXBElement<Integer> value) {
+        this.componentId = value;
     }
 
     /**
@@ -224,7 +269,7 @@ public class RemoteRequirement
      *     
      */
     public void setCoverageCountBlocked(JAXBElement<Integer> value) {
-        this.coverageCountBlocked = ((JAXBElement<Integer> ) value);
+        this.coverageCountBlocked = value;
     }
 
     /**
@@ -248,7 +293,7 @@ public class RemoteRequirement
      *     
      */
     public void setCoverageCountCaution(JAXBElement<Integer> value) {
-        this.coverageCountCaution = ((JAXBElement<Integer> ) value);
+        this.coverageCountCaution = value;
     }
 
     /**
@@ -272,7 +317,7 @@ public class RemoteRequirement
      *     
      */
     public void setCoverageCountFailed(JAXBElement<Integer> value) {
-        this.coverageCountFailed = ((JAXBElement<Integer> ) value);
+        this.coverageCountFailed = value;
     }
 
     /**
@@ -296,7 +341,7 @@ public class RemoteRequirement
      *     
      */
     public void setCoverageCountPassed(JAXBElement<Integer> value) {
-        this.coverageCountPassed = ((JAXBElement<Integer> ) value);
+        this.coverageCountPassed = value;
     }
 
     /**
@@ -320,7 +365,7 @@ public class RemoteRequirement
      *     
      */
     public void setCoverageCountTotal(JAXBElement<Integer> value) {
-        this.coverageCountTotal = ((JAXBElement<Integer> ) value);
+        this.coverageCountTotal = value;
     }
 
     /**
@@ -368,7 +413,55 @@ public class RemoteRequirement
      *     
      */
     public void setDescription(JAXBElement<String> value) {
-        this.description = ((JAXBElement<String> ) value);
+        this.description = value;
+    }
+
+    /**
+     * Gets the value of the estimatePoints property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}
+     *     
+     */
+    public JAXBElement<BigDecimal> getEstimatePoints() {
+        return estimatePoints;
+    }
+
+    /**
+     * Sets the value of the estimatePoints property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}
+     *     
+     */
+    public void setEstimatePoints(JAXBElement<BigDecimal> value) {
+        this.estimatePoints = value;
+    }
+
+    /**
+     * Gets the value of the estimatedEffort property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getEstimatedEffort() {
+        return estimatedEffort;
+    }
+
+    /**
+     * Sets the value of the estimatedEffort property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setEstimatedEffort(JAXBElement<Integer> value) {
+        this.estimatedEffort = value;
     }
 
     /**
@@ -392,7 +485,7 @@ public class RemoteRequirement
      *     
      */
     public void setImportanceId(JAXBElement<Integer> value) {
-        this.importanceId = ((JAXBElement<Integer> ) value);
+        this.importanceId = value;
     }
 
     /**
@@ -416,7 +509,7 @@ public class RemoteRequirement
      *     
      */
     public void setImportanceName(JAXBElement<String> value) {
-        this.importanceName = ((JAXBElement<String> ) value);
+        this.importanceName = value;
     }
 
     /**
@@ -440,7 +533,7 @@ public class RemoteRequirement
      *     
      */
     public void setIndentLevel(JAXBElement<String> value) {
-        this.indentLevel = ((JAXBElement<String> ) value);
+        this.indentLevel = value;
     }
 
     /**
@@ -488,7 +581,7 @@ public class RemoteRequirement
      *     
      */
     public void setName(JAXBElement<String> value) {
-        this.name = ((JAXBElement<String> ) value);
+        this.name = value;
     }
 
     /**
@@ -512,7 +605,7 @@ public class RemoteRequirement
      *     
      */
     public void setOwnerId(JAXBElement<Integer> value) {
-        this.ownerId = ((JAXBElement<Integer> ) value);
+        this.ownerId = value;
     }
 
     /**
@@ -536,31 +629,7 @@ public class RemoteRequirement
      *     
      */
     public void setOwnerName(JAXBElement<String> value) {
-        this.ownerName = ((JAXBElement<String> ) value);
-    }
-
-    /**
-     * Gets the value of the plannedEffort property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
-     *     
-     */
-    public JAXBElement<Integer> getPlannedEffort() {
-        return plannedEffort;
-    }
-
-    /**
-     * Sets the value of the plannedEffort property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
-     *     
-     */
-    public void setPlannedEffort(JAXBElement<Integer> value) {
-        this.plannedEffort = ((JAXBElement<Integer> ) value);
+        this.ownerName = value;
     }
 
     /**
@@ -584,7 +653,7 @@ public class RemoteRequirement
      *     
      */
     public void setProjectName(JAXBElement<String> value) {
-        this.projectName = ((JAXBElement<String> ) value);
+        this.projectName = value;
     }
 
     /**
@@ -608,7 +677,7 @@ public class RemoteRequirement
      *     
      */
     public void setReleaseId(JAXBElement<Integer> value) {
-        this.releaseId = ((JAXBElement<Integer> ) value);
+        this.releaseId = value;
     }
 
     /**
@@ -632,7 +701,7 @@ public class RemoteRequirement
      *     
      */
     public void setReleaseVersionNumber(JAXBElement<String> value) {
-        this.releaseVersionNumber = ((JAXBElement<String> ) value);
+        this.releaseVersionNumber = value;
     }
 
     /**
@@ -656,7 +725,55 @@ public class RemoteRequirement
      *     
      */
     public void setRequirementId(JAXBElement<Integer> value) {
-        this.requirementId = ((JAXBElement<Integer> ) value);
+        this.requirementId = value;
+    }
+
+    /**
+     * Gets the value of the requirementTypeId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getRequirementTypeId() {
+        return requirementTypeId;
+    }
+
+    /**
+     * Sets the value of the requirementTypeId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setRequirementTypeId(Integer value) {
+        this.requirementTypeId = value;
+    }
+
+    /**
+     * Gets the value of the requirementTypeName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getRequirementTypeName() {
+        return requirementTypeName;
+    }
+
+    /**
+     * Sets the value of the requirementTypeName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setRequirementTypeName(JAXBElement<String> value) {
+        this.requirementTypeName = value;
     }
 
     /**
@@ -680,7 +797,7 @@ public class RemoteRequirement
      *     
      */
     public void setStatusId(JAXBElement<Integer> value) {
-        this.statusId = ((JAXBElement<Integer> ) value);
+        this.statusId = value;
     }
 
     /**
@@ -704,7 +821,31 @@ public class RemoteRequirement
      *     
      */
     public void setStatusName(JAXBElement<String> value) {
-        this.statusName = ((JAXBElement<String> ) value);
+        this.statusName = value;
+    }
+
+    /**
+     * Gets the value of the steps property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteRequirementStep }{@code >}
+     *     
+     */
+    public JAXBElement<ArrayOfRemoteRequirementStep> getSteps() {
+        return steps;
+    }
+
+    /**
+     * Sets the value of the steps property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteRequirementStep }{@code >}
+     *     
+     */
+    public void setSteps(JAXBElement<ArrayOfRemoteRequirementStep> value) {
+        this.steps = value;
     }
 
     /**
@@ -752,7 +893,7 @@ public class RemoteRequirement
      *     
      */
     public void setTaskActualEffort(JAXBElement<Integer> value) {
-        this.taskActualEffort = ((JAXBElement<Integer> ) value);
+        this.taskActualEffort = value;
     }
 
     /**
@@ -776,7 +917,7 @@ public class RemoteRequirement
      *     
      */
     public void setTaskCount(JAXBElement<Integer> value) {
-        this.taskCount = ((JAXBElement<Integer> ) value);
+        this.taskCount = value;
     }
 
     /**
@@ -800,7 +941,7 @@ public class RemoteRequirement
      *     
      */
     public void setTaskEstimatedEffort(JAXBElement<Integer> value) {
-        this.taskEstimatedEffort = ((JAXBElement<Integer> ) value);
+        this.taskEstimatedEffort = value;
     }
 
 }

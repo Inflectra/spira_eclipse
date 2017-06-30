@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Incident_RetrieveWorkflowCustomPropertiesResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteWorkflowIncidentCustomProperties" minOccurs="0"/>
+ *         &lt;element name="Incident_RetrieveWorkflowCustomPropertiesResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteWorkflowCustomProperty" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,18 +35,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Incident_RetrieveWorkflowCustomPropertiesResponse")
 public class IncidentRetrieveWorkflowCustomPropertiesResponse {
 
-    @XmlElementRef(name = "Incident_RetrieveWorkflowCustomPropertiesResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
-    protected JAXBElement<ArrayOfRemoteWorkflowIncidentCustomProperties> incidentRetrieveWorkflowCustomPropertiesResult;
+    @XmlElementRef(name = "Incident_RetrieveWorkflowCustomPropertiesResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfRemoteWorkflowCustomProperty> incidentRetrieveWorkflowCustomPropertiesResult;
 
     /**
      * Gets the value of the incidentRetrieveWorkflowCustomPropertiesResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowIncidentCustomProperties }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowCustomProperty }{@code >}
      *     
      */
-    public JAXBElement<ArrayOfRemoteWorkflowIncidentCustomProperties> getIncidentRetrieveWorkflowCustomPropertiesResult() {
+    public JAXBElement<ArrayOfRemoteWorkflowCustomProperty> getIncidentRetrieveWorkflowCustomPropertiesResult() {
         return incidentRetrieveWorkflowCustomPropertiesResult;
     }
 
@@ -55,11 +55,11 @@ public class IncidentRetrieveWorkflowCustomPropertiesResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowIncidentCustomProperties }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowCustomProperty }{@code >}
      *     
      */
-    public void setIncidentRetrieveWorkflowCustomPropertiesResult(JAXBElement<ArrayOfRemoteWorkflowIncidentCustomProperties> value) {
-        this.incidentRetrieveWorkflowCustomPropertiesResult = ((JAXBElement<ArrayOfRemoteWorkflowIncidentCustomProperties> ) value);
+    public void setIncidentRetrieveWorkflowCustomPropertiesResult(JAXBElement<ArrayOfRemoteWorkflowCustomProperty> value) {
+        this.incidentRetrieveWorkflowCustomPropertiesResult = value;
     }
 
 }

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Incident_RetrieveWorkflowFieldsResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteWorkflowIncidentFields" minOccurs="0"/>
+ *         &lt;element name="Incident_RetrieveWorkflowFieldsResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteWorkflowField" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,18 +35,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Incident_RetrieveWorkflowFieldsResponse")
 public class IncidentRetrieveWorkflowFieldsResponse {
 
-    @XmlElementRef(name = "Incident_RetrieveWorkflowFieldsResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
-    protected JAXBElement<ArrayOfRemoteWorkflowIncidentFields> incidentRetrieveWorkflowFieldsResult;
+    @XmlElementRef(name = "Incident_RetrieveWorkflowFieldsResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfRemoteWorkflowField> incidentRetrieveWorkflowFieldsResult;
 
     /**
      * Gets the value of the incidentRetrieveWorkflowFieldsResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowIncidentFields }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowField }{@code >}
      *     
      */
-    public JAXBElement<ArrayOfRemoteWorkflowIncidentFields> getIncidentRetrieveWorkflowFieldsResult() {
+    public JAXBElement<ArrayOfRemoteWorkflowField> getIncidentRetrieveWorkflowFieldsResult() {
         return incidentRetrieveWorkflowFieldsResult;
     }
 
@@ -55,11 +55,11 @@ public class IncidentRetrieveWorkflowFieldsResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowIncidentFields }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowField }{@code >}
      *     
      */
-    public void setIncidentRetrieveWorkflowFieldsResult(JAXBElement<ArrayOfRemoteWorkflowIncidentFields> value) {
-        this.incidentRetrieveWorkflowFieldsResult = ((JAXBElement<ArrayOfRemoteWorkflowIncidentFields> ) value);
+    public void setIncidentRetrieveWorkflowFieldsResult(JAXBElement<ArrayOfRemoteWorkflowField> value) {
+        this.incidentRetrieveWorkflowFieldsResult = value;
     }
 
 }

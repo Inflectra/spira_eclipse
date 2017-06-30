@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="TestSet_CreateFolderResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteTestSet" minOccurs="0"/>
+ *         &lt;element name="TestSet_CreateFolderResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteTestSetFolder" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,18 +35,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "TestSet_CreateFolderResponse")
 public class TestSetCreateFolderResponse {
 
-    @XmlElementRef(name = "TestSet_CreateFolderResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
-    protected JAXBElement<RemoteTestSet> testSetCreateFolderResult;
+    @XmlElementRef(name = "TestSet_CreateFolderResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
+    protected JAXBElement<RemoteTestSetFolder> testSetCreateFolderResult;
 
     /**
      * Gets the value of the testSetCreateFolderResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link RemoteTestSet }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RemoteTestSetFolder }{@code >}
      *     
      */
-    public JAXBElement<RemoteTestSet> getTestSetCreateFolderResult() {
+    public JAXBElement<RemoteTestSetFolder> getTestSetCreateFolderResult() {
         return testSetCreateFolderResult;
     }
 
@@ -55,11 +55,11 @@ public class TestSetCreateFolderResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link RemoteTestSet }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RemoteTestSetFolder }{@code >}
      *     
      */
-    public void setTestSetCreateFolderResult(JAXBElement<RemoteTestSet> value) {
-        this.testSetCreateFolderResult = ((JAXBElement<RemoteTestSet> ) value);
+    public void setTestSetCreateFolderResult(JAXBElement<RemoteTestSetFolder> value) {
+        this.testSetCreateFolderResult = value;
     }
 
 }

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Document_AddFolderResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteDocumentFolder" minOccurs="0"/>
+ *         &lt;element name="Document_AddFolderResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteDocumentFolder" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Document_AddFolderResponse")
 public class DocumentAddFolderResponse {
 
-    @XmlElementRef(name = "Document_AddFolderResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "Document_AddFolderResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteDocumentFolder> documentAddFolderResult;
 
     /**
@@ -59,7 +59,7 @@ public class DocumentAddFolderResponse {
      *     
      */
     public void setDocumentAddFolderResult(JAXBElement<RemoteDocumentFolder> value) {
-        this.documentAddFolderResult = ((JAXBElement<RemoteDocumentFolder> ) value);
+        this.documentAddFolderResult = value;
     }
 
 }

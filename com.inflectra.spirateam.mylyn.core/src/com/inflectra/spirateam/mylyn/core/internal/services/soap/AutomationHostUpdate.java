@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteAutomationHost" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteAutomationHost" minOccurs="0"/>
+ *         &lt;element name="remoteAutomationHost" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteAutomationHost" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "AutomationHost_Update")
 public class AutomationHostUpdate {
 
-    @XmlElementRef(name = "remoteAutomationHost", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteAutomationHost", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteAutomationHost> remoteAutomationHost;
 
     /**
@@ -59,7 +59,7 @@ public class AutomationHostUpdate {
      *     
      */
     public void setRemoteAutomationHost(JAXBElement<RemoteAutomationHost> value) {
-        this.remoteAutomationHost = ((JAXBElement<RemoteAutomationHost> ) value);
+        this.remoteAutomationHost = value;
     }
 
 }

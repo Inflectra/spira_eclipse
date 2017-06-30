@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Incident_RetrieveWorkflowTransitionsResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteWorkflowIncidentTransition" minOccurs="0"/>
+ *         &lt;element name="Incident_RetrieveWorkflowTransitionsResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteWorkflowTransition" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,18 +35,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Incident_RetrieveWorkflowTransitionsResponse")
 public class IncidentRetrieveWorkflowTransitionsResponse {
 
-    @XmlElementRef(name = "Incident_RetrieveWorkflowTransitionsResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
-    protected JAXBElement<ArrayOfRemoteWorkflowIncidentTransition> incidentRetrieveWorkflowTransitionsResult;
+    @XmlElementRef(name = "Incident_RetrieveWorkflowTransitionsResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfRemoteWorkflowTransition> incidentRetrieveWorkflowTransitionsResult;
 
     /**
      * Gets the value of the incidentRetrieveWorkflowTransitionsResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowIncidentTransition }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowTransition }{@code >}
      *     
      */
-    public JAXBElement<ArrayOfRemoteWorkflowIncidentTransition> getIncidentRetrieveWorkflowTransitionsResult() {
+    public JAXBElement<ArrayOfRemoteWorkflowTransition> getIncidentRetrieveWorkflowTransitionsResult() {
         return incidentRetrieveWorkflowTransitionsResult;
     }
 
@@ -55,11 +55,11 @@ public class IncidentRetrieveWorkflowTransitionsResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowIncidentTransition }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteWorkflowTransition }{@code >}
      *     
      */
-    public void setIncidentRetrieveWorkflowTransitionsResult(JAXBElement<ArrayOfRemoteWorkflowIncidentTransition> value) {
-        this.incidentRetrieveWorkflowTransitionsResult = ((JAXBElement<ArrayOfRemoteWorkflowIncidentTransition> ) value);
+    public void setIncidentRetrieveWorkflowTransitionsResult(JAXBElement<ArrayOfRemoteWorkflowTransition> value) {
+        this.incidentRetrieveWorkflowTransitionsResult = value;
     }
 
 }

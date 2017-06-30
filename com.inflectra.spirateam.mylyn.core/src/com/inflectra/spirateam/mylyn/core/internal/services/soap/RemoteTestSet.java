@@ -14,9 +14,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 Represents a single Test Set artifact in the system
- *               &lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * Represents a single Test Set artifact in the system
+ * &lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -27,9 +27,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <pre>
  * &lt;complexType name="RemoteTestSet">
  *   &lt;complexContent>
- *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteArtifact">
+ *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteArtifact">
  *       &lt;sequence>
+ *         &lt;element name="ActualDuration" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="AutomationHostId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="BuildExecuteTimeInterval" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CountBlocked" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CountCaution" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CountFailed" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -40,9 +42,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="CreatorId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="CreatorName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="DynamicQuery" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="EstimatedDuration" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ExecutionDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="Folder" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="IndentLevel" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="IsAutoScheduled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="IsDynamic" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="LastUpdateDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="OwnerId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -53,7 +58,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="RecurrenceName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ReleaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ReleaseVersionNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="TestConfigurationSetId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestRunTypeId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="TestSetFolderId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestSetId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestSetStatusId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestSetStatusName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -66,8 +73,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteTestSet", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteTestSet", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
+    "actualDuration",
     "automationHostId",
+    "buildExecuteTimeInterval",
     "countBlocked",
     "countCaution",
     "countFailed",
@@ -78,9 +87,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "creatorId",
     "creatorName",
     "description",
+    "dynamicQuery",
+    "estimatedDuration",
     "executionDate",
-    "folder",
     "indentLevel",
+    "isAutoScheduled",
+    "isDynamic",
     "lastUpdateDate",
     "name",
     "ownerId",
@@ -91,7 +103,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "recurrenceName",
     "releaseId",
     "releaseVersionNumber",
+    "testConfigurationSetId",
     "testRunTypeId",
+    "testSetFolderId",
     "testSetId",
     "testSetStatusId",
     "testSetStatusName"
@@ -100,64 +114,102 @@ public class RemoteTestSet
     extends RemoteArtifact
 {
 
-    @XmlElementRef(name = "AutomationHostId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ActualDuration", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> actualDuration;
+    @XmlElementRef(name = "AutomationHostId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> automationHostId;
-    @XmlElementRef(name = "CountBlocked", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "BuildExecuteTimeInterval", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> buildExecuteTimeInterval;
+    @XmlElementRef(name = "CountBlocked", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> countBlocked;
-    @XmlElementRef(name = "CountCaution", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CountCaution", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> countCaution;
-    @XmlElementRef(name = "CountFailed", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CountFailed", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> countFailed;
-    @XmlElementRef(name = "CountNotApplicable", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CountNotApplicable", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> countNotApplicable;
-    @XmlElementRef(name = "CountNotRun", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CountNotRun", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> countNotRun;
-    @XmlElementRef(name = "CountPassed", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CountPassed", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> countPassed;
     @XmlElement(name = "CreationDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar creationDate;
-    @XmlElementRef(name = "CreatorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CreatorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> creatorId;
-    @XmlElementRef(name = "CreatorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CreatorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> creatorName;
-    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> description;
-    @XmlElementRef(name = "ExecutionDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "DynamicQuery", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> dynamicQuery;
+    @XmlElementRef(name = "EstimatedDuration", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> estimatedDuration;
+    @XmlElementRef(name = "ExecutionDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> executionDate;
-    @XmlElement(name = "Folder")
-    protected Boolean folder;
-    @XmlElementRef(name = "IndentLevel", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IndentLevel", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> indentLevel;
+    @XmlElement(name = "IsAutoScheduled")
+    protected Boolean isAutoScheduled;
+    @XmlElement(name = "IsDynamic")
+    protected Boolean isDynamic;
     @XmlElement(name = "LastUpdateDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastUpdateDate;
-    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> name;
-    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> ownerId;
-    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> ownerName;
-    @XmlElementRef(name = "PlannedDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "PlannedDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> plannedDate;
-    @XmlElementRef(name = "ProjectName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ProjectName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> projectName;
-    @XmlElementRef(name = "RecurrenceId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "RecurrenceId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> recurrenceId;
-    @XmlElementRef(name = "RecurrenceName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "RecurrenceName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> recurrenceName;
-    @XmlElementRef(name = "ReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> releaseId;
-    @XmlElementRef(name = "ReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> releaseVersionNumber;
-    @XmlElementRef(name = "TestRunTypeId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestConfigurationSetId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> testConfigurationSetId;
+    @XmlElementRef(name = "TestRunTypeId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testRunTypeId;
-    @XmlElementRef(name = "TestSetId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestSetFolderId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> testSetFolderId;
+    @XmlElementRef(name = "TestSetId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testSetId;
     @XmlElement(name = "TestSetStatusId")
     protected Integer testSetStatusId;
-    @XmlElementRef(name = "TestSetStatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestSetStatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> testSetStatusName;
+
+    /**
+     * Gets the value of the actualDuration property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getActualDuration() {
+        return actualDuration;
+    }
+
+    /**
+     * Sets the value of the actualDuration property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setActualDuration(JAXBElement<Integer> value) {
+        this.actualDuration = value;
+    }
 
     /**
      * Gets the value of the automationHostId property.
@@ -180,7 +232,31 @@ public class RemoteTestSet
      *     
      */
     public void setAutomationHostId(JAXBElement<Integer> value) {
-        this.automationHostId = ((JAXBElement<Integer> ) value);
+        this.automationHostId = value;
+    }
+
+    /**
+     * Gets the value of the buildExecuteTimeInterval property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getBuildExecuteTimeInterval() {
+        return buildExecuteTimeInterval;
+    }
+
+    /**
+     * Sets the value of the buildExecuteTimeInterval property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setBuildExecuteTimeInterval(JAXBElement<Integer> value) {
+        this.buildExecuteTimeInterval = value;
     }
 
     /**
@@ -204,7 +280,7 @@ public class RemoteTestSet
      *     
      */
     public void setCountBlocked(JAXBElement<Integer> value) {
-        this.countBlocked = ((JAXBElement<Integer> ) value);
+        this.countBlocked = value;
     }
 
     /**
@@ -228,7 +304,7 @@ public class RemoteTestSet
      *     
      */
     public void setCountCaution(JAXBElement<Integer> value) {
-        this.countCaution = ((JAXBElement<Integer> ) value);
+        this.countCaution = value;
     }
 
     /**
@@ -252,7 +328,7 @@ public class RemoteTestSet
      *     
      */
     public void setCountFailed(JAXBElement<Integer> value) {
-        this.countFailed = ((JAXBElement<Integer> ) value);
+        this.countFailed = value;
     }
 
     /**
@@ -276,7 +352,7 @@ public class RemoteTestSet
      *     
      */
     public void setCountNotApplicable(JAXBElement<Integer> value) {
-        this.countNotApplicable = ((JAXBElement<Integer> ) value);
+        this.countNotApplicable = value;
     }
 
     /**
@@ -300,7 +376,7 @@ public class RemoteTestSet
      *     
      */
     public void setCountNotRun(JAXBElement<Integer> value) {
-        this.countNotRun = ((JAXBElement<Integer> ) value);
+        this.countNotRun = value;
     }
 
     /**
@@ -324,7 +400,7 @@ public class RemoteTestSet
      *     
      */
     public void setCountPassed(JAXBElement<Integer> value) {
-        this.countPassed = ((JAXBElement<Integer> ) value);
+        this.countPassed = value;
     }
 
     /**
@@ -372,7 +448,7 @@ public class RemoteTestSet
      *     
      */
     public void setCreatorId(JAXBElement<Integer> value) {
-        this.creatorId = ((JAXBElement<Integer> ) value);
+        this.creatorId = value;
     }
 
     /**
@@ -396,7 +472,7 @@ public class RemoteTestSet
      *     
      */
     public void setCreatorName(JAXBElement<String> value) {
-        this.creatorName = ((JAXBElement<String> ) value);
+        this.creatorName = value;
     }
 
     /**
@@ -420,7 +496,55 @@ public class RemoteTestSet
      *     
      */
     public void setDescription(JAXBElement<String> value) {
-        this.description = ((JAXBElement<String> ) value);
+        this.description = value;
+    }
+
+    /**
+     * Gets the value of the dynamicQuery property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getDynamicQuery() {
+        return dynamicQuery;
+    }
+
+    /**
+     * Sets the value of the dynamicQuery property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setDynamicQuery(JAXBElement<String> value) {
+        this.dynamicQuery = value;
+    }
+
+    /**
+     * Gets the value of the estimatedDuration property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getEstimatedDuration() {
+        return estimatedDuration;
+    }
+
+    /**
+     * Sets the value of the estimatedDuration property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setEstimatedDuration(JAXBElement<Integer> value) {
+        this.estimatedDuration = value;
     }
 
     /**
@@ -444,31 +568,7 @@ public class RemoteTestSet
      *     
      */
     public void setExecutionDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.executionDate = ((JAXBElement<XMLGregorianCalendar> ) value);
-    }
-
-    /**
-     * Gets the value of the folder property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isFolder() {
-        return folder;
-    }
-
-    /**
-     * Sets the value of the folder property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFolder(Boolean value) {
-        this.folder = value;
+        this.executionDate = value;
     }
 
     /**
@@ -492,7 +592,55 @@ public class RemoteTestSet
      *     
      */
     public void setIndentLevel(JAXBElement<String> value) {
-        this.indentLevel = ((JAXBElement<String> ) value);
+        this.indentLevel = value;
+    }
+
+    /**
+     * Gets the value of the isAutoScheduled property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isIsAutoScheduled() {
+        return isAutoScheduled;
+    }
+
+    /**
+     * Sets the value of the isAutoScheduled property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIsAutoScheduled(Boolean value) {
+        this.isAutoScheduled = value;
+    }
+
+    /**
+     * Gets the value of the isDynamic property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isIsDynamic() {
+        return isDynamic;
+    }
+
+    /**
+     * Sets the value of the isDynamic property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIsDynamic(Boolean value) {
+        this.isDynamic = value;
     }
 
     /**
@@ -540,7 +688,7 @@ public class RemoteTestSet
      *     
      */
     public void setName(JAXBElement<String> value) {
-        this.name = ((JAXBElement<String> ) value);
+        this.name = value;
     }
 
     /**
@@ -564,7 +712,7 @@ public class RemoteTestSet
      *     
      */
     public void setOwnerId(JAXBElement<Integer> value) {
-        this.ownerId = ((JAXBElement<Integer> ) value);
+        this.ownerId = value;
     }
 
     /**
@@ -588,7 +736,7 @@ public class RemoteTestSet
      *     
      */
     public void setOwnerName(JAXBElement<String> value) {
-        this.ownerName = ((JAXBElement<String> ) value);
+        this.ownerName = value;
     }
 
     /**
@@ -612,7 +760,7 @@ public class RemoteTestSet
      *     
      */
     public void setPlannedDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.plannedDate = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.plannedDate = value;
     }
 
     /**
@@ -636,7 +784,7 @@ public class RemoteTestSet
      *     
      */
     public void setProjectName(JAXBElement<String> value) {
-        this.projectName = ((JAXBElement<String> ) value);
+        this.projectName = value;
     }
 
     /**
@@ -660,7 +808,7 @@ public class RemoteTestSet
      *     
      */
     public void setRecurrenceId(JAXBElement<Integer> value) {
-        this.recurrenceId = ((JAXBElement<Integer> ) value);
+        this.recurrenceId = value;
     }
 
     /**
@@ -684,7 +832,7 @@ public class RemoteTestSet
      *     
      */
     public void setRecurrenceName(JAXBElement<String> value) {
-        this.recurrenceName = ((JAXBElement<String> ) value);
+        this.recurrenceName = value;
     }
 
     /**
@@ -708,7 +856,7 @@ public class RemoteTestSet
      *     
      */
     public void setReleaseId(JAXBElement<Integer> value) {
-        this.releaseId = ((JAXBElement<Integer> ) value);
+        this.releaseId = value;
     }
 
     /**
@@ -732,7 +880,31 @@ public class RemoteTestSet
      *     
      */
     public void setReleaseVersionNumber(JAXBElement<String> value) {
-        this.releaseVersionNumber = ((JAXBElement<String> ) value);
+        this.releaseVersionNumber = value;
+    }
+
+    /**
+     * Gets the value of the testConfigurationSetId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getTestConfigurationSetId() {
+        return testConfigurationSetId;
+    }
+
+    /**
+     * Sets the value of the testConfigurationSetId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setTestConfigurationSetId(JAXBElement<Integer> value) {
+        this.testConfigurationSetId = value;
     }
 
     /**
@@ -756,7 +928,31 @@ public class RemoteTestSet
      *     
      */
     public void setTestRunTypeId(JAXBElement<Integer> value) {
-        this.testRunTypeId = ((JAXBElement<Integer> ) value);
+        this.testRunTypeId = value;
+    }
+
+    /**
+     * Gets the value of the testSetFolderId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getTestSetFolderId() {
+        return testSetFolderId;
+    }
+
+    /**
+     * Sets the value of the testSetFolderId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setTestSetFolderId(JAXBElement<Integer> value) {
+        this.testSetFolderId = value;
     }
 
     /**
@@ -780,7 +976,7 @@ public class RemoteTestSet
      *     
      */
     public void setTestSetId(JAXBElement<Integer> value) {
-        this.testSetId = ((JAXBElement<Integer> ) value);
+        this.testSetId = value;
     }
 
     /**
@@ -828,7 +1024,7 @@ public class RemoteTestSet
      *     
      */
     public void setTestSetStatusName(JAXBElement<String> value) {
-        this.testSetStatusName = ((JAXBElement<String> ) value);
+        this.testSetStatusName = value;
     }
 
 }

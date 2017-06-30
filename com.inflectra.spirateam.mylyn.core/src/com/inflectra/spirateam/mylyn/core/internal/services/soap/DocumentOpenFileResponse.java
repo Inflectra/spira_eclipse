@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Document_OpenFileResponse")
 public class DocumentOpenFileResponse {
 
-    @XmlElementRef(name = "Document_OpenFileResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "Document_OpenFileResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<byte[]> documentOpenFileResult;
 
     /**
@@ -59,7 +59,7 @@ public class DocumentOpenFileResponse {
      *     
      */
     public void setDocumentOpenFileResult(JAXBElement<byte[]> value) {
-        this.documentOpenFileResult = ((JAXBElement<byte[]> ) value);
+        this.documentOpenFileResult = value;
     }
 
 }

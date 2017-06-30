@@ -71,35 +71,35 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "TestRun_RecordAutomated2")
 public class TestRunRecordAutomated2 {
 
-    @XmlElementRef(name = "userName", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "userName", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> userName;
-    @XmlElementRef(name = "password", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "password", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> password;
     protected Integer projectId;
-    @XmlElementRef(name = "testerUserId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "testerUserId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testerUserId;
     protected Integer testCaseId;
-    @XmlElementRef(name = "releaseId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "releaseId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> releaseId;
-    @XmlElementRef(name = "testSetId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "testSetId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testSetId;
-    @XmlElementRef(name = "testSetTestCaseId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "testSetTestCaseId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testSetTestCaseId;
-    @XmlElementRef(name = "buildId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "buildId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> buildId;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar startDate;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar endDate;
     protected Integer executionStatusId;
-    @XmlElementRef(name = "runnerName", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "runnerName", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> runnerName;
-    @XmlElementRef(name = "runnerTestName", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "runnerTestName", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> runnerTestName;
     protected Integer runnerAssertCount;
-    @XmlElementRef(name = "runnerMessage", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "runnerMessage", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> runnerMessage;
-    @XmlElementRef(name = "runnerStackTrace", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "runnerStackTrace", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> runnerStackTrace;
     protected Integer testRunFormatId;
 
@@ -124,7 +124,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setUserName(JAXBElement<String> value) {
-        this.userName = ((JAXBElement<String> ) value);
+        this.userName = value;
     }
 
     /**
@@ -148,7 +148,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setPassword(JAXBElement<String> value) {
-        this.password = ((JAXBElement<String> ) value);
+        this.password = value;
     }
 
     /**
@@ -196,7 +196,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setTesterUserId(JAXBElement<Integer> value) {
-        this.testerUserId = ((JAXBElement<Integer> ) value);
+        this.testerUserId = value;
     }
 
     /**
@@ -244,7 +244,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setReleaseId(JAXBElement<Integer> value) {
-        this.releaseId = ((JAXBElement<Integer> ) value);
+        this.releaseId = value;
     }
 
     /**
@@ -268,7 +268,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setTestSetId(JAXBElement<Integer> value) {
-        this.testSetId = ((JAXBElement<Integer> ) value);
+        this.testSetId = value;
     }
 
     /**
@@ -292,7 +292,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setTestSetTestCaseId(JAXBElement<Integer> value) {
-        this.testSetTestCaseId = ((JAXBElement<Integer> ) value);
+        this.testSetTestCaseId = value;
     }
 
     /**
@@ -316,7 +316,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setBuildId(JAXBElement<Integer> value) {
-        this.buildId = ((JAXBElement<Integer> ) value);
+        this.buildId = value;
     }
 
     /**
@@ -412,7 +412,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setRunnerName(JAXBElement<String> value) {
-        this.runnerName = ((JAXBElement<String> ) value);
+        this.runnerName = value;
     }
 
     /**
@@ -436,7 +436,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setRunnerTestName(JAXBElement<String> value) {
-        this.runnerTestName = ((JAXBElement<String> ) value);
+        this.runnerTestName = value;
     }
 
     /**
@@ -484,7 +484,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setRunnerMessage(JAXBElement<String> value) {
-        this.runnerMessage = ((JAXBElement<String> ) value);
+        this.runnerMessage = value;
     }
 
     /**
@@ -508,7 +508,7 @@ public class TestRunRecordAutomated2 {
      *     
      */
     public void setRunnerStackTrace(JAXBElement<String> value) {
-        this.runnerStackTrace = ((JAXBElement<String> ) value);
+        this.runnerStackTrace = value;
     }
 
     /**

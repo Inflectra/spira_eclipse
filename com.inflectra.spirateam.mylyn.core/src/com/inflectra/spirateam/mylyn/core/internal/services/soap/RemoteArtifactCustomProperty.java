@@ -14,9 +14,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 Represents a single custom property instance associated with an artifact
- *               &lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * Represents a single custom property instance associated with an artifact
+ * &lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -32,7 +32,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="BooleanValue" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="DateTimeValue" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="DecimalValue" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
- *         &lt;element name="Definition" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteCustomProperty" minOccurs="0"/>
+ *         &lt;element name="Definition" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteCustomProperty" minOccurs="0"/>
  *         &lt;element name="IntegerListValue" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfint" minOccurs="0"/>
  *         &lt;element name="IntegerValue" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="PropertyNumber" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -46,7 +46,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteArtifactCustomProperty", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteArtifactCustomProperty", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "booleanValue",
     "dateTimeValue",
     "decimalValue",
@@ -58,21 +58,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class RemoteArtifactCustomProperty {
 
-    @XmlElementRef(name = "BooleanValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "BooleanValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Boolean> booleanValue;
-    @XmlElementRef(name = "DateTimeValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "DateTimeValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> dateTimeValue;
-    @XmlElementRef(name = "DecimalValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "DecimalValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<BigDecimal> decimalValue;
-    @XmlElementRef(name = "Definition", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Definition", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteCustomProperty> definition;
-    @XmlElementRef(name = "IntegerListValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IntegerListValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfint> integerListValue;
-    @XmlElementRef(name = "IntegerValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IntegerValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> integerValue;
     @XmlElement(name = "PropertyNumber")
     protected Integer propertyNumber;
-    @XmlElementRef(name = "StringValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "StringValue", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> stringValue;
 
     /**
@@ -96,7 +96,7 @@ public class RemoteArtifactCustomProperty {
      *     
      */
     public void setBooleanValue(JAXBElement<Boolean> value) {
-        this.booleanValue = ((JAXBElement<Boolean> ) value);
+        this.booleanValue = value;
     }
 
     /**
@@ -120,7 +120,7 @@ public class RemoteArtifactCustomProperty {
      *     
      */
     public void setDateTimeValue(JAXBElement<XMLGregorianCalendar> value) {
-        this.dateTimeValue = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.dateTimeValue = value;
     }
 
     /**
@@ -144,7 +144,7 @@ public class RemoteArtifactCustomProperty {
      *     
      */
     public void setDecimalValue(JAXBElement<BigDecimal> value) {
-        this.decimalValue = ((JAXBElement<BigDecimal> ) value);
+        this.decimalValue = value;
     }
 
     /**
@@ -168,7 +168,7 @@ public class RemoteArtifactCustomProperty {
      *     
      */
     public void setDefinition(JAXBElement<RemoteCustomProperty> value) {
-        this.definition = ((JAXBElement<RemoteCustomProperty> ) value);
+        this.definition = value;
     }
 
     /**
@@ -192,7 +192,7 @@ public class RemoteArtifactCustomProperty {
      *     
      */
     public void setIntegerListValue(JAXBElement<ArrayOfint> value) {
-        this.integerListValue = ((JAXBElement<ArrayOfint> ) value);
+        this.integerListValue = value;
     }
 
     /**
@@ -216,7 +216,7 @@ public class RemoteArtifactCustomProperty {
      *     
      */
     public void setIntegerValue(JAXBElement<Integer> value) {
-        this.integerValue = ((JAXBElement<Integer> ) value);
+        this.integerValue = value;
     }
 
     /**
@@ -264,7 +264,7 @@ public class RemoteArtifactCustomProperty {
      *     
      */
     public void setStringValue(JAXBElement<String> value) {
-        this.stringValue = ((JAXBElement<String> ) value);
+        this.stringValue = value;
     }
 
 }

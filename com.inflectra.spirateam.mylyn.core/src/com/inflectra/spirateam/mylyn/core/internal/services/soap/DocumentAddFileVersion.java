@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteDocumentVersion" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteDocumentVersion" minOccurs="0"/>
+ *         &lt;element name="remoteDocumentVersion" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteDocumentVersion" minOccurs="0"/>
  *         &lt;element name="binaryData" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
  *         &lt;element name="makeCurrent" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *       &lt;/sequence>
@@ -39,9 +39,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Document_AddFileVersion")
 public class DocumentAddFileVersion {
 
-    @XmlElementRef(name = "remoteDocumentVersion", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteDocumentVersion", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteDocumentVersion> remoteDocumentVersion;
-    @XmlElementRef(name = "binaryData", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "binaryData", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<byte[]> binaryData;
     protected Boolean makeCurrent;
 
@@ -66,7 +66,7 @@ public class DocumentAddFileVersion {
      *     
      */
     public void setRemoteDocumentVersion(JAXBElement<RemoteDocumentVersion> value) {
-        this.remoteDocumentVersion = ((JAXBElement<RemoteDocumentVersion> ) value);
+        this.remoteDocumentVersion = value;
     }
 
     /**
@@ -90,7 +90,7 @@ public class DocumentAddFileVersion {
      *     
      */
     public void setBinaryData(JAXBElement<byte[]> value) {
-        this.binaryData = ((JAXBElement<byte[]> ) value);
+        this.binaryData = value;
     }
 
     /**

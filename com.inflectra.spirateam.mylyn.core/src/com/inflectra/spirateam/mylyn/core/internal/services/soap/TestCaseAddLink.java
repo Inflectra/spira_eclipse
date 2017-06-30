@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="testCaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="position" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="linkedTestCaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="parameters" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteTestStepParameter" minOccurs="0"/>
+ *         &lt;element name="parameters" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteTestStepParameter" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -44,7 +44,7 @@ public class TestCaseAddLink {
     protected Integer testCaseId;
     protected Integer position;
     protected Integer linkedTestCaseId;
-    @XmlElementRef(name = "parameters", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "parameters", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteTestStepParameter> parameters;
 
     /**
@@ -140,7 +140,7 @@ public class TestCaseAddLink {
      *     
      */
     public void setParameters(JAXBElement<ArrayOfRemoteTestStepParameter> value) {
-        this.parameters = ((JAXBElement<ArrayOfRemoteTestStepParameter> ) value);
+        this.parameters = value;
     }
 
 }

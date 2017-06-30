@@ -14,7 +14,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;Represents a document (attachment/url) in the system&lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * Represents a document (attachment/url) in the system
+ * &lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -25,10 +27,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <pre>
  * &lt;complexType name="RemoteDocument">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteArtifact">
  *       &lt;sequence>
- *         &lt;element name="ArtifactId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="ArtifactTypeId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="AttachedArtifacts" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteLinkedArtifact" minOccurs="0"/>
  *         &lt;element name="AttachmentId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="AttachmentTypeId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="AttachmentTypeName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -46,9 +47,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="Size" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="Tags" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="UploadDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="Versions" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteDocumentVersion" minOccurs="0"/>
+ *         &lt;element name="Versions" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteDocumentVersion" minOccurs="0"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -56,9 +57,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteDocument", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
-    "artifactId",
-    "artifactTypeId",
+@XmlType(name = "RemoteDocument", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
+    "attachedArtifacts",
     "attachmentId",
     "attachmentTypeId",
     "attachmentTypeName",
@@ -78,97 +78,73 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "uploadDate",
     "versions"
 })
-public class RemoteDocument {
+public class RemoteDocument
+    extends RemoteArtifact
+{
 
-    @XmlElementRef(name = "ArtifactId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
-    protected JAXBElement<Integer> artifactId;
-    @XmlElementRef(name = "ArtifactTypeId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
-    protected JAXBElement<Integer> artifactTypeId;
-    @XmlElementRef(name = "AttachmentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AttachedArtifacts", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfRemoteLinkedArtifact> attachedArtifacts;
+    @XmlElementRef(name = "AttachmentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> attachmentId;
     @XmlElement(name = "AttachmentTypeId")
     protected Integer attachmentTypeId;
-    @XmlElementRef(name = "AttachmentTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AttachmentTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> attachmentTypeName;
-    @XmlElementRef(name = "AuthorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AuthorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> authorId;
-    @XmlElementRef(name = "AuthorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AuthorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> authorName;
-    @XmlElementRef(name = "CurrentVersion", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CurrentVersion", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> currentVersion;
-    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> description;
     @XmlElement(name = "EditedDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar editedDate;
-    @XmlElementRef(name = "EditorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "EditorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> editorId;
-    @XmlElementRef(name = "EditorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "EditorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> editorName;
-    @XmlElementRef(name = "FilenameOrUrl", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "FilenameOrUrl", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> filenameOrUrl;
-    @XmlElementRef(name = "ProjectAttachmentFolderId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ProjectAttachmentFolderId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> projectAttachmentFolderId;
-    @XmlElementRef(name = "ProjectAttachmentTypeId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ProjectAttachmentTypeId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> projectAttachmentTypeId;
-    @XmlElementRef(name = "ProjectAttachmentTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ProjectAttachmentTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> projectAttachmentTypeName;
     @XmlElement(name = "Size")
     protected Integer size;
-    @XmlElementRef(name = "Tags", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Tags", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> tags;
     @XmlElement(name = "UploadDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar uploadDate;
-    @XmlElementRef(name = "Versions", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Versions", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteDocumentVersion> versions;
 
     /**
-     * Gets the value of the artifactId property.
+     * Gets the value of the attachedArtifacts property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteLinkedArtifact }{@code >}
      *     
      */
-    public JAXBElement<Integer> getArtifactId() {
-        return artifactId;
+    public JAXBElement<ArrayOfRemoteLinkedArtifact> getAttachedArtifacts() {
+        return attachedArtifacts;
     }
 
     /**
-     * Sets the value of the artifactId property.
+     * Sets the value of the attachedArtifacts property.
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfRemoteLinkedArtifact }{@code >}
      *     
      */
-    public void setArtifactId(JAXBElement<Integer> value) {
-        this.artifactId = ((JAXBElement<Integer> ) value);
-    }
-
-    /**
-     * Gets the value of the artifactTypeId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
-     *     
-     */
-    public JAXBElement<Integer> getArtifactTypeId() {
-        return artifactTypeId;
-    }
-
-    /**
-     * Sets the value of the artifactTypeId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
-     *     
-     */
-    public void setArtifactTypeId(JAXBElement<Integer> value) {
-        this.artifactTypeId = ((JAXBElement<Integer> ) value);
+    public void setAttachedArtifacts(JAXBElement<ArrayOfRemoteLinkedArtifact> value) {
+        this.attachedArtifacts = value;
     }
 
     /**
@@ -192,7 +168,7 @@ public class RemoteDocument {
      *     
      */
     public void setAttachmentId(JAXBElement<Integer> value) {
-        this.attachmentId = ((JAXBElement<Integer> ) value);
+        this.attachmentId = value;
     }
 
     /**
@@ -240,7 +216,7 @@ public class RemoteDocument {
      *     
      */
     public void setAttachmentTypeName(JAXBElement<String> value) {
-        this.attachmentTypeName = ((JAXBElement<String> ) value);
+        this.attachmentTypeName = value;
     }
 
     /**
@@ -264,7 +240,7 @@ public class RemoteDocument {
      *     
      */
     public void setAuthorId(JAXBElement<Integer> value) {
-        this.authorId = ((JAXBElement<Integer> ) value);
+        this.authorId = value;
     }
 
     /**
@@ -288,7 +264,7 @@ public class RemoteDocument {
      *     
      */
     public void setAuthorName(JAXBElement<String> value) {
-        this.authorName = ((JAXBElement<String> ) value);
+        this.authorName = value;
     }
 
     /**
@@ -312,7 +288,7 @@ public class RemoteDocument {
      *     
      */
     public void setCurrentVersion(JAXBElement<String> value) {
-        this.currentVersion = ((JAXBElement<String> ) value);
+        this.currentVersion = value;
     }
 
     /**
@@ -336,7 +312,7 @@ public class RemoteDocument {
      *     
      */
     public void setDescription(JAXBElement<String> value) {
-        this.description = ((JAXBElement<String> ) value);
+        this.description = value;
     }
 
     /**
@@ -384,7 +360,7 @@ public class RemoteDocument {
      *     
      */
     public void setEditorId(JAXBElement<Integer> value) {
-        this.editorId = ((JAXBElement<Integer> ) value);
+        this.editorId = value;
     }
 
     /**
@@ -408,7 +384,7 @@ public class RemoteDocument {
      *     
      */
     public void setEditorName(JAXBElement<String> value) {
-        this.editorName = ((JAXBElement<String> ) value);
+        this.editorName = value;
     }
 
     /**
@@ -432,7 +408,7 @@ public class RemoteDocument {
      *     
      */
     public void setFilenameOrUrl(JAXBElement<String> value) {
-        this.filenameOrUrl = ((JAXBElement<String> ) value);
+        this.filenameOrUrl = value;
     }
 
     /**
@@ -456,7 +432,7 @@ public class RemoteDocument {
      *     
      */
     public void setProjectAttachmentFolderId(JAXBElement<Integer> value) {
-        this.projectAttachmentFolderId = ((JAXBElement<Integer> ) value);
+        this.projectAttachmentFolderId = value;
     }
 
     /**
@@ -480,7 +456,7 @@ public class RemoteDocument {
      *     
      */
     public void setProjectAttachmentTypeId(JAXBElement<Integer> value) {
-        this.projectAttachmentTypeId = ((JAXBElement<Integer> ) value);
+        this.projectAttachmentTypeId = value;
     }
 
     /**
@@ -504,7 +480,7 @@ public class RemoteDocument {
      *     
      */
     public void setProjectAttachmentTypeName(JAXBElement<String> value) {
-        this.projectAttachmentTypeName = ((JAXBElement<String> ) value);
+        this.projectAttachmentTypeName = value;
     }
 
     /**
@@ -552,7 +528,7 @@ public class RemoteDocument {
      *     
      */
     public void setTags(JAXBElement<String> value) {
-        this.tags = ((JAXBElement<String> ) value);
+        this.tags = value;
     }
 
     /**
@@ -600,7 +576,7 @@ public class RemoteDocument {
      *     
      */
     public void setVersions(JAXBElement<ArrayOfRemoteDocumentVersion> value) {
-        this.versions = ((JAXBElement<ArrayOfRemoteDocumentVersion> ) value);
+        this.versions = value;
     }
 
 }

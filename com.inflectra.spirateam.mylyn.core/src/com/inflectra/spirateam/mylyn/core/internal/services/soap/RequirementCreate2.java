@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteRequirement" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteRequirement" minOccurs="0"/>
+ *         &lt;element name="remoteRequirement" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteRequirement" minOccurs="0"/>
  *         &lt;element name="parentRequirementId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -37,9 +37,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Requirement_Create2")
 public class RequirementCreate2 {
 
-    @XmlElementRef(name = "remoteRequirement", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteRequirement", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteRequirement> remoteRequirement;
-    @XmlElementRef(name = "parentRequirementId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "parentRequirementId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> parentRequirementId;
 
     /**
@@ -63,7 +63,7 @@ public class RequirementCreate2 {
      *     
      */
     public void setRemoteRequirement(JAXBElement<RemoteRequirement> value) {
-        this.remoteRequirement = ((JAXBElement<RemoteRequirement> ) value);
+        this.remoteRequirement = value;
     }
 
     /**
@@ -87,7 +87,7 @@ public class RequirementCreate2 {
      *     
      */
     public void setParentRequirementId(JAXBElement<Integer> value) {
-        this.parentRequirementId = ((JAXBElement<Integer> ) value);
+        this.parentRequirementId = value;
     }
 
 }

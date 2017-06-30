@@ -37,9 +37,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Connection_Authenticate")
 public class ConnectionAuthenticate {
 
-    @XmlElementRef(name = "userName", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "userName", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> userName;
-    @XmlElementRef(name = "password", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "password", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> password;
 
     /**
@@ -63,7 +63,7 @@ public class ConnectionAuthenticate {
      *     
      */
     public void setUserName(JAXBElement<String> value) {
-        this.userName = ((JAXBElement<String> ) value);
+        this.userName = value;
     }
 
     /**
@@ -87,7 +87,7 @@ public class ConnectionAuthenticate {
      *     
      */
     public void setPassword(JAXBElement<String> value) {
-        this.password = ((JAXBElement<String> ) value);
+        this.password = value;
     }
 
 }

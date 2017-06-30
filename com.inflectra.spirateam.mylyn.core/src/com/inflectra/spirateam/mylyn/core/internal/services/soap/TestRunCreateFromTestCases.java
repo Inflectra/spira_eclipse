@@ -37,9 +37,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "TestRun_CreateFromTestCases")
 public class TestRunCreateFromTestCases {
 
-    @XmlElementRef(name = "testCaseIds", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "testCaseIds", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfint> testCaseIds;
-    @XmlElementRef(name = "releaseId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "releaseId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> releaseId;
 
     /**
@@ -63,7 +63,7 @@ public class TestRunCreateFromTestCases {
      *     
      */
     public void setTestCaseIds(JAXBElement<ArrayOfint> value) {
-        this.testCaseIds = ((JAXBElement<ArrayOfint> ) value);
+        this.testCaseIds = value;
     }
 
     /**
@@ -87,7 +87,7 @@ public class TestRunCreateFromTestCases {
      *     
      */
     public void setReleaseId(JAXBElement<Integer> value) {
-        this.releaseId = ((JAXBElement<Integer> ) value);
+        this.releaseId = value;
     }
 
 }
