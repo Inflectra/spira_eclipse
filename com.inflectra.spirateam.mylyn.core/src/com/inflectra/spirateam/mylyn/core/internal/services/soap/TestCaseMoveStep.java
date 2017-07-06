@@ -41,7 +41,7 @@ public class TestCaseMoveStep {
 
     protected Integer testCaseId;
     protected Integer sourceTestStepId;
-    @XmlElementRef(name = "destinationTestStepId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "destinationTestStepId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> destinationTestStepId;
 
     /**
@@ -113,7 +113,7 @@ public class TestCaseMoveStep {
      *     
      */
     public void setDestinationTestStepId(JAXBElement<Integer> value) {
-        this.destinationTestStepId = ((JAXBElement<Integer> ) value);
+        this.destinationTestStepId = value;
     }
 
 }

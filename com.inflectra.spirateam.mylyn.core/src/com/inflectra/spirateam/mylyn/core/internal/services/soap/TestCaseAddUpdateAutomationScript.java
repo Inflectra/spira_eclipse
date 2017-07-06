@@ -50,19 +50,19 @@ import javax.xml.bind.annotation.XmlType;
 public class TestCaseAddUpdateAutomationScript {
 
     protected Integer testCaseId;
-    @XmlElementRef(name = "automationEngineId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "automationEngineId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> automationEngineId;
-    @XmlElementRef(name = "urlOrFilename", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "urlOrFilename", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> urlOrFilename;
-    @XmlElementRef(name = "description", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "description", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> description;
-    @XmlElementRef(name = "binaryData", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "binaryData", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<byte[]> binaryData;
-    @XmlElementRef(name = "version", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "version", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> version;
-    @XmlElementRef(name = "projectAttachmentTypeId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "projectAttachmentTypeId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> projectAttachmentTypeId;
-    @XmlElementRef(name = "projectAttachmentFolderId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "projectAttachmentFolderId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> projectAttachmentFolderId;
 
     /**
@@ -110,7 +110,7 @@ public class TestCaseAddUpdateAutomationScript {
      *     
      */
     public void setAutomationEngineId(JAXBElement<Integer> value) {
-        this.automationEngineId = ((JAXBElement<Integer> ) value);
+        this.automationEngineId = value;
     }
 
     /**
@@ -134,7 +134,7 @@ public class TestCaseAddUpdateAutomationScript {
      *     
      */
     public void setUrlOrFilename(JAXBElement<String> value) {
-        this.urlOrFilename = ((JAXBElement<String> ) value);
+        this.urlOrFilename = value;
     }
 
     /**
@@ -158,7 +158,7 @@ public class TestCaseAddUpdateAutomationScript {
      *     
      */
     public void setDescription(JAXBElement<String> value) {
-        this.description = ((JAXBElement<String> ) value);
+        this.description = value;
     }
 
     /**
@@ -182,7 +182,7 @@ public class TestCaseAddUpdateAutomationScript {
      *     
      */
     public void setBinaryData(JAXBElement<byte[]> value) {
-        this.binaryData = ((JAXBElement<byte[]> ) value);
+        this.binaryData = value;
     }
 
     /**
@@ -206,7 +206,7 @@ public class TestCaseAddUpdateAutomationScript {
      *     
      */
     public void setVersion(JAXBElement<String> value) {
-        this.version = ((JAXBElement<String> ) value);
+        this.version = value;
     }
 
     /**
@@ -230,7 +230,7 @@ public class TestCaseAddUpdateAutomationScript {
      *     
      */
     public void setProjectAttachmentTypeId(JAXBElement<Integer> value) {
-        this.projectAttachmentTypeId = ((JAXBElement<Integer> ) value);
+        this.projectAttachmentTypeId = value;
     }
 
     /**
@@ -254,7 +254,7 @@ public class TestCaseAddUpdateAutomationScript {
      *     
      */
     public void setProjectAttachmentFolderId(JAXBElement<Integer> value) {
-        this.projectAttachmentFolderId = ((JAXBElement<Integer> ) value);
+        this.projectAttachmentFolderId = value;
     }
 
 }

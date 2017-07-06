@@ -7,14 +7,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 This object represents a single step in a test run in the system
- *               &lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * This object represents a single step in a test run in the system
+ * &lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -27,12 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="ActualDuration" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ActualResult" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="EndDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="ExecutionStatusId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ExpectedResult" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Position" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="SampleData" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="StartDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="TestCaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestRunId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestRunStepId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -46,13 +50,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteTestRunStep", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteTestRunStep", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
+    "actualDuration",
     "actualResult",
     "description",
+    "endDate",
     "executionStatusId",
     "expectedResult",
     "position",
     "sampleData",
+    "startDate",
     "testCaseId",
     "testRunId",
     "testRunStepId",
@@ -60,26 +67,56 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class RemoteTestRunStep {
 
-    @XmlElementRef(name = "ActualResult", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ActualDuration", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> actualDuration;
+    @XmlElementRef(name = "ActualResult", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> actualResult;
-    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> description;
+    @XmlElementRef(name = "EndDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<XMLGregorianCalendar> endDate;
     @XmlElement(name = "ExecutionStatusId")
     protected Integer executionStatusId;
-    @XmlElementRef(name = "ExpectedResult", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ExpectedResult", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> expectedResult;
     @XmlElement(name = "Position")
     protected Integer position;
-    @XmlElementRef(name = "SampleData", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "SampleData", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> sampleData;
-    @XmlElementRef(name = "TestCaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "StartDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<XMLGregorianCalendar> startDate;
+    @XmlElementRef(name = "TestCaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testCaseId;
     @XmlElement(name = "TestRunId")
     protected Integer testRunId;
-    @XmlElementRef(name = "TestRunStepId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestRunStepId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testRunStepId;
-    @XmlElementRef(name = "TestStepId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestStepId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testStepId;
+
+    /**
+     * Gets the value of the actualDuration property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getActualDuration() {
+        return actualDuration;
+    }
+
+    /**
+     * Sets the value of the actualDuration property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setActualDuration(JAXBElement<Integer> value) {
+        this.actualDuration = value;
+    }
 
     /**
      * Gets the value of the actualResult property.
@@ -102,7 +139,7 @@ public class RemoteTestRunStep {
      *     
      */
     public void setActualResult(JAXBElement<String> value) {
-        this.actualResult = ((JAXBElement<String> ) value);
+        this.actualResult = value;
     }
 
     /**
@@ -126,7 +163,31 @@ public class RemoteTestRunStep {
      *     
      */
     public void setDescription(JAXBElement<String> value) {
-        this.description = ((JAXBElement<String> ) value);
+        this.description = value;
+    }
+
+    /**
+     * Gets the value of the endDate property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     *     
+     */
+    public JAXBElement<XMLGregorianCalendar> getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * Sets the value of the endDate property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     *     
+     */
+    public void setEndDate(JAXBElement<XMLGregorianCalendar> value) {
+        this.endDate = value;
     }
 
     /**
@@ -174,7 +235,7 @@ public class RemoteTestRunStep {
      *     
      */
     public void setExpectedResult(JAXBElement<String> value) {
-        this.expectedResult = ((JAXBElement<String> ) value);
+        this.expectedResult = value;
     }
 
     /**
@@ -222,7 +283,31 @@ public class RemoteTestRunStep {
      *     
      */
     public void setSampleData(JAXBElement<String> value) {
-        this.sampleData = ((JAXBElement<String> ) value);
+        this.sampleData = value;
+    }
+
+    /**
+     * Gets the value of the startDate property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     *     
+     */
+    public JAXBElement<XMLGregorianCalendar> getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Sets the value of the startDate property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}
+     *     
+     */
+    public void setStartDate(JAXBElement<XMLGregorianCalendar> value) {
+        this.startDate = value;
     }
 
     /**
@@ -246,7 +331,7 @@ public class RemoteTestRunStep {
      *     
      */
     public void setTestCaseId(JAXBElement<Integer> value) {
-        this.testCaseId = ((JAXBElement<Integer> ) value);
+        this.testCaseId = value;
     }
 
     /**
@@ -294,7 +379,7 @@ public class RemoteTestRunStep {
      *     
      */
     public void setTestRunStepId(JAXBElement<Integer> value) {
-        this.testRunStepId = ((JAXBElement<Integer> ) value);
+        this.testRunStepId = value;
     }
 
     /**
@@ -318,7 +403,7 @@ public class RemoteTestRunStep {
      *     
      */
     public void setTestStepId(JAXBElement<Integer> value) {
-        this.testStepId = ((JAXBElement<Integer> ) value);
+        this.testStepId = value;
     }
 
 }

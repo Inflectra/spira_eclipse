@@ -1,6 +1,6 @@
 package com.inflectra.spirateam.mylyn.core.internal.model;
 
-import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteWorkflowIncidentTransition;
+import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteWorkflowTransition;
 
 public class IncidentWorkflowTransition
 {
@@ -13,15 +13,16 @@ public class IncidentWorkflowTransition
     protected String name;
     protected int workflowID;
     protected int transitionID;
-    
-    public IncidentWorkflowTransition(RemoteWorkflowIncidentTransition remoteWorkflowIncidentTransition)
+    //to get working, removed Incident from all the methods and object names
+    public IncidentWorkflowTransition(RemoteWorkflowTransition remoteWorkflowIncidentTransition)
     {
-        this.executeByDetector = remoteWorkflowIncidentTransition.isExecuteByDetector();
+        this.executeByDetector = remoteWorkflowIncidentTransition.isExecuteByCreator();
+        //in above line changed from isExecuteByDetector() to isExecuteByCreator()
         this.executeByOwner = remoteWorkflowIncidentTransition.isExecuteByOwner();
-        this.incidentStatusIDInput = remoteWorkflowIncidentTransition.getIncidentStatusIdInput();
-        this.incidentStatusNameInput = remoteWorkflowIncidentTransition.getIncidentStatusNameInput().getValue();
-        this.incidentStatusIDOutput = remoteWorkflowIncidentTransition.getIncidentStatusIdOutput();
-        this.incidentStatusNameOutput = remoteWorkflowIncidentTransition.getIncidentStatusNameOutput().getValue();
+        this.incidentStatusIDInput = remoteWorkflowIncidentTransition.getStatusIdInput();
+        this.incidentStatusNameInput = remoteWorkflowIncidentTransition.getStatusNameInput().getValue();
+        this.incidentStatusIDOutput = remoteWorkflowIncidentTransition.getStatusIdOutput();
+        this.incidentStatusNameOutput = remoteWorkflowIncidentTransition.getStatusNameOutput().getValue();
         this.name = remoteWorkflowIncidentTransition.getName().getValue();
         this.workflowID = remoteWorkflowIncidentTransition.getWorkflowId();
         this.transitionID = remoteWorkflowIncidentTransition.getTransitionId();

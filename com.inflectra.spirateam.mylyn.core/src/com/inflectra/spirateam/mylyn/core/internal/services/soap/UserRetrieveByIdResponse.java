@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="User_RetrieveByIdResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteUser" minOccurs="0"/>
+ *         &lt;element name="User_RetrieveByIdResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteUser" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "User_RetrieveByIdResponse")
 public class UserRetrieveByIdResponse {
 
-    @XmlElementRef(name = "User_RetrieveByIdResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "User_RetrieveByIdResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteUser> userRetrieveByIdResult;
 
     /**
@@ -59,7 +59,7 @@ public class UserRetrieveByIdResponse {
      *     
      */
     public void setUserRetrieveByIdResult(JAXBElement<RemoteUser> value) {
-        this.userRetrieveByIdResult = ((JAXBElement<RemoteUser> ) value);
+        this.userRetrieveByIdResult = value;
     }
 
 }

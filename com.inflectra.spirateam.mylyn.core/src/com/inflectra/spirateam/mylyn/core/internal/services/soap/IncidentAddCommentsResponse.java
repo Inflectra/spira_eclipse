@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Incident_AddCommentsResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteComment" minOccurs="0"/>
+ *         &lt;element name="Incident_AddCommentsResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteComment" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Incident_AddCommentsResponse")
 public class IncidentAddCommentsResponse {
 
-    @XmlElementRef(name = "Incident_AddCommentsResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "Incident_AddCommentsResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteComment> incidentAddCommentsResult;
 
     /**
@@ -59,7 +59,7 @@ public class IncidentAddCommentsResponse {
      *     
      */
     public void setIncidentAddCommentsResult(JAXBElement<ArrayOfRemoteComment> value) {
-        this.incidentAddCommentsResult = ((JAXBElement<ArrayOfRemoteComment> ) value);
+        this.incidentAddCommentsResult = value;
     }
 
 }

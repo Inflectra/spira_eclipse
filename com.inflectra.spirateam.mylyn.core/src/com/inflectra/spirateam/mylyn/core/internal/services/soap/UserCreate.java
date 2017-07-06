@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteUser" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteUser" minOccurs="0"/>
+ *         &lt;element name="remoteUser" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteUser" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="passwordQuestion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="passwordAnswer" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -43,15 +43,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "User_Create")
 public class UserCreate {
 
-    @XmlElementRef(name = "remoteUser", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteUser", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteUser> remoteUser;
-    @XmlElementRef(name = "password", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "password", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> password;
-    @XmlElementRef(name = "passwordQuestion", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "passwordQuestion", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> passwordQuestion;
-    @XmlElementRef(name = "passwordAnswer", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "passwordAnswer", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> passwordAnswer;
-    @XmlElementRef(name = "projectRoleId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "projectRoleId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> projectRoleId;
 
     /**
@@ -75,7 +75,7 @@ public class UserCreate {
      *     
      */
     public void setRemoteUser(JAXBElement<RemoteUser> value) {
-        this.remoteUser = ((JAXBElement<RemoteUser> ) value);
+        this.remoteUser = value;
     }
 
     /**
@@ -99,7 +99,7 @@ public class UserCreate {
      *     
      */
     public void setPassword(JAXBElement<String> value) {
-        this.password = ((JAXBElement<String> ) value);
+        this.password = value;
     }
 
     /**
@@ -123,7 +123,7 @@ public class UserCreate {
      *     
      */
     public void setPasswordQuestion(JAXBElement<String> value) {
-        this.passwordQuestion = ((JAXBElement<String> ) value);
+        this.passwordQuestion = value;
     }
 
     /**
@@ -147,7 +147,7 @@ public class UserCreate {
      *     
      */
     public void setPasswordAnswer(JAXBElement<String> value) {
-        this.passwordAnswer = ((JAXBElement<String> ) value);
+        this.passwordAnswer = value;
     }
 
     /**
@@ -171,7 +171,7 @@ public class UserCreate {
      *     
      */
     public void setProjectRoleId(JAXBElement<Integer> value) {
-        this.projectRoleId = ((JAXBElement<Integer> ) value);
+        this.projectRoleId = value;
     }
 
 }

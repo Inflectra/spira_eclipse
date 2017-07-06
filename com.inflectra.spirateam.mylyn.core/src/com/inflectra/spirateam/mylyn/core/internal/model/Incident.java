@@ -9,6 +9,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraImportExport;
+import com.inflectra.spirateam.mylyn.core.internal.services.soap.ArrayOfint;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteIncident;
 /**
  * Represents a single incident in SpiraTeam
@@ -22,7 +23,8 @@ public class Incident extends Artifact
     protected int incidentStatusId;
     protected int incidentTypeId;
     protected int openerId;
-    protected Integer testRunStepId;
+    //changed below from Integer to ArrayOfint
+    protected ArrayOfint testRunStepIds;
     protected Integer detectedReleaseId;
     protected Integer resolvedReleaseId;
     protected Integer verifiedReleaseId;
@@ -44,6 +46,8 @@ public class Incident extends Artifact
     protected String resolvedReleaseVersionNumber;
     protected String verifiedReleaseVersionNumber;
     protected Boolean incidentStatusOpenStatus;
+    protected ArrayOfint componentIds;
+    
     
     //Contains the collection of resolutions
     protected List<IncidentResolution> resolutions = new ArrayList<IncidentResolution>();
@@ -67,7 +71,8 @@ public class Incident extends Artifact
 		REMAINING_EFFORT("incident.remainingEffort"),
 		PROJECTED_EFFORT("incident.projectedEffort"),
 		TRANSITION_STATUS("incident.internal.transitionStatus"),
-		RESOLUTION("incident.resolution");
+		RESOLUTION("incident.resolution"),
+		COMPONENT_IDS("incident.componentIds");
 
 		public static Key fromKey(String name)
 		{
@@ -121,7 +126,7 @@ public class Incident extends Artifact
         this.incidentStatusId = remoteIncident.getIncidentStatusId().getValue();
         this.incidentTypeId = remoteIncident.getIncidentTypeId().getValue();
         this.openerId = remoteIncident.getOpenerId().getValue();
-        this.testRunStepId = remoteIncident.getTestRunStepId().getValue();
+        this.testRunStepIds = remoteIncident.getTestRunStepIds().getValue();
         this.detectedReleaseId = remoteIncident.getDetectedReleaseId().getValue();
         this.resolvedReleaseId = remoteIncident.getResolvedReleaseId().getValue();
         this.verifiedReleaseId = remoteIncident.getVerifiedReleaseId().getValue();
@@ -143,6 +148,9 @@ public class Incident extends Artifact
         this.resolvedReleaseVersionNumber = remoteIncident.getResolvedReleaseVersionNumber().getValue();
         this.verifiedReleaseVersionNumber = remoteIncident.getVerifiedReleaseVersionNumber().getValue();
         this.incidentStatusOpenStatus = remoteIncident.getIncidentStatusOpenStatus().getValue();
+        this.componentIds = remoteIncident.getComponentIds().getValue();
+        
+        
     }
     
     /**
@@ -170,7 +178,8 @@ public class Incident extends Artifact
     	remoteIncident.setIncidentStatusId(SpiraImportExport.CreateJAXBInteger("IncidentStatusId",this.incidentStatusId));
     	remoteIncident.setIncidentTypeId(SpiraImportExport.CreateJAXBInteger("IncidentTypeId",this.incidentTypeId));
     	remoteIncident.setOpenerId(SpiraImportExport.CreateJAXBInteger("OpenerId",this.openerId));
-    	remoteIncident.setTestRunStepId(SpiraImportExport.CreateJAXBInteger("TestRunStepId",this.testRunStepId));
+    	remoteIncident.setTestRunStepIds(SpiraImportExport.CreateJAXBArrayOfInt("TestRunStepIds", this.testRunStepIds));
+    	//changed above to work with a list of int's instead of a singular int
     	remoteIncident.setDetectedReleaseId(SpiraImportExport.CreateJAXBInteger("DetectedReleaseId",this.detectedReleaseId));
     	remoteIncident.setResolvedReleaseId(SpiraImportExport.CreateJAXBInteger("ResolvedReleaseId",this.resolvedReleaseId));
     	remoteIncident.setVerifiedReleaseId(SpiraImportExport.CreateJAXBInteger("VerifiedReleaseId",this.verifiedReleaseId));
@@ -179,7 +188,8 @@ public class Incident extends Artifact
     	remoteIncident.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("EstimatedEffort",this.estimatedEffort));
     	remoteIncident.setActualEffort(SpiraImportExport.CreateJAXBInteger("ActualEffort",this.actualEffort));
     	remoteIncident.setRemainingEffort(SpiraImportExport.CreateJAXBInteger("RemainingEffort", this.remainingEffort));
-               
+        remoteIncident.setComponentIds(SpiraImportExport.CreateJAXBArrayOfInt("ComponentIds", this.componentIds));
+    	
         return remoteIncident;
     }
     
@@ -308,6 +318,33 @@ public class Incident extends Artifact
     public int getOpenerId() {
         return openerId;
     }
+    
+    /**
+     * Gets the value of the testRunStepIds property.
+     * 
+     *     
+     */
+    public ArrayOfint getTestRunStepIds() {
+        return testRunStepIds;
+    }
+    
+    /**
+     * 
+     * @return the value of the componentIds property.
+     */
+    public ArrayOfint getComponentIds() {
+    	return componentIds;
+    }
+    
+    /**
+     * @param componentIds - The new value for the componentIds property.
+     */
+    public void setComponentIds(ArrayOfint componentIds) {
+    	if(hasChanged(this.componentIds, componentIds)) {
+    		this.dataChanged=true;
+    	}
+    	this.componentIds=componentIds;
+    }
 
     /**
      * Sets the value of the openerId property.
@@ -322,34 +359,25 @@ public class Incident extends Artifact
         this.openerId = value;
     }
 
-     /**
-     * Gets the value of the testRunStepId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public Integer getTestRunStepId() {
-        return testRunStepId;
-    }
+     
 
     /**
-     * Sets the value of the testRunStepId property.
+     * Sets the value of the testRunStepIds property.
      * 
      * @param value
      *     allowed object is
      *     {@link Integer }
      *     
      */
-    public void setTestRunStepId(Integer value)
+    public void setTestRunStepIds(ArrayOfint value)
     {
-    	if (hasChanged(this.testRunStepId, value))
+    	if (hasChanged(this.testRunStepIds, value))
     	{
     		this.dataChanged = true;
     	}
-        this.testRunStepId = value;
+        this.testRunStepIds = value;
     }
+    
 
     /**
      * Gets the value of the detectedReleaseId property.
@@ -736,4 +764,5 @@ public class Incident extends Artifact
 	{
 		return this.projectedEffort;
 	}
+	
 }

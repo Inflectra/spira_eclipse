@@ -60,6 +60,8 @@ public enum ArtifactAttribute
 	INCIDENT_PROJECTED_EFFORT(Incident.Key.PROJECTED_EFFORT, Messages.IncidentAttribute_ProjectedEffort, null, TaskAttribute.TYPE_DOUBLE, "", Flag.READ_ONLY, Flag.ATTRIBUTE),
 	INCIDENT_TRANSITION_STATUS(Incident.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT, ""),
 	INCIDENT_NEW_RESOLUTION(Incident.Key.RESOLUTION, Messages.IncidentAttribute_NewResolution, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT, "Resolution"),
+	//TODO: Very possible this is broken
+	//INCIDENT_COMPONENT_IDS(Incident.Key.COMPONENT_IDS, Messages.IncidentAttribute_ComponentIds, null, TaskAttribute.TYPE_),
 	
 	//Task attributes
 	TASK_TYPE(Task.Key.TYPE, Messages.TaskAttribute_Type, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SHORT_TEXT),

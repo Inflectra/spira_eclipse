@@ -23,7 +23,10 @@ public class Requirement
     protected Integer releaseId;
     protected String releaseVersionNumber;
     protected boolean summary;
-    protected Integer plannedEffort;
+    //changed planned to estimated
+    protected Integer estimatedEffort;
+    protected Integer componentId;
+    protected Integer requirementTypeId;
     
     //Contains the collection of comments
     protected List<RequirementComment> comments = new ArrayList<RequirementComment>();
@@ -94,7 +97,9 @@ public class Requirement
         this.releaseId = remoteRequirement.getReleaseId().getValue();
         this.releaseVersionNumber = remoteRequirement.getReleaseVersionNumber().getValue();
         this.summary = remoteRequirement.isSummary();
-        this.plannedEffort = remoteRequirement.getPlannedEffort().getValue();
+        this.estimatedEffort = remoteRequirement.getEstimatedEffort().getValue();
+        this.componentId = remoteRequirement.getComponentId().getValue();
+        this.requirementTypeId = remoteRequirement.getRequirementTypeId();
     }
     
     /**
@@ -121,7 +126,8 @@ public class Requirement
     	remoteRequirement.setStatusId(SpiraImportExport.CreateJAXBInteger("StatusId", this.statusId));
     	remoteRequirement.setReleaseId(SpiraImportExport.CreateJAXBInteger("ReleaseId", this.releaseId));
     	remoteRequirement.setImportanceId(SpiraImportExport.CreateJAXBInteger("ImportanceId", this.importanceId));
-    	remoteRequirement.setPlannedEffort(SpiraImportExport.CreateJAXBInteger("PlannedEffort", this.plannedEffort));
+    	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("PlannedEffort", this.estimatedEffort));
+    	remoteRequirement.setRequirementTypeId(this.requirementTypeId);
             	
         return remoteRequirement;
     }
@@ -181,6 +187,22 @@ public class Requirement
     public String getAuthorName()
     {
         return authorName;
+    }
+    
+    /**
+     * 
+     * @return - The value of the componentId property
+     */
+    public Integer getComponentId() {
+    	return componentId;
+    }
+    
+    /**
+     * 
+     * @param componentId - The new value of the componentId property
+     */
+    public void setComponentId(Integer componentId) {
+    	this.componentId=componentId;
     }
  
     /**
@@ -281,27 +303,27 @@ public class Requirement
     }
 
     /**
-     * Gets the value of the plannedEffort property.
-     * 
+     * Gets the value of the estimatedEffort property.
+     * Changed from planned in 4.0 to estimated in 5.0
      * @return
      *     possible object is
      *     {@link Integer }
      *     
      */
-    public Integer getPlannedEffort() {
-        return plannedEffort;
+    public Integer getEstimatedEffort() {
+        return estimatedEffort;
     }
 
     /**
-     * Sets the value of the plannedEffort property.
-     * 
+     * Sets the value of the estimatedEffort property.
+     * Changed from planned in 4.0 to estimated in 5.0
      * @param value
      *     allowed object is
      *     {@link Integer }
      *     
      */
-    public void setPlannedEffort(Integer value) {
-        this.plannedEffort = value;
+    public void setEstimatedEffort(Integer value) {
+        this.estimatedEffort = value;
     }
 
 	/**
@@ -310,5 +332,21 @@ public class Requirement
 	public List<RequirementComment> getComments()
 	{
 		return this.comments;
+	}
+	
+	/**
+	 * Sets the value of the requirementTypeId property
+	 * @param requirementTypeId The new value for the requirementTypeId property
+	 */
+	public void setRequirementTypeId(Integer requirementTypeId) {
+		this.requirementTypeId=requirementTypeId;
+	}
+	
+	/**
+	 * 
+	 * @return The value of the requirementTypeId property
+	 */
+	public Integer getRequirementTypeId() {
+		return this.requirementTypeId;
 	}
 }

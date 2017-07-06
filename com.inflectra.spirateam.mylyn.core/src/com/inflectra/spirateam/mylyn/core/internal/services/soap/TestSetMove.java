@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
 public class TestSetMove {
 
     protected Integer testSetId;
-    @XmlElementRef(name = "destinationTestSetId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "destinationTestSetId", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> destinationTestSetId;
 
     /**
@@ -86,7 +86,7 @@ public class TestSetMove {
      *     
      */
     public void setDestinationTestSetId(JAXBElement<Integer> value) {
-        this.destinationTestSetId = ((JAXBElement<Integer> ) value);
+        this.destinationTestSetId = value;
     }
 
 }

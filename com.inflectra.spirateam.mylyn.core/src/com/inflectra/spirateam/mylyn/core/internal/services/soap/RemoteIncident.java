@@ -14,9 +14,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 Represents a single Incident artifact in the system
- *               &lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * Represents a single Incident artifact in the system
+ * &lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -27,11 +27,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <pre>
  * &lt;complexType name="RemoteIncident">
  *   &lt;complexContent>
- *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteArtifact">
+ *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteArtifact">
  *       &lt;sequence>
  *         &lt;element name="ActualEffort" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ClosedDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="CompletionPercent" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="ComponentIds" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfint" minOccurs="0"/>
  *         &lt;element name="CreationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="DetectedReleaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -61,7 +62,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="SeverityId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="SeverityName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="StartDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="TestRunStepId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="TestRunStepIds" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfint" minOccurs="0"/>
  *         &lt;element name="VerifiedReleaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="VerifiedReleaseVersionNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -73,10 +74,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteIncident", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteIncident", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "actualEffort",
     "closedDate",
     "completionPercent",
+    "componentIds",
     "creationDate",
     "description",
     "detectedReleaseId",
@@ -106,7 +108,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "severityId",
     "severityName",
     "startDate",
-    "testRunStepId",
+    "testRunStepIds",
     "verifiedReleaseId",
     "verifiedReleaseVersionNumber"
 })
@@ -114,76 +116,78 @@ public class RemoteIncident
     extends RemoteArtifact
 {
 
-    @XmlElementRef(name = "ActualEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ActualEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> actualEffort;
-    @XmlElementRef(name = "ClosedDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ClosedDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> closedDate;
     @XmlElement(name = "CompletionPercent")
     protected Integer completionPercent;
-    @XmlElementRef(name = "CreationDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ComponentIds", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfint> componentIds;
+    @XmlElementRef(name = "CreationDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> creationDate;
-    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> description;
-    @XmlElementRef(name = "DetectedReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "DetectedReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> detectedReleaseId;
-    @XmlElementRef(name = "DetectedReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "DetectedReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> detectedReleaseVersionNumber;
-    @XmlElementRef(name = "EstimatedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "EstimatedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> estimatedEffort;
-    @XmlElementRef(name = "FixedBuildId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "FixedBuildId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> fixedBuildId;
-    @XmlElementRef(name = "FixedBuildName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "FixedBuildName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> fixedBuildName;
-    @XmlElementRef(name = "IncidentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IncidentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> incidentId;
-    @XmlElementRef(name = "IncidentStatusId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IncidentStatusId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> incidentStatusId;
-    @XmlElementRef(name = "IncidentStatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IncidentStatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> incidentStatusName;
-    @XmlElementRef(name = "IncidentStatusOpenStatus", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IncidentStatusOpenStatus", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Boolean> incidentStatusOpenStatus;
-    @XmlElementRef(name = "IncidentTypeId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IncidentTypeId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> incidentTypeId;
-    @XmlElementRef(name = "IncidentTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "IncidentTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> incidentTypeName;
     @XmlElement(name = "LastUpdateDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastUpdateDate;
-    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> name;
-    @XmlElementRef(name = "OpenerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OpenerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> openerId;
-    @XmlElementRef(name = "OpenerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OpenerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> openerName;
-    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> ownerId;
-    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> ownerName;
-    @XmlElementRef(name = "PriorityId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "PriorityId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> priorityId;
-    @XmlElementRef(name = "PriorityName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "PriorityName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> priorityName;
-    @XmlElementRef(name = "ProjectName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ProjectName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> projectName;
-    @XmlElementRef(name = "ProjectedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ProjectedEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> projectedEffort;
-    @XmlElementRef(name = "RemainingEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "RemainingEffort", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> remainingEffort;
-    @XmlElementRef(name = "ResolvedReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ResolvedReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> resolvedReleaseId;
-    @XmlElementRef(name = "ResolvedReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ResolvedReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> resolvedReleaseVersionNumber;
-    @XmlElementRef(name = "SeverityId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "SeverityId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> severityId;
-    @XmlElementRef(name = "SeverityName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "SeverityName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> severityName;
-    @XmlElementRef(name = "StartDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "StartDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> startDate;
-    @XmlElementRef(name = "TestRunStepId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
-    protected JAXBElement<Integer> testRunStepId;
-    @XmlElementRef(name = "VerifiedReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestRunStepIds", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfint> testRunStepIds;
+    @XmlElementRef(name = "VerifiedReleaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> verifiedReleaseId;
-    @XmlElementRef(name = "VerifiedReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "VerifiedReleaseVersionNumber", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> verifiedReleaseVersionNumber;
 
     /**
@@ -207,7 +211,7 @@ public class RemoteIncident
      *     
      */
     public void setActualEffort(JAXBElement<Integer> value) {
-        this.actualEffort = ((JAXBElement<Integer> ) value);
+        this.actualEffort = value;
     }
 
     /**
@@ -231,7 +235,7 @@ public class RemoteIncident
      *     
      */
     public void setClosedDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.closedDate = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.closedDate = value;
     }
 
     /**
@@ -259,6 +263,30 @@ public class RemoteIncident
     }
 
     /**
+     * Gets the value of the componentIds property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     *     
+     */
+    public JAXBElement<ArrayOfint> getComponentIds() {
+        return componentIds;
+    }
+
+    /**
+     * Sets the value of the componentIds property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     *     
+     */
+    public void setComponentIds(JAXBElement<ArrayOfint> value) {
+        this.componentIds = value;
+    }
+
+    /**
      * Gets the value of the creationDate property.
      * 
      * @return
@@ -279,7 +307,7 @@ public class RemoteIncident
      *     
      */
     public void setCreationDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.creationDate = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.creationDate = value;
     }
 
     /**
@@ -303,7 +331,7 @@ public class RemoteIncident
      *     
      */
     public void setDescription(JAXBElement<String> value) {
-        this.description = ((JAXBElement<String> ) value);
+        this.description = value;
     }
 
     /**
@@ -327,7 +355,7 @@ public class RemoteIncident
      *     
      */
     public void setDetectedReleaseId(JAXBElement<Integer> value) {
-        this.detectedReleaseId = ((JAXBElement<Integer> ) value);
+        this.detectedReleaseId = value;
     }
 
     /**
@@ -351,7 +379,7 @@ public class RemoteIncident
      *     
      */
     public void setDetectedReleaseVersionNumber(JAXBElement<String> value) {
-        this.detectedReleaseVersionNumber = ((JAXBElement<String> ) value);
+        this.detectedReleaseVersionNumber = value;
     }
 
     /**
@@ -375,7 +403,7 @@ public class RemoteIncident
      *     
      */
     public void setEstimatedEffort(JAXBElement<Integer> value) {
-        this.estimatedEffort = ((JAXBElement<Integer> ) value);
+        this.estimatedEffort = value;
     }
 
     /**
@@ -399,7 +427,7 @@ public class RemoteIncident
      *     
      */
     public void setFixedBuildId(JAXBElement<Integer> value) {
-        this.fixedBuildId = ((JAXBElement<Integer> ) value);
+        this.fixedBuildId = value;
     }
 
     /**
@@ -423,7 +451,7 @@ public class RemoteIncident
      *     
      */
     public void setFixedBuildName(JAXBElement<String> value) {
-        this.fixedBuildName = ((JAXBElement<String> ) value);
+        this.fixedBuildName = value;
     }
 
     /**
@@ -447,7 +475,7 @@ public class RemoteIncident
      *     
      */
     public void setIncidentId(JAXBElement<Integer> value) {
-        this.incidentId = ((JAXBElement<Integer> ) value);
+        this.incidentId = value;
     }
 
     /**
@@ -471,7 +499,7 @@ public class RemoteIncident
      *     
      */
     public void setIncidentStatusId(JAXBElement<Integer> value) {
-        this.incidentStatusId = ((JAXBElement<Integer> ) value);
+        this.incidentStatusId = value;
     }
 
     /**
@@ -495,7 +523,7 @@ public class RemoteIncident
      *     
      */
     public void setIncidentStatusName(JAXBElement<String> value) {
-        this.incidentStatusName = ((JAXBElement<String> ) value);
+        this.incidentStatusName = value;
     }
 
     /**
@@ -519,7 +547,7 @@ public class RemoteIncident
      *     
      */
     public void setIncidentStatusOpenStatus(JAXBElement<Boolean> value) {
-        this.incidentStatusOpenStatus = ((JAXBElement<Boolean> ) value);
+        this.incidentStatusOpenStatus = value;
     }
 
     /**
@@ -543,7 +571,7 @@ public class RemoteIncident
      *     
      */
     public void setIncidentTypeId(JAXBElement<Integer> value) {
-        this.incidentTypeId = ((JAXBElement<Integer> ) value);
+        this.incidentTypeId = value;
     }
 
     /**
@@ -567,7 +595,7 @@ public class RemoteIncident
      *     
      */
     public void setIncidentTypeName(JAXBElement<String> value) {
-        this.incidentTypeName = ((JAXBElement<String> ) value);
+        this.incidentTypeName = value;
     }
 
     /**
@@ -615,7 +643,7 @@ public class RemoteIncident
      *     
      */
     public void setName(JAXBElement<String> value) {
-        this.name = ((JAXBElement<String> ) value);
+        this.name = value;
     }
 
     /**
@@ -639,7 +667,7 @@ public class RemoteIncident
      *     
      */
     public void setOpenerId(JAXBElement<Integer> value) {
-        this.openerId = ((JAXBElement<Integer> ) value);
+        this.openerId = value;
     }
 
     /**
@@ -663,7 +691,7 @@ public class RemoteIncident
      *     
      */
     public void setOpenerName(JAXBElement<String> value) {
-        this.openerName = ((JAXBElement<String> ) value);
+        this.openerName = value;
     }
 
     /**
@@ -687,7 +715,7 @@ public class RemoteIncident
      *     
      */
     public void setOwnerId(JAXBElement<Integer> value) {
-        this.ownerId = ((JAXBElement<Integer> ) value);
+        this.ownerId = value;
     }
 
     /**
@@ -711,7 +739,7 @@ public class RemoteIncident
      *     
      */
     public void setOwnerName(JAXBElement<String> value) {
-        this.ownerName = ((JAXBElement<String> ) value);
+        this.ownerName = value;
     }
 
     /**
@@ -735,7 +763,7 @@ public class RemoteIncident
      *     
      */
     public void setPriorityId(JAXBElement<Integer> value) {
-        this.priorityId = ((JAXBElement<Integer> ) value);
+        this.priorityId = value;
     }
 
     /**
@@ -759,7 +787,7 @@ public class RemoteIncident
      *     
      */
     public void setPriorityName(JAXBElement<String> value) {
-        this.priorityName = ((JAXBElement<String> ) value);
+        this.priorityName = value;
     }
 
     /**
@@ -783,7 +811,7 @@ public class RemoteIncident
      *     
      */
     public void setProjectName(JAXBElement<String> value) {
-        this.projectName = ((JAXBElement<String> ) value);
+        this.projectName = value;
     }
 
     /**
@@ -807,7 +835,7 @@ public class RemoteIncident
      *     
      */
     public void setProjectedEffort(JAXBElement<Integer> value) {
-        this.projectedEffort = ((JAXBElement<Integer> ) value);
+        this.projectedEffort = value;
     }
 
     /**
@@ -831,7 +859,7 @@ public class RemoteIncident
      *     
      */
     public void setRemainingEffort(JAXBElement<Integer> value) {
-        this.remainingEffort = ((JAXBElement<Integer> ) value);
+        this.remainingEffort = value;
     }
 
     /**
@@ -855,7 +883,7 @@ public class RemoteIncident
      *     
      */
     public void setResolvedReleaseId(JAXBElement<Integer> value) {
-        this.resolvedReleaseId = ((JAXBElement<Integer> ) value);
+        this.resolvedReleaseId = value;
     }
 
     /**
@@ -879,7 +907,7 @@ public class RemoteIncident
      *     
      */
     public void setResolvedReleaseVersionNumber(JAXBElement<String> value) {
-        this.resolvedReleaseVersionNumber = ((JAXBElement<String> ) value);
+        this.resolvedReleaseVersionNumber = value;
     }
 
     /**
@@ -903,7 +931,7 @@ public class RemoteIncident
      *     
      */
     public void setSeverityId(JAXBElement<Integer> value) {
-        this.severityId = ((JAXBElement<Integer> ) value);
+        this.severityId = value;
     }
 
     /**
@@ -927,7 +955,7 @@ public class RemoteIncident
      *     
      */
     public void setSeverityName(JAXBElement<String> value) {
-        this.severityName = ((JAXBElement<String> ) value);
+        this.severityName = value;
     }
 
     /**
@@ -951,31 +979,31 @@ public class RemoteIncident
      *     
      */
     public void setStartDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.startDate = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.startDate = value;
     }
 
     /**
-     * Gets the value of the testRunStepId property.
+     * Gets the value of the testRunStepIds property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
      *     
      */
-    public JAXBElement<Integer> getTestRunStepId() {
-        return testRunStepId;
+    public JAXBElement<ArrayOfint> getTestRunStepIds() {
+        return testRunStepIds;
     }
 
     /**
-     * Sets the value of the testRunStepId property.
+     * Sets the value of the testRunStepIds property.
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
      *     
      */
-    public void setTestRunStepId(JAXBElement<Integer> value) {
-        this.testRunStepId = ((JAXBElement<Integer> ) value);
+    public void setTestRunStepIds(JAXBElement<ArrayOfint> value) {
+        this.testRunStepIds = value;
     }
 
     /**
@@ -999,7 +1027,7 @@ public class RemoteIncident
      *     
      */
     public void setVerifiedReleaseId(JAXBElement<Integer> value) {
-        this.verifiedReleaseId = ((JAXBElement<Integer> ) value);
+        this.verifiedReleaseId = value;
     }
 
     /**
@@ -1023,7 +1051,7 @@ public class RemoteIncident
      *     
      */
     public void setVerifiedReleaseVersionNumber(JAXBElement<String> value) {
-        this.verifiedReleaseVersionNumber = ((JAXBElement<String> ) value);
+        this.verifiedReleaseVersionNumber = value;
     }
 
 }

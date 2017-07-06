@@ -11,6 +11,7 @@ import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraImportExport;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.ArrayOfRemoteArtifactCustomProperty;
+import com.inflectra.spirateam.mylyn.core.internal.services.soap.ArrayOfint;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteArtifact;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteArtifactCustomProperty;
 
@@ -103,6 +104,23 @@ public class Artifact
 	}
 
 	protected boolean hasChanged (Integer newValue, Integer oldValue)
+	{
+		if (newValue == null)
+		{
+			return (oldValue == null);
+		}
+		if (oldValue == null)
+		{
+			return (newValue == null);
+		}
+		if (!newValue.equals(oldValue))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	protected boolean hasChanged (ArrayOfint newValue, ArrayOfint oldValue)
 	{
 		if (newValue == null)
 		{
@@ -401,6 +419,7 @@ public class Artifact
 		 //First the standard properties
          this.projectId = remoteArtifact.getProjectId().getValue();
 		 this.concurrencyDate = SpiraTeamUtil.convertDatesXml2Java(remoteArtifact.getConcurrencyDate());
+		  
 		 
 		 //Make sure we have custom properties
 		 this.customProperties.clear();

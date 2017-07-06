@@ -20,7 +20,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteTestRuns" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteManualTestRun" minOccurs="0"/>
+ *         &lt;element name="remoteTestRuns" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteManualTestRun" minOccurs="0"/>
  *         &lt;element name="endDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -38,9 +38,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "TestRun_Save")
 public class TestRunSave {
 
-    @XmlElementRef(name = "remoteTestRuns", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteTestRuns", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteManualTestRun> remoteTestRuns;
-    @XmlElementRef(name = "endDate", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "endDate", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> endDate;
 
     /**
@@ -64,7 +64,7 @@ public class TestRunSave {
      *     
      */
     public void setRemoteTestRuns(JAXBElement<ArrayOfRemoteManualTestRun> value) {
-        this.remoteTestRuns = ((JAXBElement<ArrayOfRemoteManualTestRun> ) value);
+        this.remoteTestRuns = value;
     }
 
     /**
@@ -88,7 +88,7 @@ public class TestRunSave {
      *     
      */
     public void setEndDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.endDate = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.endDate = value;
     }
 
 }

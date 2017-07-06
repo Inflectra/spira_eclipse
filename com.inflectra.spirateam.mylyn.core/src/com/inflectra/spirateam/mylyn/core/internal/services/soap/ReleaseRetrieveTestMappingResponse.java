@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Release_RetrieveTestMappingResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteReleaseTestCaseMapping" minOccurs="0"/>
+ *         &lt;element name="Release_RetrieveTestMappingResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteReleaseTestCaseMapping" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Release_RetrieveTestMappingResponse")
 public class ReleaseRetrieveTestMappingResponse {
 
-    @XmlElementRef(name = "Release_RetrieveTestMappingResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "Release_RetrieveTestMappingResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteReleaseTestCaseMapping> releaseRetrieveTestMappingResult;
 
     /**
@@ -59,7 +59,7 @@ public class ReleaseRetrieveTestMappingResponse {
      *     
      */
     public void setReleaseRetrieveTestMappingResult(JAXBElement<ArrayOfRemoteReleaseTestCaseMapping> value) {
-        this.releaseRetrieveTestMappingResult = ((JAXBElement<ArrayOfRemoteReleaseTestCaseMapping> ) value);
+        this.releaseRetrieveTestMappingResult = value;
     }
 
 }

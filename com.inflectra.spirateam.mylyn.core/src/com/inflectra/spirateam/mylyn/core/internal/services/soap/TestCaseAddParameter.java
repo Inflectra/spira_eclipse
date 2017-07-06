@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteTestCaseParameter" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteTestCaseParameter" minOccurs="0"/>
+ *         &lt;element name="remoteTestCaseParameter" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteTestCaseParameter" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "TestCase_AddParameter")
 public class TestCaseAddParameter {
 
-    @XmlElementRef(name = "remoteTestCaseParameter", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "remoteTestCaseParameter", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<RemoteTestCaseParameter> remoteTestCaseParameter;
 
     /**
@@ -59,7 +59,7 @@ public class TestCaseAddParameter {
      *     
      */
     public void setRemoteTestCaseParameter(JAXBElement<RemoteTestCaseParameter> value) {
-        this.remoteTestCaseParameter = ((JAXBElement<RemoteTestCaseParameter> ) value);
+        this.remoteTestCaseParameter = value;
     }
 
 }

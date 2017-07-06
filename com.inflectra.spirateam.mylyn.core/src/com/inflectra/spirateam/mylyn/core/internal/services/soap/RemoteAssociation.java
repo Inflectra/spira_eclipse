@@ -13,9 +13,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 Represents an association/link between artifacts in the system
- *               &lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * Represents an association/link between artifacts in the system
+ * &lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -29,6 +29,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="ArtifactLinkId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="ArtifactLinkTypeId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="ArtifactLinkTypeName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Comment" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="CreationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="CreatorId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -48,8 +50,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteAssociation", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
+@XmlType(name = "RemoteAssociation", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
     "artifactLinkId",
+    "artifactLinkTypeId",
+    "artifactLinkTypeName",
     "comment",
     "creationDate",
     "creatorId",
@@ -63,23 +67,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class RemoteAssociation {
 
-    @XmlElementRef(name = "ArtifactLinkId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ArtifactLinkId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> artifactLinkId;
-    @XmlElementRef(name = "Comment", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElement(name = "ArtifactLinkTypeId")
+    protected Integer artifactLinkTypeId;
+    @XmlElementRef(name = "ArtifactLinkTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> artifactLinkTypeName;
+    @XmlElementRef(name = "Comment", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> comment;
-    @XmlElementRef(name = "CreationDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CreationDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> creationDate;
-    @XmlElementRef(name = "CreatorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CreatorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> creatorId;
-    @XmlElementRef(name = "CreatorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "CreatorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> creatorName;
     @XmlElement(name = "DestArtifactId")
     protected Integer destArtifactId;
-    @XmlElementRef(name = "DestArtifactName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "DestArtifactName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> destArtifactName;
     @XmlElement(name = "DestArtifactTypeId")
     protected Integer destArtifactTypeId;
-    @XmlElementRef(name = "DestArtifactTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "DestArtifactTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> destArtifactTypeName;
     @XmlElement(name = "SourceArtifactId")
     protected Integer sourceArtifactId;
@@ -107,7 +115,55 @@ public class RemoteAssociation {
      *     
      */
     public void setArtifactLinkId(JAXBElement<Integer> value) {
-        this.artifactLinkId = ((JAXBElement<Integer> ) value);
+        this.artifactLinkId = value;
+    }
+
+    /**
+     * Gets the value of the artifactLinkTypeId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getArtifactLinkTypeId() {
+        return artifactLinkTypeId;
+    }
+
+    /**
+     * Sets the value of the artifactLinkTypeId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setArtifactLinkTypeId(Integer value) {
+        this.artifactLinkTypeId = value;
+    }
+
+    /**
+     * Gets the value of the artifactLinkTypeName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getArtifactLinkTypeName() {
+        return artifactLinkTypeName;
+    }
+
+    /**
+     * Sets the value of the artifactLinkTypeName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setArtifactLinkTypeName(JAXBElement<String> value) {
+        this.artifactLinkTypeName = value;
     }
 
     /**
@@ -131,7 +187,7 @@ public class RemoteAssociation {
      *     
      */
     public void setComment(JAXBElement<String> value) {
-        this.comment = ((JAXBElement<String> ) value);
+        this.comment = value;
     }
 
     /**
@@ -155,7 +211,7 @@ public class RemoteAssociation {
      *     
      */
     public void setCreationDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.creationDate = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.creationDate = value;
     }
 
     /**
@@ -179,7 +235,7 @@ public class RemoteAssociation {
      *     
      */
     public void setCreatorId(JAXBElement<Integer> value) {
-        this.creatorId = ((JAXBElement<Integer> ) value);
+        this.creatorId = value;
     }
 
     /**
@@ -203,7 +259,7 @@ public class RemoteAssociation {
      *     
      */
     public void setCreatorName(JAXBElement<String> value) {
-        this.creatorName = ((JAXBElement<String> ) value);
+        this.creatorName = value;
     }
 
     /**
@@ -251,7 +307,7 @@ public class RemoteAssociation {
      *     
      */
     public void setDestArtifactName(JAXBElement<String> value) {
-        this.destArtifactName = ((JAXBElement<String> ) value);
+        this.destArtifactName = value;
     }
 
     /**
@@ -299,7 +355,7 @@ public class RemoteAssociation {
      *     
      */
     public void setDestArtifactTypeName(JAXBElement<String> value) {
-        this.destArtifactTypeName = ((JAXBElement<String> ) value);
+        this.destArtifactTypeName = value;
     }
 
     /**

@@ -19,8 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="remoteTestSet" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteTestSet" minOccurs="0"/>
- *         &lt;element name="parentTestSetFolderId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="remoteTestSetFolder" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteTestSetFolder" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,63 +30,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "remoteTestSet",
-    "parentTestSetFolderId"
+    "remoteTestSetFolder"
 })
 @XmlRootElement(name = "TestSet_CreateFolder")
 public class TestSetCreateFolder {
 
-    @XmlElementRef(name = "remoteTestSet", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
-    protected JAXBElement<RemoteTestSet> remoteTestSet;
-    @XmlElementRef(name = "parentTestSetFolderId", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
-    protected JAXBElement<Integer> parentTestSetFolderId;
+    @XmlElementRef(name = "remoteTestSetFolder", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
+    protected JAXBElement<RemoteTestSetFolder> remoteTestSetFolder;
 
     /**
-     * Gets the value of the remoteTestSet property.
+     * Gets the value of the remoteTestSetFolder property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link RemoteTestSet }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RemoteTestSetFolder }{@code >}
      *     
      */
-    public JAXBElement<RemoteTestSet> getRemoteTestSet() {
-        return remoteTestSet;
+    public JAXBElement<RemoteTestSetFolder> getRemoteTestSetFolder() {
+        return remoteTestSetFolder;
     }
 
     /**
-     * Sets the value of the remoteTestSet property.
+     * Sets the value of the remoteTestSetFolder property.
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link RemoteTestSet }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RemoteTestSetFolder }{@code >}
      *     
      */
-    public void setRemoteTestSet(JAXBElement<RemoteTestSet> value) {
-        this.remoteTestSet = ((JAXBElement<RemoteTestSet> ) value);
-    }
-
-    /**
-     * Gets the value of the parentTestSetFolderId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
-     *     
-     */
-    public JAXBElement<Integer> getParentTestSetFolderId() {
-        return parentTestSetFolderId;
-    }
-
-    /**
-     * Sets the value of the parentTestSetFolderId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
-     *     
-     */
-    public void setParentTestSetFolderId(JAXBElement<Integer> value) {
-        this.parentTestSetFolderId = ((JAXBElement<Integer> ) value);
+    public void setRemoteTestSetFolder(JAXBElement<RemoteTestSetFolder> value) {
+        this.remoteTestSetFolder = value;
     }
 
 }

@@ -14,9 +14,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /**
  * 
  * <pre>
- * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
- *                 Represents a single Test Case artifact in the system
- *               &lt;/summary&gt;&lt;/comments&gt;
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;comments xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;&lt;summary&gt;
+ * Represents a single Test Case artifact in the system
+ * &lt;/summary&gt;&lt;/comments&gt;
  * </pre>
  * 
  * 
@@ -27,29 +27,36 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <pre>
  * &lt;complexType name="RemoteTestCase">
  *   &lt;complexContent>
- *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}RemoteArtifact">
+ *     &lt;extension base="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}RemoteArtifact">
  *       &lt;sequence>
- *         &lt;element name="Active" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="ActualDuration" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="AuthorId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="AuthorName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="AutomationAttachmentId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="AutomationEngineId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="ComponentIds" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfint" minOccurs="0"/>
  *         &lt;element name="CreationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="EstimatedDuration" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ExecutionDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="ExecutionStatusId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="Folder" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="IndentLevel" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ExecutionStatusName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="IsSuspect" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="IsTestSteps" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="LastUpdateDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="OwnerId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="OwnerName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ProjectName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="TestCaseFolderId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestCaseId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestCasePriorityId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="TestCasePriorityName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="TestSteps" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteTestStep" minOccurs="0"/>
+ *         &lt;element name="TestCaseStatusId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="TestCaseStatusName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="TestCaseTypeId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="TestCaseTypeName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="TestSteps" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteTestStep" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -59,100 +66,121 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RemoteTestCase", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", propOrder = {
-    "active",
+@XmlType(name = "RemoteTestCase", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", propOrder = {
+    "actualDuration",
     "authorId",
     "authorName",
     "automationAttachmentId",
     "automationEngineId",
+    "componentIds",
     "creationDate",
     "description",
     "estimatedDuration",
     "executionDate",
     "executionStatusId",
-    "folder",
-    "indentLevel",
+    "executionStatusName",
+    "isSuspect",
+    "isTestSteps",
     "lastUpdateDate",
     "name",
     "ownerId",
     "ownerName",
     "projectName",
+    "testCaseFolderId",
     "testCaseId",
     "testCasePriorityId",
     "testCasePriorityName",
+    "testCaseStatusId",
+    "testCaseStatusName",
+    "testCaseTypeId",
+    "testCaseTypeName",
     "testSteps"
 })
 public class RemoteTestCase
     extends RemoteArtifact
 {
 
-    @XmlElement(name = "Active")
-    protected Boolean active;
-    @XmlElementRef(name = "AuthorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ActualDuration", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> actualDuration;
+    @XmlElementRef(name = "AuthorId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> authorId;
-    @XmlElementRef(name = "AuthorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AuthorName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> authorName;
-    @XmlElementRef(name = "AutomationAttachmentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AutomationAttachmentId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> automationAttachmentId;
-    @XmlElementRef(name = "AutomationEngineId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "AutomationEngineId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> automationEngineId;
+    @XmlElementRef(name = "ComponentIds", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfint> componentIds;
     @XmlElement(name = "CreationDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar creationDate;
-    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Description", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> description;
-    @XmlElementRef(name = "EstimatedDuration", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "EstimatedDuration", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> estimatedDuration;
-    @XmlElementRef(name = "ExecutionDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ExecutionDate", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<XMLGregorianCalendar> executionDate;
-    @XmlElementRef(name = "ExecutionStatusId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ExecutionStatusId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> executionStatusId;
-    @XmlElement(name = "Folder")
-    protected Boolean folder;
-    @XmlElementRef(name = "IndentLevel", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
-    protected JAXBElement<String> indentLevel;
+    @XmlElementRef(name = "ExecutionStatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> executionStatusName;
+    @XmlElement(name = "IsSuspect")
+    protected Boolean isSuspect;
+    @XmlElement(name = "IsTestSteps")
+    protected Boolean isTestSteps;
     @XmlElement(name = "LastUpdateDate")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastUpdateDate;
-    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> name;
-    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> ownerId;
-    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "OwnerName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> ownerName;
-    @XmlElementRef(name = "ProjectName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "ProjectName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> projectName;
-    @XmlElementRef(name = "TestCaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestCaseFolderId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<Integer> testCaseFolderId;
+    @XmlElementRef(name = "TestCaseId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testCaseId;
-    @XmlElementRef(name = "TestCasePriorityId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestCasePriorityId", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<Integer> testCasePriorityId;
-    @XmlElementRef(name = "TestCasePriorityName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElementRef(name = "TestCasePriorityName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<String> testCasePriorityName;
-    @XmlElementRef(name = "TestSteps", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects", type = JAXBElement.class)
+    @XmlElement(name = "TestCaseStatusId")
+    protected Integer testCaseStatusId;
+    @XmlElementRef(name = "TestCaseStatusName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> testCaseStatusName;
+    @XmlElement(name = "TestCaseTypeId")
+    protected Integer testCaseTypeId;
+    @XmlElementRef(name = "TestCaseTypeName", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> testCaseTypeName;
+    @XmlElementRef(name = "TestSteps", namespace = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteTestStep> testSteps;
 
     /**
-     * Gets the value of the active property.
+     * Gets the value of the actualDuration property.
      * 
      * @return
      *     possible object is
-     *     {@link Boolean }
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
      *     
      */
-    public Boolean isActive() {
-        return active;
+    public JAXBElement<Integer> getActualDuration() {
+        return actualDuration;
     }
 
     /**
-     * Sets the value of the active property.
+     * Sets the value of the actualDuration property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Boolean }
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
      *     
      */
-    public void setActive(Boolean value) {
-        this.active = value;
+    public void setActualDuration(JAXBElement<Integer> value) {
+        this.actualDuration = value;
     }
 
     /**
@@ -176,7 +204,7 @@ public class RemoteTestCase
      *     
      */
     public void setAuthorId(JAXBElement<Integer> value) {
-        this.authorId = ((JAXBElement<Integer> ) value);
+        this.authorId = value;
     }
 
     /**
@@ -200,7 +228,7 @@ public class RemoteTestCase
      *     
      */
     public void setAuthorName(JAXBElement<String> value) {
-        this.authorName = ((JAXBElement<String> ) value);
+        this.authorName = value;
     }
 
     /**
@@ -224,7 +252,7 @@ public class RemoteTestCase
      *     
      */
     public void setAutomationAttachmentId(JAXBElement<Integer> value) {
-        this.automationAttachmentId = ((JAXBElement<Integer> ) value);
+        this.automationAttachmentId = value;
     }
 
     /**
@@ -248,7 +276,31 @@ public class RemoteTestCase
      *     
      */
     public void setAutomationEngineId(JAXBElement<Integer> value) {
-        this.automationEngineId = ((JAXBElement<Integer> ) value);
+        this.automationEngineId = value;
+    }
+
+    /**
+     * Gets the value of the componentIds property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     *     
+     */
+    public JAXBElement<ArrayOfint> getComponentIds() {
+        return componentIds;
+    }
+
+    /**
+     * Sets the value of the componentIds property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     *     
+     */
+    public void setComponentIds(JAXBElement<ArrayOfint> value) {
+        this.componentIds = value;
     }
 
     /**
@@ -296,7 +348,7 @@ public class RemoteTestCase
      *     
      */
     public void setDescription(JAXBElement<String> value) {
-        this.description = ((JAXBElement<String> ) value);
+        this.description = value;
     }
 
     /**
@@ -320,7 +372,7 @@ public class RemoteTestCase
      *     
      */
     public void setEstimatedDuration(JAXBElement<Integer> value) {
-        this.estimatedDuration = ((JAXBElement<Integer> ) value);
+        this.estimatedDuration = value;
     }
 
     /**
@@ -344,7 +396,7 @@ public class RemoteTestCase
      *     
      */
     public void setExecutionDate(JAXBElement<XMLGregorianCalendar> value) {
-        this.executionDate = ((JAXBElement<XMLGregorianCalendar> ) value);
+        this.executionDate = value;
     }
 
     /**
@@ -368,55 +420,79 @@ public class RemoteTestCase
      *     
      */
     public void setExecutionStatusId(JAXBElement<Integer> value) {
-        this.executionStatusId = ((JAXBElement<Integer> ) value);
+        this.executionStatusId = value;
     }
 
     /**
-     * Gets the value of the folder property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isFolder() {
-        return folder;
-    }
-
-    /**
-     * Sets the value of the folder property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFolder(Boolean value) {
-        this.folder = value;
-    }
-
-    /**
-     * Gets the value of the indentLevel property.
+     * Gets the value of the executionStatusName property.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public JAXBElement<String> getIndentLevel() {
-        return indentLevel;
+    public JAXBElement<String> getExecutionStatusName() {
+        return executionStatusName;
     }
 
     /**
-     * Sets the value of the indentLevel property.
+     * Sets the value of the executionStatusName property.
      * 
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public void setIndentLevel(JAXBElement<String> value) {
-        this.indentLevel = ((JAXBElement<String> ) value);
+    public void setExecutionStatusName(JAXBElement<String> value) {
+        this.executionStatusName = value;
+    }
+
+    /**
+     * Gets the value of the isSuspect property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isIsSuspect() {
+        return isSuspect;
+    }
+
+    /**
+     * Sets the value of the isSuspect property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIsSuspect(Boolean value) {
+        this.isSuspect = value;
+    }
+
+    /**
+     * Gets the value of the isTestSteps property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isIsTestSteps() {
+        return isTestSteps;
+    }
+
+    /**
+     * Sets the value of the isTestSteps property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIsTestSteps(Boolean value) {
+        this.isTestSteps = value;
     }
 
     /**
@@ -464,7 +540,7 @@ public class RemoteTestCase
      *     
      */
     public void setName(JAXBElement<String> value) {
-        this.name = ((JAXBElement<String> ) value);
+        this.name = value;
     }
 
     /**
@@ -488,7 +564,7 @@ public class RemoteTestCase
      *     
      */
     public void setOwnerId(JAXBElement<Integer> value) {
-        this.ownerId = ((JAXBElement<Integer> ) value);
+        this.ownerId = value;
     }
 
     /**
@@ -512,7 +588,7 @@ public class RemoteTestCase
      *     
      */
     public void setOwnerName(JAXBElement<String> value) {
-        this.ownerName = ((JAXBElement<String> ) value);
+        this.ownerName = value;
     }
 
     /**
@@ -536,7 +612,31 @@ public class RemoteTestCase
      *     
      */
     public void setProjectName(JAXBElement<String> value) {
-        this.projectName = ((JAXBElement<String> ) value);
+        this.projectName = value;
+    }
+
+    /**
+     * Gets the value of the testCaseFolderId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public JAXBElement<Integer> getTestCaseFolderId() {
+        return testCaseFolderId;
+    }
+
+    /**
+     * Sets the value of the testCaseFolderId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Integer }{@code >}
+     *     
+     */
+    public void setTestCaseFolderId(JAXBElement<Integer> value) {
+        this.testCaseFolderId = value;
     }
 
     /**
@@ -560,7 +660,7 @@ public class RemoteTestCase
      *     
      */
     public void setTestCaseId(JAXBElement<Integer> value) {
-        this.testCaseId = ((JAXBElement<Integer> ) value);
+        this.testCaseId = value;
     }
 
     /**
@@ -584,7 +684,7 @@ public class RemoteTestCase
      *     
      */
     public void setTestCasePriorityId(JAXBElement<Integer> value) {
-        this.testCasePriorityId = ((JAXBElement<Integer> ) value);
+        this.testCasePriorityId = value;
     }
 
     /**
@@ -608,7 +708,103 @@ public class RemoteTestCase
      *     
      */
     public void setTestCasePriorityName(JAXBElement<String> value) {
-        this.testCasePriorityName = ((JAXBElement<String> ) value);
+        this.testCasePriorityName = value;
+    }
+
+    /**
+     * Gets the value of the testCaseStatusId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getTestCaseStatusId() {
+        return testCaseStatusId;
+    }
+
+    /**
+     * Sets the value of the testCaseStatusId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setTestCaseStatusId(Integer value) {
+        this.testCaseStatusId = value;
+    }
+
+    /**
+     * Gets the value of the testCaseStatusName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getTestCaseStatusName() {
+        return testCaseStatusName;
+    }
+
+    /**
+     * Sets the value of the testCaseStatusName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setTestCaseStatusName(JAXBElement<String> value) {
+        this.testCaseStatusName = value;
+    }
+
+    /**
+     * Gets the value of the testCaseTypeId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getTestCaseTypeId() {
+        return testCaseTypeId;
+    }
+
+    /**
+     * Sets the value of the testCaseTypeId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setTestCaseTypeId(Integer value) {
+        this.testCaseTypeId = value;
+    }
+
+    /**
+     * Gets the value of the testCaseTypeName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getTestCaseTypeName() {
+        return testCaseTypeName;
+    }
+
+    /**
+     * Sets the value of the testCaseTypeName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setTestCaseTypeName(JAXBElement<String> value) {
+        this.testCaseTypeName = value;
     }
 
     /**
@@ -632,7 +828,7 @@ public class RemoteTestCase
      *     
      */
     public void setTestSteps(JAXBElement<ArrayOfRemoteTestStep> value) {
-        this.testSteps = ((JAXBElement<ArrayOfRemoteTestStep> ) value);
+        this.testSteps = value;
     }
 
 }

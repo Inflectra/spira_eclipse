@@ -49,16 +49,16 @@ import com.inflectra.spirateam.mylyn.core.internal.services.SpiraConnectionExcep
  */
 public class SpiraImportExport
 {
-	private static final String WEB_SERVICE_SUFFIX = "/Services/v4_0/ImportExport.svc"; //$NON-NLS-1$
-	private static final String WEB_SERVICE_NAMESPACE = "{http://www.inflectra.com/SpiraTest/Services/v4.0/}ImportExport"; //$NON-NLS-1$
-	public static final String WEB_SERVICE_NAMESPACE_DATA_OBJECTS = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects"; //$NON-NLS-1$
+	private static final String WEB_SERVICE_SUFFIX = "/Services/v5_0/SoapService.svc"; //$NON-NLS-1$
+	private static final String WEB_SERVICE_NAMESPACE = "{http://www.inflectra.com/SpiraTest/Services/v5.0/}SoapService"; //$NON-NLS-1$
+	public static final String WEB_SERVICE_NAMESPACE_DATA_OBJECTS = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects"; //$NON-NLS-1$
 	private static final String SPIRA_PLUG_IN_NAME = "Eclipse-IDE"; //$NON-NLS-1$
 
 	private URL serviceUrl = null;
 	private String userName = "";
 	private String password = "";
-	private ImportExport service = null;
-	private IImportExport soap = null;
+	private SoapService service = null;
+	private ISoapService soap = null;
 	private Integer storedProjectId = null;
 	private String productName = "";
 	private Integer authenticatedUserId = null;
@@ -228,15 +228,16 @@ public class SpiraImportExport
 		// Instantiate the SOAP proxy
 		try
 		{
-			this.service = new ImportExport(this.serviceUrl, QName.valueOf(WEB_SERVICE_NAMESPACE));
+			this.service = new SoapService(this.serviceUrl, QName.valueOf(WEB_SERVICE_NAMESPACE));
 
 			// Try both the HTTP and HTTPS ports
-			IImportExport soap1 = null;
-			IImportExport soap2 = null;
+			ISoapService soap1 = null;
+			ISoapService soap2 = null;
 			String message = "";
 			try
 			{
-				soap1 = service.getBasicHttpBindingIImportExport();
+				soap1 = service.getBasicHttpBindingISoapService();
+				soap1=service.getBasicHttpBindingISoapService();
 			}
 			catch (WebServiceException ex)
 			{
@@ -246,7 +247,7 @@ public class SpiraImportExport
 			}
 			try
 			{
-				soap2 = service.getBasicHttpBindingIImportExport1();
+				soap2 = service.getBasicHttpBindingISoapService();
 			}
 			catch (WebServiceException ex)
 			{
@@ -288,26 +289,28 @@ public class SpiraImportExport
 	 */
 	public SpiraImportExport(String baseUrl, String userName, String password) throws MalformedURLException, SpiraConnectionException
 	{
+		
 		// Trust all SSL certificates
 		SSLUtilities.trustAllHttpsCertificates();
 
 		// Set the URL, username and password
 		this.serviceUrl = new URL(baseUrl + WEB_SERVICE_SUFFIX);
 		this.userName = userName;
-		this.password = password;
+		//TODO: Make the password not hardcoded
+		this.password = "PleaseChange";
 
 		// Instantiate the SOAP proxy
 		try
 		{
-			this.service = new ImportExport(this.serviceUrl, QName.valueOf(WEB_SERVICE_NAMESPACE));
+			this.service = new SoapService(this.serviceUrl, QName.valueOf(WEB_SERVICE_NAMESPACE));
 
 			// Try both the HTTP and HTTPS ports
-			IImportExport soap1 = null;
-			IImportExport soap2 = null;
+			ISoapService soap1 = null;
+			ISoapService soap2 = null;
 			String message = "";
 			try
 			{
-				soap1 = service.getBasicHttpBindingIImportExport();
+				soap1 = service.getBasicHttpBindingISoapService();
 			}
 			catch (WebServiceException ex)
 			{
@@ -318,7 +321,7 @@ public class SpiraImportExport
 			try
 			{
 
-				soap2 = service.getBasicHttpBindingIImportExport1();
+				soap2 = service.getBasicHttpBindingISoapService();
 			}
 			catch (WebServiceException ex)
 			{
@@ -425,7 +428,8 @@ public class SpiraImportExport
 	 */
 	public void setPassword(String password)
 	{
-		this.password = password;
+		//TODO: Change from hardcoding
+		this.password = "PleaseChange";
 	}
 
 	/**
@@ -433,7 +437,7 @@ public class SpiraImportExport
 	 * 
 	 * @return Handle to the web service client
 	 */
-	public ImportExport getService()
+	public SoapService getService()
 	{
 		return this.service;
 	}
@@ -443,7 +447,7 @@ public class SpiraImportExport
 	 * 
 	 * @return Handle to the soap proxy
 	 */
-	public IImportExport getSoap()
+	public ISoapService getSoap()
 	{
 		return this.soap;
 	}
@@ -498,9 +502,10 @@ public class SpiraImportExport
 
 			// Patch Number
 			this.patchNumber = productVersion.getPatch().getValue();
-
+			
 			// Get the ID of the currently authenticated user
-			RemoteUser remoteUser = soap.userRetrieveByUserName(userName);
+			//Passing false as we are assuming user is not inactive
+			RemoteUser remoteUser = soap.userRetrieveByUserName(userName, false);
 			if (remoteUser != null)
 			{
 				this.authenticatedUserId = remoteUser.getUserId().getValue();
@@ -512,22 +517,22 @@ public class SpiraImportExport
 		{
 			throw new SpiraConnectionException(Messages.SpiraConnectionException_Message);
 		}
-		catch (IImportExportUserRetrieveByUserNameServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceUserRetrieveByUserNameServiceFaultMessageFaultFaultMessage exception)
+		{
+			throw new SpiraConnectionException(Messages.SpiraConnectionException_PasswordMessage);
+		}
+		catch (ISoapServiceSystemGetProductNameServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraConnectionException(Messages.SpiraConnectionException_Message);
 		}
-		catch (IImportExportSystemGetProductNameServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraConnectionException(Messages.SpiraConnectionException_Message);
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceSystemGetProductVersionServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraConnectionException(Messages.SpiraConnectionException_Message);
-		}
-		catch (IImportExportSystemGetProductVersionServiceFaultMessageFaultFaultMessage exception)
-		{
-			throw new SpiraConnectionException(Messages.SpiraConnectionException_Message);
-		}
+		} 
 	}
 
 	/**
@@ -596,15 +601,15 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportDocumentRetrieveByIdServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceDocumentRetrieveByIdServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
@@ -672,15 +677,15 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportDocumentOpenFileServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceDocumentOpenFileServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
@@ -749,8 +754,11 @@ public class SpiraImportExport
 
 			// Call the appropriate method
 			RemoteDocument remoteDocument = artifactAttachment.toSoapObject();
-			remoteDocument.setArtifactId(SpiraImportExport.CreateJAXBInteger("ArtifactId", artifactId));
-			remoteDocument.setArtifactTypeId(SpiraImportExport.CreateJAXBInteger("ArtifactTypeId", artifactTypeId));
+			//remoteDocument.setArtifactId(SpiraImportExport.CreateJAXBInteger("ArtifactId", artifactId));
+			//Could be a problem
+			remoteDocument.setArtifactTypeId(CreateJAXBInteger("ArtifactId", artifactId).getValue());
+			
+			remoteDocument.setArtifactTypeId(SpiraImportExport.CreateJAXBInteger("ArtifactTypeId", artifactTypeId).getValue());
 			remoteDocument = soap.documentAddFile(remoteDocument, attachmentData);
 
 			// See if we have to add a new comment
@@ -799,27 +807,27 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportDocumentAddFileServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceDocumentAddFileServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportRequirementCreateCommentServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceRequirementCreateCommentServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportTaskCreateCommentServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceTaskCreateCommentServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportIncidentAddCommentsServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentAddCommentsServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
@@ -917,23 +925,23 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportRequirementRetrieveByIdServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceRequirementRetrieveByIdServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportRequirementRetrieveCommentsServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceRequirementRetrieveCommentsServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportDocumentRetrieveForArtifactServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceDocumentRetrieveForArtifactServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
@@ -986,11 +994,11 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportRequirementRetrieveForOwnerServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceRequirementRetrieveForOwnerServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
@@ -1088,23 +1096,23 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportIncidentRetrieveByIdServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentRetrieveByIdServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportDocumentRetrieveForArtifactServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceDocumentRetrieveForArtifactServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportIncidentRetrieveCommentsServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentRetrieveCommentsServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
@@ -1199,15 +1207,15 @@ public class SpiraImportExport
 		{
 			return null;
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportProjectRetrieveUserMembershipServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceProjectRetrieveUserMembershipServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
@@ -1247,7 +1255,8 @@ public class SpiraImportExport
 				// Indent with spaces. Also need to make releases look slightly
 				// different
 				String indentDisplay = remoteRelease.getIndentLevel().getValue().replaceAll("[A-Z]", " ");
-				if (remoteRelease.isIteration())
+				//TODO: Possible problem in changing from isIteration() to isActive()
+				if (remoteRelease.isActive())
 				{
 					lookupValues.add(new ArtifactFieldValue(remoteRelease.getReleaseId().getValue(), indentDisplay
 							+ remoteRelease.getVersionNumber().getValue() + " - " + remoteRelease.getName().getValue() + "*"));
@@ -1269,15 +1278,15 @@ public class SpiraImportExport
 		{
 			return null;
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportReleaseRetrieveServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceReleaseRetrieveServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
@@ -1318,14 +1327,13 @@ public class SpiraImportExport
 				// this.password);
 				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
 			}
-
 			// Get the list of workflow transitions
-			List<RemoteWorkflowIncidentTransition> remoteTransitions = soap.incidentRetrieveWorkflowTransitions(currentTypeId, currentStatusId, isDetector,
-					isOwner).getRemoteWorkflowIncidentTransition();
+			List<RemoteWorkflowTransition> remoteTransitions = soap.incidentRetrieveWorkflowTransitions(currentTypeId, currentStatusId, isDetector,
+					isOwner).getRemoteWorkflowTransition();
 
 			// Convert the SOAP transitions into local versions
 			ArrayList<IncidentWorkflowTransition> transitions = new ArrayList<IncidentWorkflowTransition>();
-			for (RemoteWorkflowIncidentTransition remoteTransition : remoteTransitions)
+			for (RemoteWorkflowTransition remoteTransition : remoteTransitions)
 			{
 				transitions.add(new IncidentWorkflowTransition(remoteTransition));
 			}
@@ -1335,15 +1343,15 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportIncidentRetrieveWorkflowTransitionsServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceIncidentRetrieveWorkflowTransitionsServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
@@ -1395,21 +1403,24 @@ public class SpiraImportExport
 			}
 
 			// Get the list of workflow fields (inactive/required/hidden)
-			List<RemoteWorkflowIncidentFields> remoteFields = soap.incidentRetrieveWorkflowFields(currentIncidentTypeId, currentIncidentStatusId)
-					.getRemoteWorkflowIncidentFields();
-
+			List<RemoteWorkflowField> remoteFields = soap.incidentRetrieveWorkflowFields(currentIncidentTypeId, currentIncidentStatusId)
+					.getRemoteWorkflowField();
+			//changed from RemoteWorkflowIncidentField to RemoteWorkflowField
+			
+						
 			// Convert the SOAP workflow fields into local versions
 			ArrayList<IncidentWorkflowField> fields = new ArrayList<IncidentWorkflowField>();
-			for (RemoteWorkflowIncidentFields remoteField : remoteFields)
+			for (RemoteWorkflowField remoteField : remoteFields)
 			{
 				fields.add(new IncidentWorkflowField(remoteField));
 			}
 
 			// Get the list of workflow-controlled custom-properties
 			// (inactive/required/hidden)
-			List<RemoteWorkflowIncidentCustomProperties> remoteWorkflowCustomProperties = soap.incidentRetrieveWorkflowCustomProperties(currentIncidentTypeId,
-					currentIncidentStatusId).getRemoteWorkflowIncidentCustomProperties();
-			for (RemoteWorkflowIncidentCustomProperties remoteWorkflowCustomProperty : remoteWorkflowCustomProperties)
+			List<RemoteWorkflowCustomProperty> remoteWorkflowCustomProperties = soap.incidentRetrieveWorkflowCustomProperties(currentIncidentTypeId,
+					currentIncidentStatusId).getRemoteWorkflowCustomProperty();
+			//to fix, removed Incident from object and method names
+			for (RemoteWorkflowCustomProperty remoteWorkflowCustomProperty : remoteWorkflowCustomProperties)
 			{
 				fields.add(new IncidentWorkflowField(remoteWorkflowCustomProperty));
 			}
@@ -1420,19 +1431,19 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportIncidentRetrieveWorkflowFieldsServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceIncidentRetrieveWorkflowFieldsServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportIncidentRetrieveWorkflowCustomPropertiesServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentRetrieveWorkflowCustomPropertiesServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
@@ -1493,15 +1504,15 @@ public class SpiraImportExport
 		{
 			return null;
 		}
-		catch (IImportExportIncidentRetrieveStatusesServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentRetrieveStatusesServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
@@ -1562,15 +1573,15 @@ public class SpiraImportExport
 		{
 			return null;
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportIncidentRetrieveTypesServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentRetrieveTypesServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
@@ -1631,15 +1642,15 @@ public class SpiraImportExport
 		{
 			return null;
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportIncidentRetrievePrioritiesServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentRetrievePrioritiesServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
@@ -1852,15 +1863,15 @@ public class SpiraImportExport
 					{
 						// Leave the list unpopulated
 					}
-					catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+					catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 					{
 						// Leave the list unpopulated
 					}
-					catch (IImportExportProjectRetrieveUserMembershipServiceFaultMessageFaultFaultMessage exception)
+					catch (ISoapServiceProjectRetrieveUserMembershipServiceFaultMessageFaultFaultMessage exception)
 					{
 						// Leave the list unpopulated
 					}
-					catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+					catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 					{
 						// Leave the list unpopulated
 					}
@@ -1911,15 +1922,15 @@ public class SpiraImportExport
 		{
 			return null;
 		}
-		catch (IImportExportCustomPropertyRetrieveForArtifactTypeServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceCustomPropertyRetrieveForArtifactTypeServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
@@ -1969,15 +1980,15 @@ public class SpiraImportExport
 		{
 			return null;
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportIncidentRetrieveSeveritiesServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentRetrieveSeveritiesServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			return null;
 		}
@@ -2104,11 +2115,11 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportIncidentRetrieveForOwnerServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceIncidentRetrieveForOwnerServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
@@ -2170,23 +2181,23 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportTaskUpdateServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceTaskUpdateServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportTaskCreateCommentServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceTaskCreateCommentServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportTaskUpdateValidationFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceTaskUpdateValidationFaultMessageFaultFaultMessage exception)
 		{
 			// TODO May need to add more intelligent handling of validation
 			// messages
@@ -2251,23 +2262,23 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportRequirementUpdateServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceRequirementUpdateServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportRequirementCreateCommentServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceRequirementCreateCommentServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportRequirementUpdateValidationFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceRequirementUpdateValidationFaultMessageFaultFaultMessage exception)
 		{
 			// TODO May need to add more intelligent handling of validation
 			// messages
@@ -2333,24 +2344,24 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportIncidentUpdateServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentUpdateServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportIncidentUpdateValidationFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentUpdateValidationFaultMessageFaultFaultMessage exception)
 		{
 			// TODO Add better validation message handling
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
-		catch (IImportExportIncidentAddCommentsServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceIncidentAddCommentsServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw SpiraTeamUtil.convertFaultException(exception);
 		}
@@ -2452,23 +2463,23 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportTaskRetrieveByIdServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceTaskRetrieveByIdServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportTaskRetrieveCommentsServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceTaskRetrieveCommentsServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportDocumentRetrieveForArtifactServiceFaultMessageFaultFaultMessage ex)
+		catch (ISoapServiceDocumentRetrieveForArtifactServiceFaultMessageFaultFaultMessage ex)
 		{
 			throw new SpiraException(ex.getMessage());
 		}
@@ -2522,11 +2533,11 @@ public class SpiraImportExport
 		{
 			throw new SpiraException(ex.getMessage());
 		}
-		catch (IImportExportTaskRetrieveForOwnerServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceTaskRetrieveForOwnerServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}
-		catch (IImportExportConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraException(exception.getMessage());
 		}

@@ -40,7 +40,8 @@ public class SpiraTeamConnectorUi extends AbstractRepositoryConnectorUi
 	public String getTaskKindLabel(ITask repositoryTask)
 	{
 		//Display the appropriate label depending on artifact type
-		ArtifactType artifactType = ArtifactType.byTaskKey(repositoryTask.getTaskKey());
+		//ArtifactType artifactType = ArtifactType.byTaskKey(repositoryTask.getTaskKey());
+		ArtifactType artifactType = ArtifactType.byTaskKey(repositoryTask.getTaskId());
 		if (artifactType != null)
 		{
 			return artifactType.getDisplayName();
@@ -99,8 +100,11 @@ public class SpiraTeamConnectorUi extends AbstractRepositoryConnectorUi
 	@Override
 	public ImageDescriptor getTaskKindOverlay(ITask repositoryTask)
 	{
+		
 		//Display the appropriate overlay depending on artifact type
-		ArtifactType artifactType = ArtifactType.byTaskKey(repositoryTask.getTaskKey());
+		//ArtifactType artifactType = ArtifactType.byTaskKey(repositoryTask.getTaskKey());
+		ArtifactType artifactType = ArtifactType.byTaskKey(repositoryTask.getTaskId());
+		
 		if (artifactType == ArtifactType.REQUIREMENT)
 		{
 			return SpiraTeamImages.OVERLAY_REQUIREMENT;

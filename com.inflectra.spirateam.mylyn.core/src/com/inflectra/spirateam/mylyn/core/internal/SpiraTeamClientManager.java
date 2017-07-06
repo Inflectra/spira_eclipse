@@ -192,8 +192,10 @@ public class SpiraTeamClientManager implements IRepositoryListener
 			{
 				throw new SpiraAuthenticationException(Messages.SpiraTeamClientManager_MissingCredentials);
 			}
+			
 			String userName = credentials.getUserName();
 			String password = credentials.getPassword();
+			
 			client = new SpiraImportExport(url, userName, password);
 			clientByUrl.put(taskRepository.getRepositoryUrl(), client);
 

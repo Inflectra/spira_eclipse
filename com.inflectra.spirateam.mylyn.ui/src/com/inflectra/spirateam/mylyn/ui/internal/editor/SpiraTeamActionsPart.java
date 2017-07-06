@@ -8,6 +8,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.mylyn.tasks.core.TaskRepository;
 import org.eclipse.mylyn.tasks.core.data.TaskAttribute;
+import org.eclipse.mylyn.tasks.core.data.TaskAttributeMapper;
 import org.eclipse.mylyn.tasks.core.data.TaskData;
 import org.eclipse.mylyn.tasks.core.data.TaskOperation;
 import org.eclipse.mylyn.tasks.ui.TasksUiImages;
@@ -49,17 +50,21 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		//Make the hyperlinks enabled or disabled based on the workflow status field
 		TaskData taskData = getTaskData();
 		String workflowFieldStatus = taskData.getRoot().getAttribute(ArtifactAttribute.INCIDENT_TRANSITION_STATUS.getArtifactKey()).getValue();
-		for (Hyperlink button : operationButtons)
-		{
-			button.setEnabled(workflowFieldStatus.equals(SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_ACTIVE));
+		//operationButtons is null
+		if (operationButtons != null) {
+			for (Hyperlink button : operationButtons) {
+				button.setEnabled(workflowFieldStatus.equals(SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_ACTIVE));
+			}
 		}
+		else
+			System.out.println("operataionButtons is null");
 	}
 	
 	@Override
 	public void createControl(Composite parent, FormToolkit toolkit)
 	{
 		Section section = createSection(parent, toolkit, true);
-	
+		
 		Composite buttonComposite = toolkit.createComposite(section);
 		GridLayout buttonLayout = new GridLayout();
 		buttonLayout.numColumns = 1;
@@ -124,6 +129,11 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 	private void createHyperlinks(Composite buttonComposite, FormToolkit toolkit, TaskOperation selectedOperation)
 	{
 		List<TaskOperation> operations = getTaskData().getAttributeMapper().getTaskOperations(selectedOperationAttribute);
+		TaskData data=getTaskData();
+		TaskAttributeMapper mapper=data.getAttributeMapper();
+		
+		//operations has a size of 0
+		//TODO: Figure out why it has a size of 0
 		if (operations.size() > 0)
 		{
 			operationButtons = new ArrayList<Hyperlink>();

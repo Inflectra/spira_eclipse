@@ -140,15 +140,19 @@ public class SpiraTeamRepositorySettingsPage extends
 				//Instantiating the proxy class will automatically verify the URL
 				String url = this.repository.getRepositoryUrl();
 				AuthenticationCredentials credentials = this.repository.getCredentials(AuthenticationType.REPOSITORY);
+				
+				
+				
 				if (credentials == null)
 				{
 					throw new CoreException(new Status(IStatus.ERROR, SpiraTeamUiPlugin.PLUGIN_ID, IStatus.OK,
 							Messages.SpiraTeamRepositorySettingsPage_MissingCredentials, null));	
 				}
 				String userName = credentials.getUserName();
-				String password = credentials.getPassword();			
+				String password = credentials.getPassword();
+				
 				SpiraImportExport spiraImportExport = new SpiraImportExport(url, userName, password);
-			
+				
 				//Authenticate
 				boolean success = spiraImportExport.connectionAuthenticate2();
 				if (!success)

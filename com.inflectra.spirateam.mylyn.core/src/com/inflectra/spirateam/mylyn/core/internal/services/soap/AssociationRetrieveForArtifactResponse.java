@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Association_RetrieveForArtifactResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects}ArrayOfRemoteAssociation" minOccurs="0"/>
+ *         &lt;element name="Association_RetrieveForArtifactResult" type="{http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects}ArrayOfRemoteAssociation" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Association_RetrieveForArtifactResponse")
 public class AssociationRetrieveForArtifactResponse {
 
-    @XmlElementRef(name = "Association_RetrieveForArtifactResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v4.0/", type = JAXBElement.class)
+    @XmlElementRef(name = "Association_RetrieveForArtifactResult", namespace = "http://www.inflectra.com/SpiraTest/Services/v5.0/", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfRemoteAssociation> associationRetrieveForArtifactResult;
 
     /**
@@ -59,7 +59,7 @@ public class AssociationRetrieveForArtifactResponse {
      *     
      */
     public void setAssociationRetrieveForArtifactResult(JAXBElement<ArrayOfRemoteAssociation> value) {
-        this.associationRetrieveForArtifactResult = ((JAXBElement<ArrayOfRemoteAssociation> ) value);
+        this.associationRetrieveForArtifactResult = value;
     }
 
 }

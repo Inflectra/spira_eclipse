@@ -97,6 +97,7 @@ public class Messages extends NLS
 	public static String IncidentAttribute_ProjectedEffort;
 	public static String IncidentAttribute_OpenerId;
 	public static String IncidentAttribute_NewResolution;
+	public static String IncidentAttribute_ComponentIds;
 
 	public static String SpiraTeamRepositoryConnector_Getting_changed_tasks;
 }
