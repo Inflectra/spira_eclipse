@@ -37,7 +37,8 @@ public class SpiraTeamTaskEditorPage extends AbstractTaskEditorPage
 		artifactType = null;
 		if (task != null)
 		{
-			String taskKey = task.getTaskKey();
+			//String taskKey = task.getTaskKey();
+			String taskKey = task.getTaskId();
 			if (taskKey != null)
 			{
 				artifactType = ArtifactType.byTaskKey(taskKey);

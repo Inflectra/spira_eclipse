@@ -49,9 +49,9 @@ import com.inflectra.spirateam.mylyn.core.internal.services.SpiraConnectionExcep
  */
 public class SpiraImportExport
 {
-	private static final String WEB_SERVICE_SUFFIX = "/Services/v4_0/ImportExport.svc"; //$NON-NLS-1$
-	private static final String WEB_SERVICE_NAMESPACE = "{http://www.inflectra.com/SpiraTest/Services/v4.0/}ImportExport"; //$NON-NLS-1$
-	public static final String WEB_SERVICE_NAMESPACE_DATA_OBJECTS = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v4_0.DataObjects"; //$NON-NLS-1$
+	private static final String WEB_SERVICE_SUFFIX = "/Services/v5_0/SoapService.svc"; //$NON-NLS-1$
+	private static final String WEB_SERVICE_NAMESPACE = "{http://www.inflectra.com/SpiraTest/Services/v5.0/}SoapService"; //$NON-NLS-1$
+	public static final String WEB_SERVICE_NAMESPACE_DATA_OBJECTS = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v5_0.DataObjects"; //$NON-NLS-1$
 	private static final String SPIRA_PLUG_IN_NAME = "Eclipse-IDE"; //$NON-NLS-1$
 
 	private URL serviceUrl = null;
@@ -289,13 +289,15 @@ public class SpiraImportExport
 	 */
 	public SpiraImportExport(String baseUrl, String userName, String password) throws MalformedURLException, SpiraConnectionException
 	{
+		
 		// Trust all SSL certificates
 		SSLUtilities.trustAllHttpsCertificates();
 
 		// Set the URL, username and password
 		this.serviceUrl = new URL(baseUrl + WEB_SERVICE_SUFFIX);
 		this.userName = userName;
-		this.password = password;
+		//TODO: Make the password not hardcoded
+		this.password = "PleaseChange";
 
 		// Instantiate the SOAP proxy
 		try
@@ -426,7 +428,8 @@ public class SpiraImportExport
 	 */
 	public void setPassword(String password)
 	{
-		this.password = password;
+		//TODO: Change from hardcoding
+		this.password = "PleaseChange";
 	}
 
 	/**
@@ -499,10 +502,10 @@ public class SpiraImportExport
 
 			// Patch Number
 			this.patchNumber = productVersion.getPatch().getValue();
-
+			
 			// Get the ID of the currently authenticated user
-			RemoteUser remoteUser = soap.userRetrieveByUserName(userName, false);
 			//Passing false as we are assuming user is not inactive
+			RemoteUser remoteUser = soap.userRetrieveByUserName(userName, false);
 			if (remoteUser != null)
 			{
 				this.authenticatedUserId = remoteUser.getUserId().getValue();
@@ -516,7 +519,7 @@ public class SpiraImportExport
 		}
 		catch (ISoapServiceUserRetrieveByUserNameServiceFaultMessageFaultFaultMessage exception)
 		{
-			throw new SpiraConnectionException(Messages.SpiraConnectionException_Message);
+			throw new SpiraConnectionException(Messages.SpiraConnectionException_PasswordMessage);
 		}
 		catch (ISoapServiceSystemGetProductNameServiceFaultMessageFaultFaultMessage exception)
 		{
@@ -529,7 +532,7 @@ public class SpiraImportExport
 		catch (ISoapServiceSystemGetProductVersionServiceFaultMessageFaultFaultMessage exception)
 		{
 			throw new SpiraConnectionException(Messages.SpiraConnectionException_Message);
-		}
+		} 
 	}
 
 	/**

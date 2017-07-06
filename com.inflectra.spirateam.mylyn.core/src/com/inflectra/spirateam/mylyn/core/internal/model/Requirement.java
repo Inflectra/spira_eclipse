@@ -25,6 +25,8 @@ public class Requirement
     protected boolean summary;
     //changed planned to estimated
     protected Integer estimatedEffort;
+    protected Integer componentId;
+    protected Integer requirementTypeId;
     
     //Contains the collection of comments
     protected List<RequirementComment> comments = new ArrayList<RequirementComment>();
@@ -96,6 +98,8 @@ public class Requirement
         this.releaseVersionNumber = remoteRequirement.getReleaseVersionNumber().getValue();
         this.summary = remoteRequirement.isSummary();
         this.estimatedEffort = remoteRequirement.getEstimatedEffort().getValue();
+        this.componentId = remoteRequirement.getComponentId().getValue();
+        this.requirementTypeId = remoteRequirement.getRequirementTypeId();
     }
     
     /**
@@ -123,6 +127,7 @@ public class Requirement
     	remoteRequirement.setReleaseId(SpiraImportExport.CreateJAXBInteger("ReleaseId", this.releaseId));
     	remoteRequirement.setImportanceId(SpiraImportExport.CreateJAXBInteger("ImportanceId", this.importanceId));
     	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("PlannedEffort", this.estimatedEffort));
+    	remoteRequirement.setRequirementTypeId(this.requirementTypeId);
             	
         return remoteRequirement;
     }
@@ -182,6 +187,22 @@ public class Requirement
     public String getAuthorName()
     {
         return authorName;
+    }
+    
+    /**
+     * 
+     * @return - The value of the componentId property
+     */
+    public Integer getComponentId() {
+    	return componentId;
+    }
+    
+    /**
+     * 
+     * @param componentId - The new value of the componentId property
+     */
+    public void setComponentId(Integer componentId) {
+    	this.componentId=componentId;
     }
  
     /**
@@ -311,5 +332,21 @@ public class Requirement
 	public List<RequirementComment> getComments()
 	{
 		return this.comments;
+	}
+	
+	/**
+	 * Sets the value of the requirementTypeId property
+	 * @param requirementTypeId The new value for the requirementTypeId property
+	 */
+	public void setRequirementTypeId(Integer requirementTypeId) {
+		this.requirementTypeId=requirementTypeId;
+	}
+	
+	/**
+	 * 
+	 * @return The value of the requirementTypeId property
+	 */
+	public Integer getRequirementTypeId() {
+		return this.requirementTypeId;
 	}
 }

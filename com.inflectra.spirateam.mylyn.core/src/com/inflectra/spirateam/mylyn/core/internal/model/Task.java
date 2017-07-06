@@ -35,6 +35,7 @@ public class Task extends Artifact
     protected Integer remainingEffort;
     protected Integer projectedEffort;
     protected int creatorId;
+    protected Integer taskTypeId;
     
     //Contains the collection of comments
     protected List<TaskComment> comments = new ArrayList<TaskComment>();
@@ -125,6 +126,7 @@ public class Task extends Artifact
         this.projectName = remoteTask.getProjectName().getValue();
         this.releaseVersionNumber = remoteTask.getReleaseVersionNumber().getValue();
         this.requirementName = remoteTask.getRequirementName().getValue();
+        this.taskTypeId = remoteTask.getTaskTypeId();
     }
     
     /**
@@ -157,6 +159,7 @@ public class Task extends Artifact
     	remoteTask.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("EstimatedEffort", this.estimatedEffort));
     	remoteTask.setActualEffort(SpiraImportExport.CreateJAXBInteger("ActualEffort", this.actualEffort));
     	remoteTask.setRemainingEffort(SpiraImportExport.CreateJAXBInteger("RemainingEffort", this.remainingEffort));
+    	remoteTask.setTaskTypeId(this.taskTypeId);
             	
         return remoteTask;
     }
@@ -525,5 +528,21 @@ public class Task extends Artifact
 	public void setCreatorId(int creatorId)
 	{
 		this.creatorId = creatorId;
+	}
+	
+	/**
+	 * 
+	 * @return The value of the taskTypeId property
+	 */
+	public Integer getTaskTypeId() {
+		return this.taskTypeId;
+	}
+	
+	/**
+	 * 
+	 * @param taskTypeId The new value for the taskTypeId property
+	 */
+	public void setTaskTypeId(Integer taskTypeId) {
+		this.taskTypeId=taskTypeId;
 	}
 }

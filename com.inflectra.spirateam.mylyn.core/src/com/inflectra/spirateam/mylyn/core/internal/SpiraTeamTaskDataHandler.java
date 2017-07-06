@@ -1181,6 +1181,8 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 		incident.setEstimatedEffort(getTaskAttributeEffortValue(taskData, ArtifactAttribute.INCIDENT_ESTIMATED_EFFORT));
 		incident.setActualEffort(getTaskAttributeEffortValue(taskData, ArtifactAttribute.INCIDENT_ACTUAL_EFFORT));
 		incident.setRemainingEffort(getTaskAttributeEffortValue(taskData, ArtifactAttribute.INCIDENT_REMAINING_EFFORT));
+		//TODO: Update Incidents to include componentIds
+		
 
 		//Now we need to set the custom property values
 		updateCustomPropertiesFromTaskData(incident, taskData);
@@ -1787,6 +1789,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 	@Override
 	public void migrateTaskData(TaskRepository taskRepository, TaskData taskData)
 	{
+		//TODO: Add new stuff
 		int version = 0;
 		if (taskData.getVersion() != null)
 		{

@@ -419,6 +419,7 @@ public class Artifact
 		 //First the standard properties
          this.projectId = remoteArtifact.getProjectId().getValue();
 		 this.concurrencyDate = SpiraTeamUtil.convertDatesXml2Java(remoteArtifact.getConcurrencyDate());
+		  
 		 
 		 //Make sure we have custom properties
 		 this.customProperties.clear();

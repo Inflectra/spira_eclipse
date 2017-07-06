@@ -46,6 +46,8 @@ public class Incident extends Artifact
     protected String resolvedReleaseVersionNumber;
     protected String verifiedReleaseVersionNumber;
     protected Boolean incidentStatusOpenStatus;
+    protected ArrayOfint componentIds;
+    
     
     //Contains the collection of resolutions
     protected List<IncidentResolution> resolutions = new ArrayList<IncidentResolution>();
@@ -69,7 +71,8 @@ public class Incident extends Artifact
 		REMAINING_EFFORT("incident.remainingEffort"),
 		PROJECTED_EFFORT("incident.projectedEffort"),
 		TRANSITION_STATUS("incident.internal.transitionStatus"),
-		RESOLUTION("incident.resolution");
+		RESOLUTION("incident.resolution"),
+		COMPONENT_IDS("incident.componentIds");
 
 		public static Key fromKey(String name)
 		{
@@ -145,6 +148,9 @@ public class Incident extends Artifact
         this.resolvedReleaseVersionNumber = remoteIncident.getResolvedReleaseVersionNumber().getValue();
         this.verifiedReleaseVersionNumber = remoteIncident.getVerifiedReleaseVersionNumber().getValue();
         this.incidentStatusOpenStatus = remoteIncident.getIncidentStatusOpenStatus().getValue();
+        this.componentIds = remoteIncident.getComponentIds().getValue();
+        
+        
     }
     
     /**
@@ -182,7 +188,8 @@ public class Incident extends Artifact
     	remoteIncident.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("EstimatedEffort",this.estimatedEffort));
     	remoteIncident.setActualEffort(SpiraImportExport.CreateJAXBInteger("ActualEffort",this.actualEffort));
     	remoteIncident.setRemainingEffort(SpiraImportExport.CreateJAXBInteger("RemainingEffort", this.remainingEffort));
-               
+        remoteIncident.setComponentIds(SpiraImportExport.CreateJAXBArrayOfInt("ComponentIds", this.componentIds));
+    	
         return remoteIncident;
     }
     
@@ -311,6 +318,33 @@ public class Incident extends Artifact
     public int getOpenerId() {
         return openerId;
     }
+    
+    /**
+     * Gets the value of the testRunStepIds property.
+     * 
+     *     
+     */
+    public ArrayOfint getTestRunStepIds() {
+        return testRunStepIds;
+    }
+    
+    /**
+     * 
+     * @return the value of the componentIds property.
+     */
+    public ArrayOfint getComponentIds() {
+    	return componentIds;
+    }
+    
+    /**
+     * @param componentIds - The new value for the componentIds property.
+     */
+    public void setComponentIds(ArrayOfint componentIds) {
+    	if(hasChanged(this.componentIds, componentIds)) {
+    		this.dataChanged=true;
+    	}
+    	this.componentIds=componentIds;
+    }
 
     /**
      * Sets the value of the openerId property.
@@ -325,14 +359,7 @@ public class Incident extends Artifact
         this.openerId = value;
     }
 
-     /**
-     * Gets the value of the testRunStepIds property.
-     * 
-     *     
-     */
-    public ArrayOfint getTestRunStepIds() {
-        return testRunStepIds;
-    }
+     
 
     /**
      * Sets the value of the testRunStepIds property.
@@ -350,6 +377,7 @@ public class Incident extends Artifact
     	}
         this.testRunStepIds = value;
     }
+    
 
     /**
      * Gets the value of the detectedReleaseId property.
@@ -736,4 +764,5 @@ public class Incident extends Artifact
 	{
 		return this.projectedEffort;
 	}
+	
 }
