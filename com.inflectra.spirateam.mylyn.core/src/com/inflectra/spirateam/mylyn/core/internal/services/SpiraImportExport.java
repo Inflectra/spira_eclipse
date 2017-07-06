@@ -289,15 +289,14 @@ public class SpiraImportExport
 	 */
 	public SpiraImportExport(String baseUrl, String userName, String password) throws MalformedURLException, SpiraConnectionException
 	{
-		
+		System.out.println("Password passed in: " + password);
 		// Trust all SSL certificates
 		SSLUtilities.trustAllHttpsCertificates();
 
 		// Set the URL, username and password
 		this.serviceUrl = new URL(baseUrl + WEB_SERVICE_SUFFIX);
 		this.userName = userName;
-		//TODO: Make the password not hardcoded
-		this.password = "PleaseChange";
+		this.password = password;
 
 		// Instantiate the SOAP proxy
 		try
@@ -428,8 +427,7 @@ public class SpiraImportExport
 	 */
 	public void setPassword(String password)
 	{
-		//TODO: Change from hardcoding
-		this.password = "PleaseChange";
+		this.password = password;
 	}
 
 	/**

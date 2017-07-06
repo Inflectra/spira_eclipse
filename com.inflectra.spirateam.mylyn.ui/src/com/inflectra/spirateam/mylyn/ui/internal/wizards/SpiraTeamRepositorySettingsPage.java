@@ -122,6 +122,7 @@ public class SpiraTeamRepositorySettingsPage extends
 
 		//private ServerInfo serverInfo;
 
+		
 		public SpiraTeamValidator(TaskRepository repository)
 		{
 			this.repository = repository;

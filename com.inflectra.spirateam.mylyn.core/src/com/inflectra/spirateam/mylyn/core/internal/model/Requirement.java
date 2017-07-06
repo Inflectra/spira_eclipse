@@ -23,7 +23,6 @@ public class Requirement
     protected Integer releaseId;
     protected String releaseVersionNumber;
     protected boolean summary;
-    //changed planned to estimated
     protected Integer estimatedEffort;
     protected Integer componentId;
     protected Integer requirementTypeId;
@@ -39,7 +38,7 @@ public class Requirement
 		AUTHOR_ID("requirement.authorId"),
 		IMPORTANCE_ID("requirement.importanceId"),
 		RELEASE_ID("requirement.releaseId"),
-		PLANNED_EFFORT("requirement.plannedEffort"),
+		ESTIMATED_EFFORT("requirement.estimatedEffort"),
 		COMMENT("requirement.comment");
 		
 		public static Key fromKey(String name)
@@ -126,7 +125,7 @@ public class Requirement
     	remoteRequirement.setStatusId(SpiraImportExport.CreateJAXBInteger("StatusId", this.statusId));
     	remoteRequirement.setReleaseId(SpiraImportExport.CreateJAXBInteger("ReleaseId", this.releaseId));
     	remoteRequirement.setImportanceId(SpiraImportExport.CreateJAXBInteger("ImportanceId", this.importanceId));
-    	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("PlannedEffort", this.estimatedEffort));
+    	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("EstimatedEffort", this.estimatedEffort));
     	remoteRequirement.setRequirementTypeId(this.requirementTypeId);
             	
         return remoteRequirement;
@@ -304,7 +303,6 @@ public class Requirement
 
     /**
      * Gets the value of the estimatedEffort property.
-     * Changed from planned in 4.0 to estimated in 5.0
      * @return
      *     possible object is
      *     {@link Integer }
@@ -316,7 +314,6 @@ public class Requirement
 
     /**
      * Sets the value of the estimatedEffort property.
-     * Changed from planned in 4.0 to estimated in 5.0
      * @param value
      *     allowed object is
      *     {@link Integer }
