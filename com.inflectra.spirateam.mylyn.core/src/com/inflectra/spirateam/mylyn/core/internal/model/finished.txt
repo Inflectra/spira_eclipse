@@ -1,1 +1,0 @@
-Note that this folder has been debugged and cleared for 5.0 by Peter Geertsema

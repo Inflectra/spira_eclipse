@@ -57,6 +57,7 @@ public class Task extends Artifact
 		REMAINING_EFFORT("task.remainingEffort"),
 		PROJECTED_EFFORT("task.projectedEffort"),
 		REQUIREMENT_NAME("task.requirementName"),
+		TRANSITION_STATUS("task.transitionStatus"),
 		COMMENT("task.comment");
 
 		public static Key fromKey(String name)

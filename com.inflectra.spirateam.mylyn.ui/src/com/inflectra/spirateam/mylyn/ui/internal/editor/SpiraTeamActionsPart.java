@@ -74,8 +74,14 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		{
 			createCategoryChooser(buttonComposite, toolkit);
 		}*/
+		
+		TaskData data=getTaskData();
+		TaskAttribute at=data.getRoot();
 
 		selectedOperationAttribute = getTaskData().getRoot().getMappedAttribute(TaskAttribute.OPERATION);
+		//TODO: Above is null for Tasks and Requirements. Find out why
+		//When used with an Incident, inside taskData > root > attributeById > values[2] is TaskAttribute.OPERATION
+		
 		if (selectedOperationAttribute != null
 				&& TaskAttribute.TYPE_OPERATION.equals(selectedOperationAttribute.getMetaData().getType()))
 		{
@@ -126,14 +132,18 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		attachContextButton.setImage(CommonImages.getImage(TasksUiImages.CONTEXT_ATTACH));
 	}
 	
+	/**
+	 * Method called whenever workflow operations need to be added to the Mylyn UI
+	 * @param buttonComposite
+	 * @param toolkit
+	 * @param selectedOperation
+	 */
 	private void createHyperlinks(Composite buttonComposite, FormToolkit toolkit, TaskOperation selectedOperation)
 	{
 		List<TaskOperation> operations = getTaskData().getAttributeMapper().getTaskOperations(selectedOperationAttribute);
 		TaskData data=getTaskData();
 		TaskAttributeMapper mapper=data.getAttributeMapper();
 		
-		//operations has a size of 0
-		//TODO: Figure out why it has a size of 0
 		if (operations.size() > 0)
 		{
 			operationButtons = new ArrayList<Hyperlink>();

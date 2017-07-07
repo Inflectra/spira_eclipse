@@ -149,8 +149,6 @@ public class Incident extends Artifact
         this.verifiedReleaseVersionNumber = remoteIncident.getVerifiedReleaseVersionNumber().getValue();
         this.incidentStatusOpenStatus = remoteIncident.getIncidentStatusOpenStatus().getValue();
         this.componentIds = remoteIncident.getComponentIds().getValue();
-        
-        
     }
     
     /**
@@ -164,7 +162,7 @@ public class Incident extends Artifact
     	
         //First the artifact base properties
     	ExtractGeneralProperties(remoteIncident);
-
+    	
     	//Next the incident-specific ones
     	remoteIncident.setIncidentId(SpiraImportExport.CreateJAXBInteger("IncidentId",this.artifactId));
     	remoteIncident.setOwnerId(SpiraImportExport.CreateJAXBInteger("OwnerId",this.ownerId));
@@ -172,14 +170,13 @@ public class Incident extends Artifact
     	remoteIncident.setDescription(SpiraImportExport.CreateJAXBString("Description", this.description));
     	remoteIncident.setCreationDate(SpiraImportExport.CreateJAXBXMLGregorianCalendar("CreationDate", SpiraTeamUtil.convertDatesJava2Xml(this.creationDate)));
     	remoteIncident.setLastUpdateDate(SpiraTeamUtil.convertDatesJava2Xml(this.lastUpdateDate));
-
+    	
     	remoteIncident.setPriorityId(SpiraImportExport.CreateJAXBInteger("PriorityId",this.priorityId));
     	remoteIncident.setSeverityId(SpiraImportExport.CreateJAXBInteger("SeverityId",this.severityId));
     	remoteIncident.setIncidentStatusId(SpiraImportExport.CreateJAXBInteger("IncidentStatusId",this.incidentStatusId));
     	remoteIncident.setIncidentTypeId(SpiraImportExport.CreateJAXBInteger("IncidentTypeId",this.incidentTypeId));
     	remoteIncident.setOpenerId(SpiraImportExport.CreateJAXBInteger("OpenerId",this.openerId));
     	remoteIncident.setTestRunStepIds(SpiraImportExport.CreateJAXBArrayOfInt("TestRunStepIds", this.testRunStepIds));
-    	//changed above to work with a list of int's instead of a singular int
     	remoteIncident.setDetectedReleaseId(SpiraImportExport.CreateJAXBInteger("DetectedReleaseId",this.detectedReleaseId));
     	remoteIncident.setResolvedReleaseId(SpiraImportExport.CreateJAXBInteger("ResolvedReleaseId",this.resolvedReleaseId));
     	remoteIncident.setVerifiedReleaseId(SpiraImportExport.CreateJAXBInteger("VerifiedReleaseId",this.verifiedReleaseId));

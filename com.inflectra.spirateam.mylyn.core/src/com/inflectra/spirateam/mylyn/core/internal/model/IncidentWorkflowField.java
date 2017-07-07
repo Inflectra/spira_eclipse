@@ -8,6 +8,9 @@ public class IncidentWorkflowField
 	protected String fieldCaption;
 	protected String fieldName;
 	protected int fieldID;
+	/**
+	 * Represents the current field state
+	 */
 	protected int fieldStatus;
 
 	/**
@@ -32,7 +35,7 @@ public class IncidentWorkflowField
 	public IncidentWorkflowField(
 			RemoteWorkflowCustomProperty remoteWorkflowCustomProperty)
 	{
-		this.fieldCaption = ""; // Not provided
+		this.fieldCaption = remoteWorkflowCustomProperty.getFieldCaption().getValue();
 		this.fieldName = remoteWorkflowCustomProperty.getFieldName().getValue();
 		this.fieldID = remoteWorkflowCustomProperty.getCustomPropertyId();
 		this.fieldStatus = remoteWorkflowCustomProperty.getFieldStateId();
@@ -48,7 +51,7 @@ public class IncidentWorkflowField
 	{
 		return fieldCaption;
 	}
-
+	
 	/**
 	 * Gets the value of the fieldName property.
 	 * 
@@ -59,7 +62,7 @@ public class IncidentWorkflowField
 	{
 		return fieldName;
 	}
-
+	
 	/**
 	 * Gets the value of the fieldID property.
 	 * 
@@ -68,7 +71,7 @@ public class IncidentWorkflowField
 	{
 		return fieldID;
 	}
-
+	
 	/**
 	 * Gets the value of the fieldStatus property.
 	 * 

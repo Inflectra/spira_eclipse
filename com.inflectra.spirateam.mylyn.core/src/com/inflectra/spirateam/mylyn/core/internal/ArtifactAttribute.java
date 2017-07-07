@@ -41,6 +41,8 @@ public enum ArtifactAttribute
 	REQUIREMENT_RELEASE_ID(Requirement.Key.RELEASE_ID, Messages.RequirementAttribute_ReleaseId, TaskAttribute.VERSION, TaskAttribute.TYPE_SINGLE_SELECT, Flag.ATTRIBUTE),
 	REQUIREMENT_ESTIMATED_EFFORT(Requirement.Key.ESTIMATED_EFFORT, Messages.RequirementAttribute_EstimatedEffort, null, TaskAttribute.TYPE_DOUBLE, Flag.ATTRIBUTE),
 	REQUIREMENT_NEW_COMMENT(Requirement.Key.COMMENT, Messages.RequirementAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT),
+	REQUIREMENT_TRANSITION_STATUS(Requirement.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT),
+	//TODO: The above line probably does not work
 	
 	//Incident attributes
 	INCIDENT_OPENER_ID(Incident.Key.OPENER_ID, Messages.IncidentAttribute_OpenerId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.PEOPLE, Flag.READ_ONLY),
@@ -61,7 +63,7 @@ public enum ArtifactAttribute
 	INCIDENT_TRANSITION_STATUS(Incident.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT, ""),
 	INCIDENT_NEW_RESOLUTION(Incident.Key.RESOLUTION, Messages.IncidentAttribute_NewResolution, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT, "Resolution"),
 	//TODO: Very possible this is broken
-	//INCIDENT_COMPONENT_IDS(Incident.Key.COMPONENT_IDS, Messages.IncidentAttribute_ComponentIds, null, TaskAttribute.TYPE_),
+	INCIDENT_COMPONENT_IDS(Incident.Key.COMPONENT_IDS, Messages.IncidentAttribute_ComponentIds, null, TaskAttribute.TYPE_MULTI_SELECT, null),
 	
 	//Task attributes
 	TASK_TYPE(Task.Key.TYPE, Messages.TaskAttribute_Type, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SHORT_TEXT),
@@ -77,7 +79,8 @@ public enum ArtifactAttribute
 	TASK_ACTUAL_EFFORT(Task.Key.ACTUAL_EFFORT, Messages.TaskAttribute_ActualEffort, null, TaskAttribute.TYPE_DOUBLE, Flag.ATTRIBUTE),
 	TASK_REMAINING_EFFORT(Task.Key.REMAINING_EFFORT, Messages.TaskAttribute_RemainingEffort, null, TaskAttribute.TYPE_DOUBLE, Flag.ATTRIBUTE),
 	TASK_PROJECTED_EFFORT(Task.Key.PROJECTED_EFFORT, Messages.TaskAttribute_ProjectedEffort, null, TaskAttribute.TYPE_DOUBLE, Flag.READ_ONLY, Flag.ATTRIBUTE),
-	TASK_NEW_COMMENT(Task.Key.COMMENT, Messages.TaskAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT);
+	TASK_NEW_COMMENT(Task.Key.COMMENT, Messages.TaskAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT),
+	TASK_TRANSITION_STATUS(Task.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT);
 	
 	static Map<String, ArtifactAttribute> attributeByArtifactKey = new HashMap<String, ArtifactAttribute>();
 	static Map<String, String> artifactKeyByTaskKey = new HashMap<String, String>();

@@ -65,29 +65,32 @@ public class SpiraTeamTaskEditorPage extends AbstractTaskEditorPage
 		{
 			TaskEditorPartDescriptor taskEditorPartDescriptor = it.next();
 			
-			if (taskEditorPartDescriptor.getId().equals(ID_PART_COMMENTS))
+			/*if (taskEditorPartDescriptor.getId().equals(ID_PART_COMMENTS))
 			{
 				//All artifacts support comments
-			}
-			if (taskEditorPartDescriptor.getId().equals(ID_PART_ACTIONS) && artifactType.equals(ArtifactType.INCIDENT))
+			}*/
+			
+			/*if (taskEditorPartDescriptor.getId().equals(ID_PART_ACTIONS) && artifactType.equals(ArtifactType.INCIDENT))
 			{
 				//Incidents use a customized Actions Part with workflow operations
+				it.remove();
+			}*/
+			
+			if(taskEditorPartDescriptor.getId().equals(ID_PART_ACTIONS)) {
+				//All artifacts use a customized Actions part with workflow operations
 				it.remove();
 			}
 		}
 		
 		//Add the new Actions Part
-		if (artifactType.equals(ArtifactType.INCIDENT))
-		{
-			descriptors.add(new TaskEditorPartDescriptor(ID_PART_ACTIONS)
-			{
-				@Override
-				public AbstractTaskEditorPart createPart()
-				{
-					return new SpiraTeamActionsPart();
-				}
-			}.setPath(PATH_ACTIONS));
-		}
+		
+		descriptors.add(new TaskEditorPartDescriptor(ID_PART_ACTIONS) {
+			@Override
+			public AbstractTaskEditorPart createPart() {
+				return new SpiraTeamActionsPart();
+			}
+		}.setPath(PATH_ACTIONS));
+		
 		
 		return descriptors;
 	}
