@@ -42,6 +42,7 @@ import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactAttachment;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactCustomProperty;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactField;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactFieldValue;
+import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactWorkflowField;
 import com.inflectra.spirateam.mylyn.core.internal.model.Incident;
 import com.inflectra.spirateam.mylyn.core.internal.model.IncidentResolution;
 import com.inflectra.spirateam.mylyn.core.internal.model.IncidentWorkflowField;
@@ -411,6 +412,13 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 		//Common fields for all artifacts
 		createAttribute(data, client, ArtifactAttribute.NAME);
 		createAttribute(data, client, ArtifactAttribute.DESCRIPTION);
+		
+		//Workflow Transitions
+		data.getRoot().createAttribute(TaskAttribute.OPERATION).getMetaData().setType(TaskAttribute.TYPE_OPERATION);
+		
+		//Find out what type of artifact we're dealing with
+		ArtifactType artifactType = ArtifactType.byTaskKey(data.getTaskId());
+		
 		if (existingTask)
 		{
 			createAttribute(data, client, ArtifactAttribute.CREATION_DATE);
@@ -420,12 +428,12 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 		}
 		createAttribute(data, client, ArtifactAttribute.OWNER_ID);
 
-		//Find out what type of artifact we're dealing with
-		ArtifactType artifactType = ArtifactType.byTaskKey(data.getTaskId());
+		
 		
 		//Requirement-specific fields
 		if (artifactType.equals(ArtifactType.REQUIREMENT))
 		{
+			System.out.println("Creating default attributes");
 			createAttribute(data, client, ArtifactAttribute.REQUIREMENT_TYPE);
 			createAttribute(data, client, ArtifactAttribute.REQUIREMENT_STATUS_ID);
 			createAttribute(data, client, ArtifactAttribute.REQUIREMENT_AUTHOR_ID);
@@ -433,9 +441,10 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 			createAttribute(data, client, ArtifactAttribute.REQUIREMENT_RELEASE_ID);
 			createAttribute(data, client, ArtifactAttribute.REQUIREMENT_ESTIMATED_EFFORT);
 			createAttribute(data, client, ArtifactAttribute.REQUIREMENT_NEW_COMMENT);
+			createAttribute(data, client, ArtifactAttribute.REQUIREMENT_TRANSITION_STATUS);
 			
-			data.getRoot().createAttribute(TaskAttribute.OPERATION).getMetaData().setType(TaskAttribute.TYPE_OPERATION);
-		}
+			//data.getRoot().createAttribute(TaskAttribute.OPERATION).getMetaData().setType(TaskAttribute.TYPE_OPERATION);
+		}//end Requirement
 		
 		//Incident-specific fields
 		else if (artifactType.equals(ArtifactType.INCIDENT))
@@ -459,8 +468,8 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 			createAttribute(data, client, ArtifactAttribute.INCIDENT_NEW_RESOLUTION);
 					
 			// Workflow Transitions
-			data.getRoot().createAttribute(TaskAttribute.OPERATION).getMetaData().setType(TaskAttribute.TYPE_OPERATION);
-		}
+			//data.getRoot().createAttribute(TaskAttribute.OPERATION).getMetaData().setType(TaskAttribute.TYPE_OPERATION);
+		}//end Incident
 		
 		//Task-specific fields
 		else if (artifactType.equals(ArtifactType.TASK))
@@ -480,8 +489,8 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 			createAttribute(data, client, ArtifactAttribute.TASK_PROJECTED_EFFORT);
 			createAttribute(data, client, ArtifactAttribute.TASK_NEW_COMMENT);
 			
-			data.getRoot().createAttribute(TaskAttribute.OPERATION).getMetaData().setType(TaskAttribute.TYPE_OPERATION);
-		}
+			//data.getRoot().createAttribute(TaskAttribute.OPERATION).getMetaData().setType(TaskAttribute.TYPE_OPERATION);
+		}//end Task
 		
 		// custom fields/properties
 		ArtifactField[] fields = client.getCustomProperties(artifactType, null);
@@ -625,6 +634,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 						//See what kind of artifact we have
 	
 						//Currently only incidents support workflow operations
+						//TODO: Add support for other artifact types
 						ArtifactType artifactType = ArtifactType.byTaskKey(taskKey);
 						if (artifactType.equals(ArtifactType.INCIDENT))
 						{
@@ -865,7 +875,9 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.INCIDENT_TRANSITION_STATUS, SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_EXECUTED, projectId);
 							}
 						}//End type Incident
+						
 						else if(artifactType.equals(ArtifactType.REQUIREMENT)) {
+							System.out.println("Execute Operation Requirement");
 							//Get the id of the workflow transition that was just executed
 							int workflowTransitionId = Integer.parseInt(operation.getOperationId());
 							
@@ -876,27 +888,28 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 							//Get all the transitions, even if owner and detector
 							//Doesn't matter that we have more, since we already know the ID we want
 							List<RequirementWorkflowTransition> transitions = client.requirementRetrieveWorkflowTransitions(currentTypeId, currentStatusId, true, true);
-							int destinationIncidentStatusId = -1;
+							int destinationRequirementStatusId = -1;
 							for (RequirementWorkflowTransition transition : transitions)
 							{
 								if (transition.getTransitionID() == workflowTransitionId)
 								{
-									destinationIncidentStatusId = transition.getRequirementStatusIDOutput();
+									destinationRequirementStatusId = transition.getRequirementStatusIDOutput();
 								}
 							}
 							
 							//Need to change the status of the Requirement
-							if (destinationIncidentStatusId != -1)
+							if (destinationRequirementStatusId != -1)
 							{
-								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.INCIDENT_STATUS_ID, destinationIncidentStatusId + "", projectId);
+								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.REQUIREMENT_STATUS_ID, destinationRequirementStatusId + "", projectId);
 
 								//Need to change the attributes read-only state for the new status
-								updateAttributesForWorkflow(client, taskData, projectId, currentTypeId, destinationIncidentStatusId, changedAttributes);
+								updateAttributesForWorkflow(client, taskData, projectId, currentTypeId, destinationRequirementStatusId, changedAttributes);
 								
 								//Finally we need to change the transition status to executed
-								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.INCIDENT_TRANSITION_STATUS, SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_EXECUTED, projectId);
+								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.REQUIREMENT_TRANSITION_STATUS, SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_EXECUTED, projectId);
 							}
 						}//End type Requirement
+						
 						else if(artifactType.equals(ArtifactType.TASK)) {
 							//Get the id of the workflow transition that was just executed
 							int workflowTransitionId = Integer.parseInt(operation.getOperationId());
@@ -925,7 +938,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 								updateAttributesForWorkflow(client, taskData, projectId, currentTypeId, destinationIncidentStatusId, changedAttributes);
 								
 								//Finally we need to change the transition status to executed
-								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.INCIDENT_TRANSITION_STATUS, SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_EXECUTED, projectId);
+								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.TASK_TRANSITION_STATUS, SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_EXECUTED, projectId);
 							}
 						}//End type Task
 						
@@ -1774,6 +1787,13 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_RELEASE_ID, requirement.getReleaseId() + "", projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_ESTIMATED_EFFORT, SpiraTeamUtil.effortValuesToString(requirement.getEstimatedEffort()), projectId);
 			
+			//Used to denote that we have not yet executed a transition
+			System.out.println("Updating task data");
+			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_TRANSITION_STATUS, SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_ACTIVE, projectId);
+			
+			//Get the workflow field status for the current type and status
+			updateAttributesForWorkflow(client, data, projectId, requirement.getRequirementTypeId(), requirement.getStatusId(), changedAttributes);
+			
 			// Handle SpiraTeam comments
 			if (requirement.getComments() != null)
 			{
@@ -1935,13 +1955,21 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 	 * @param changedAttributes
 	 * @throws SpiraException
 	 */
-	private static void updateAttributesForWorkflow(SpiraImportExport client, TaskData data, int projectId, int currentIncidentTypeId, 
-		int currentIncidentStatusId, Set<TaskAttribute> changedAttributes) throws SpiraException
+	private static void updateAttributesForWorkflow(SpiraImportExport client, TaskData data, int projectId, int currentArtifactTypeId, 
+		int currentArtifactStatusId, Set<TaskAttribute> changedAttributes) throws SpiraException
 	{
+		List<ArtifactWorkflowField> workflowFields = null;
+		ArtifactType artifactType = ArtifactType.byTaskKey(data.getTaskId());
+		if(artifactType == ArtifactType.INCIDENT) {
+			workflowFields = client.incidentRetrieveWorkflowFields(projectId, currentArtifactTypeId, currentArtifactStatusId);
+		}
+		else if(artifactType == ArtifactType.REQUIREMENT) {
+			workflowFields = client.requirementRetrieveWorkflowFields(projectId, currentArtifactTypeId, currentArtifactStatusId);
+		}
+		else if(artifactType == ArtifactType.TASK) {
+			workflowFields = client.taskRetrieveWorkflowFields(projectId, currentArtifactTypeId, currentArtifactStatusId);
+		}
 		
-		
-		//TODO: Make this method work with Requirements and Tasks
-		List<IncidentWorkflowField> workflowFields = client.incidentRetrieveWorkflowFields(projectId, currentIncidentTypeId, currentIncidentStatusId);
 		for (String attributeKey : data.getRoot().getAttributes().keySet())
 		{
 			//See if this is a standard field or custom property
@@ -1955,7 +1983,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 				boolean isInactive = false;
 				boolean isRequired = false;
 				boolean isHidden = false;
-				for(IncidentWorkflowField workflowField : workflowFields)
+				for(ArtifactWorkflowField workflowField : workflowFields)
 				{
 					if (workflowField.getFieldStatus() == SpiraTeamUtil.WORKFLOW_FIELD_STATE_INACTIVE && customPropertyName.equals(workflowField.getFieldName()))
 					{
@@ -1991,7 +2019,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 					boolean isInactive = false;
 					boolean isRequired = false;
 					boolean isHidden = false;
-					for(IncidentWorkflowField workflowField : workflowFields)
+					for(ArtifactWorkflowField workflowField : workflowFields)
 					{
 						//We only care about the active flag (i.e. state = 1)
 						if (workflowField.getFieldStatus() == SpiraTeamUtil.WORKFLOW_FIELD_STATE_INACTIVE && workflowFieldName.equals(workflowField.getFieldName()))
@@ -2025,7 +2053,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 	private void validateWorkflowRequiredAttributes(SpiraImportExport client, TaskData data, int projectId, int currentIncidentTypeId, int currentIncidentStatusId)
 	throws SpiraException
 {
-	List<IncidentWorkflowField> workflowFields = client.incidentRetrieveWorkflowFields(projectId, currentIncidentTypeId, currentIncidentStatusId);
+	List<ArtifactWorkflowField> workflowFields = client.incidentRetrieveWorkflowFields(projectId, currentIncidentTypeId, currentIncidentStatusId);
 	for (String attributeKey : data.getRoot().getAttributes().keySet())
 	{
 		ArtifactAttribute artifactAttribute = ArtifactAttribute.getByArtifactKey(attributeKey);
@@ -2037,7 +2065,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 			{
 				//See if we have this in the field list
 				boolean required = false;
-				for(IncidentWorkflowField workflowField : workflowFields)
+				for(ArtifactWorkflowField workflowField : workflowFields)
 				{
 					//We only care about the required flag (i.e. state = 2)
 					if (workflowField.getFieldStatus() == SpiraTeamUtil.WORKFLOW_FIELD_STATE_REQUIRED && workflowFieldName.equals(workflowField.getFieldName()))

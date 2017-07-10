@@ -8,8 +8,8 @@ import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteComment;
 
 /**
- * @author Inflectra Corporation
  * Represents a single Requirement comment
+ * @author Inflectra Corporation
  */
 public class RequirementComment
 {

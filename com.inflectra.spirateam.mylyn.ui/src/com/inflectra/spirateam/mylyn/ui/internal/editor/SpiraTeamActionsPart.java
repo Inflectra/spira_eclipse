@@ -23,11 +23,15 @@ import org.eclipse.ui.forms.events.IHyperlinkListener;
 import org.eclipse.ui.forms.widgets.*;
 
 import com.inflectra.spirateam.mylyn.core.internal.ArtifactAttribute;
+import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamRepositoryConnector;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamTaskDataHandler;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 
-
+/**
+ * Represents the new Actions menu for workflow operations
+ *
+ */
 public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 {	
 	private static final String KEY_OPERATION = "operation"; //$NON-NLS-1$
@@ -49,15 +53,34 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		
 		//Make the hyperlinks enabled or disabled based on the workflow status field
 		TaskData taskData = getTaskData();
-		String workflowFieldStatus = taskData.getRoot().getAttribute(ArtifactAttribute.INCIDENT_TRANSITION_STATUS.getArtifactKey()).getValue();
-		//operationButtons is null
+		//getting the type of artifact
+		ArtifactType artifactType = ArtifactType.byTaskKey(taskData.getTaskId());
+		String workflowFieldStatus=null;
+		
+		if(artifactType.equals(ArtifactType.INCIDENT)) {
+			TaskAttribute attribute = taskData.getRoot().getAttribute(ArtifactAttribute.INCIDENT_TRANSITION_STATUS.getArtifactKey());
+			String artifactKey = ArtifactAttribute.INCIDENT_TRANSITION_STATUS.getArtifactKey();
+			workflowFieldStatus = attribute.getValue();
+		}
+		else if(artifactType.equals(ArtifactType.REQUIREMENT)) {
+			TaskAttribute attribute = taskData.getRoot().getAttribute(ArtifactAttribute.REQUIREMENT_TRANSITION_STATUS.getArtifactKey());
+			String artifactKey = ArtifactAttribute.REQUIREMENT_TRANSITION_STATUS.getArtifactKey();
+			//TODO: Figure out why attribute is null
+			workflowFieldStatus = attribute.getValue();
+		}
+		else if(artifactType.equals(ArtifactType.TASK)) {
+			TaskAttribute attribute = taskData.getRoot().getAttribute(ArtifactAttribute.TASK_TRANSITION_STATUS.getArtifactKey());
+			workflowFieldStatus = attribute.getValue();
+		}
+		
+		
 		if (operationButtons != null) {
 			for (Hyperlink button : operationButtons) {
 				button.setEnabled(workflowFieldStatus.equals(SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_ACTIVE));
 			}
 		}
 		else
-			System.out.println("operataionButtons is null");
+			System.out.println("operataionButtons is null in refresh() method in SpiraTeamActionsPart");
 	}
 	
 	@Override
@@ -79,8 +102,9 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		TaskAttribute at=data.getRoot();
 
 		selectedOperationAttribute = getTaskData().getRoot().getMappedAttribute(TaskAttribute.OPERATION);
-		//TODO: Above is null for Tasks and Requirements. Find out why
+		//TODO: selectedOperationAttribute is null for Tasks and Requirements. Find out why
 		//When used with an Incident, inside taskData > root > attributeById > values[2] is TaskAttribute.OPERATION
+		//While in Requirements and Tasks, it is null
 		
 		if (selectedOperationAttribute != null
 				&& TaskAttribute.TYPE_OPERATION.equals(selectedOperationAttribute.getMetaData().getType()))
@@ -143,6 +167,7 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		List<TaskOperation> operations = getTaskData().getAttributeMapper().getTaskOperations(selectedOperationAttribute);
 		TaskData data=getTaskData();
 		TaskAttributeMapper mapper=data.getAttributeMapper();
+		//TODO: Delete above variables when they are no longer needed
 		
 		if (operations.size() > 0)
 		{
@@ -219,7 +244,6 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		@Override
 		public void linkExited(HyperlinkEvent arg0)
 		{
-			// TODO Auto-generated method stub
 			
 		}
 	}

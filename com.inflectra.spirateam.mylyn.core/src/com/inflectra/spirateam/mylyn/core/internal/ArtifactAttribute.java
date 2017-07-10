@@ -34,15 +34,15 @@ public enum ArtifactAttribute
 	CONCURRENCY_DATE(Artifact.Key.CONCURRENCY_DATE, Messages.ArtifactAttribute_ConcurrencyDate, null, TaskAttribute.TYPE_DATE, ""),
 	
 	//Requirement attributes
-	REQUIREMENT_TYPE(Requirement.Key.TYPE, Messages.RequirementAttribute_Type, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SHORT_TEXT),
-	REQUIREMENT_STATUS_ID(Requirement.Key.STATUS_ID, Messages.RequirementAttribute_StatusId, TaskAttribute.STATUS, TaskAttribute.TYPE_SINGLE_SELECT, Flag.ATTRIBUTE),
-	REQUIREMENT_AUTHOR_ID(Requirement.Key.AUTHOR_ID, Messages.RequirementAttribute_AuthorId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, Flag.PEOPLE, Flag.READ_ONLY),
-	REQUIREMENT_IMPORTANCE_ID(Requirement.Key.IMPORTANCE_ID, Messages.RequirementAttribute_ImportanceId, TaskAttribute.PRIORITY, TaskAttribute.TYPE_SINGLE_SELECT, Flag.ATTRIBUTE),
-	REQUIREMENT_RELEASE_ID(Requirement.Key.RELEASE_ID, Messages.RequirementAttribute_ReleaseId, TaskAttribute.VERSION, TaskAttribute.TYPE_SINGLE_SELECT, Flag.ATTRIBUTE),
-	REQUIREMENT_ESTIMATED_EFFORT(Requirement.Key.ESTIMATED_EFFORT, Messages.RequirementAttribute_EstimatedEffort, null, TaskAttribute.TYPE_DOUBLE, Flag.ATTRIBUTE),
-	REQUIREMENT_NEW_COMMENT(Requirement.Key.COMMENT, Messages.RequirementAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT),
-	REQUIREMENT_TRANSITION_STATUS(Requirement.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT),
-	//TODO: The above line probably does not work
+	//TODO: Ensure that all of the workflow fields work properly
+	REQUIREMENT_TYPE(Requirement.Key.TYPE, Messages.RequirementAttribute_Type, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SHORT_TEXT, "RequirementType"),
+	REQUIREMENT_STATUS_ID(Requirement.Key.STATUS_ID, Messages.RequirementAttribute_StatusId, TaskAttribute.STATUS, TaskAttribute.TYPE_SINGLE_SELECT, "", Flag.ATTRIBUTE),
+	REQUIREMENT_AUTHOR_ID(Requirement.Key.AUTHOR_ID, Messages.RequirementAttribute_AuthorId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.PEOPLE, Flag.READ_ONLY),
+	REQUIREMENT_IMPORTANCE_ID(Requirement.Key.IMPORTANCE_ID, Messages.RequirementAttribute_ImportanceId, TaskAttribute.PRIORITY, TaskAttribute.TYPE_SINGLE_SELECT, "ImportanceId", Flag.ATTRIBUTE),
+	REQUIREMENT_RELEASE_ID(Requirement.Key.RELEASE_ID, Messages.RequirementAttribute_ReleaseId, TaskAttribute.VERSION, TaskAttribute.TYPE_SINGLE_SELECT, "ReleaseId",  Flag.ATTRIBUTE),
+	REQUIREMENT_ESTIMATED_EFFORT(Requirement.Key.ESTIMATED_EFFORT, Messages.RequirementAttribute_EstimatedEffort, null, TaskAttribute.TYPE_DOUBLE, "EstimatedEffort", Flag.ATTRIBUTE),
+	REQUIREMENT_NEW_COMMENT(Requirement.Key.COMMENT, Messages.RequirementAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT, ""),
+	REQUIREMENT_TRANSITION_STATUS(Requirement.Key.TRANSITION_STATUS, null, null, "", TaskAttribute.TYPE_SHORT_TEXT),
 	
 	//Incident attributes
 	INCIDENT_OPENER_ID(Incident.Key.OPENER_ID, Messages.IncidentAttribute_OpenerId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.PEOPLE, Flag.READ_ONLY),
@@ -62,7 +62,7 @@ public enum ArtifactAttribute
 	INCIDENT_PROJECTED_EFFORT(Incident.Key.PROJECTED_EFFORT, Messages.IncidentAttribute_ProjectedEffort, null, TaskAttribute.TYPE_DOUBLE, "", Flag.READ_ONLY, Flag.ATTRIBUTE),
 	INCIDENT_TRANSITION_STATUS(Incident.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT, ""),
 	INCIDENT_NEW_RESOLUTION(Incident.Key.RESOLUTION, Messages.IncidentAttribute_NewResolution, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT, "Resolution"),
-	//TODO: Very possible this is broken
+	//TODO: Very possible the line below is broken
 	INCIDENT_COMPONENT_IDS(Incident.Key.COMPONENT_IDS, Messages.IncidentAttribute_ComponentIds, null, TaskAttribute.TYPE_MULTI_SELECT, null),
 	
 	//Task attributes
@@ -140,13 +140,15 @@ public enum ArtifactAttribute
 		}
 	}
 	
-	ArtifactAttribute(Requirement.Key artifactKey, String prettyName, String taskKey, String type, Flag firstFlag, Flag... moreFlags)
+	//TODO: Add support for workflow fields
+	ArtifactAttribute(Requirement.Key artifactKey, String prettyName, String taskKey, String type, String workflowField, Flag firstFlag, Flag... moreFlags)
 	{
 		this.artifactType = ArtifactType.REQUIREMENT;	//Requirement attribute
 		this.artifactKey = artifactKey.getKey();
 		this.taskKey = taskKey;
 		this.prettyName = prettyName;
 		this.type = type;
+		this.workflowField = workflowField;
 		if (firstFlag == null)
 		{
 			this.flags = SpiraTeamAttributeMapper.NO_FLAGS;
@@ -196,9 +198,9 @@ public enum ArtifactAttribute
 	{
 		this(artifactKey, prettyName, taskKey, type, workflowField, null);
 	}
-	ArtifactAttribute(Requirement.Key artifactKey, String prettyName, String taskKey, String type)
+	ArtifactAttribute(Requirement.Key artifactKey, String prettyName, String taskKey, String type, String workflowField)
 	{
-		this(artifactKey, prettyName, taskKey, type, null);
+		this(artifactKey, prettyName, taskKey, type, workflowField, null);
 	}
 	ArtifactAttribute(Incident.Key artifactKey, String prettyName, String taskKey, String type, String workflowField)
 	{

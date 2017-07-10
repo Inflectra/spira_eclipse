@@ -29,6 +29,7 @@ import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactAttachment;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactField;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactFieldValue;
+import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactWorkflowField;
 import com.inflectra.spirateam.mylyn.core.internal.model.Incident;
 import com.inflectra.spirateam.mylyn.core.internal.model.IncidentResolution;
 import com.inflectra.spirateam.mylyn.core.internal.model.IncidentWorkflowField;
@@ -1360,7 +1361,7 @@ public class SpiraImportExport
 		}
 	}
 
-	public List<IncidentWorkflowField> incidentRetrieveWorkflowFields(int currentIncidentTypeId, int currentIncidentStatusId) throws SpiraException
+	public List<ArtifactWorkflowField> incidentRetrieveWorkflowFields(int currentIncidentTypeId, int currentIncidentStatusId) throws SpiraException
 	{
 		// Don't return fields if we have no project set
 		if (this.storedProjectId == null)
@@ -1381,7 +1382,7 @@ public class SpiraImportExport
 	 * @return
 	 * @throws SpiraException
 	 */
-	public List<IncidentWorkflowField> incidentRetrieveWorkflowFields(int projectId, int currentIncidentTypeId, int currentIncidentStatusId)
+	public List<ArtifactWorkflowField> incidentRetrieveWorkflowFields(int projectId, int currentIncidentTypeId, int currentIncidentStatusId)
 			throws SpiraException
 	{
 		try
@@ -1412,7 +1413,7 @@ public class SpiraImportExport
 			
 						
 			// Convert the SOAP workflow fields into local versions
-			ArrayList<IncidentWorkflowField> fields = new ArrayList<IncidentWorkflowField>();
+			ArrayList<ArtifactWorkflowField> fields = new ArrayList<ArtifactWorkflowField>();
 			for (RemoteWorkflowField remoteField : remoteFields)
 			{
 				fields.add(new IncidentWorkflowField(remoteField));
@@ -1451,6 +1452,8 @@ public class SpiraImportExport
 			throw new SpiraException(exception.getMessage());
 		}
 	}
+	
+	
 	
 	//end IncidentWorkflow methods, begin RequirementWorkflow methods
 	
@@ -1517,7 +1520,7 @@ public class SpiraImportExport
 		}
 	}
 	
-	public List<RequirementWorkflowField> requirementRetrieveWorkflowFields(int currentrequirementTypeId, int currentrequirementStatusId) throws SpiraException {
+	public List<ArtifactWorkflowField> requirementRetrieveWorkflowFields(int currentrequirementTypeId, int currentrequirementStatusId) throws SpiraException {
 		// Don't return fields if we have no project set
 		if (this.storedProjectId == null)
 		{
@@ -1527,7 +1530,7 @@ public class SpiraImportExport
 		return this.requirementRetrieveWorkflowFields(projectId, currentrequirementTypeId, currentrequirementStatusId);
 	}
 
-	public List<RequirementWorkflowField> requirementRetrieveWorkflowFields(int projectId, int currentRequirementTypeId, int currentRequirementStatusId) 
+	public List<ArtifactWorkflowField> requirementRetrieveWorkflowFields(int projectId, int currentRequirementTypeId, int currentRequirementStatusId) 
 			throws SpiraException {
 		try
 		{
@@ -1557,7 +1560,7 @@ public class SpiraImportExport
 			
 						
 			// Convert the SOAP workflow fields into local versions
-			ArrayList<RequirementWorkflowField> fields = new ArrayList<RequirementWorkflowField>();
+			ArrayList<ArtifactWorkflowField> fields = new ArrayList<ArtifactWorkflowField>();
 			for (RemoteWorkflowField remoteField : remoteFields)
 			{
 				fields.add(new RequirementWorkflowField(remoteField));
@@ -1663,7 +1666,7 @@ public class SpiraImportExport
 		}
 	}
 	
-	public List<TaskWorkflowField> taskRetrieveWorkflowFields(int currenttaskTypeId, int currenttaskStatusId) throws SpiraException {
+	public List<ArtifactWorkflowField> taskRetrieveWorkflowFields(int currenttaskTypeId, int currenttaskStatusId) throws SpiraException {
 		// Don't return fields if we have no project set
 		if (this.storedProjectId == null)
 		{
@@ -1673,7 +1676,7 @@ public class SpiraImportExport
 		return this.taskRetrieveWorkflowFields(projectId, currenttaskTypeId, currenttaskStatusId);
 	}
 
-	public List<TaskWorkflowField> taskRetrieveWorkflowFields(int projectId, int currentTaskTypeId, int currentTaskStatusId) 
+	public List<ArtifactWorkflowField> taskRetrieveWorkflowFields(int projectId, int currentTaskTypeId, int currentTaskStatusId) 
 			throws SpiraException {
 		try
 		{
@@ -1703,7 +1706,7 @@ public class SpiraImportExport
 			
 						
 			// Convert the SOAP workflow fields into local versions
-			ArrayList<TaskWorkflowField> fields = new ArrayList<TaskWorkflowField>();
+			ArrayList<ArtifactWorkflowField> fields = new ArrayList<ArtifactWorkflowField>();
 			for (RemoteWorkflowField remoteField : remoteFields)
 			{
 				fields.add(new TaskWorkflowField(remoteField));

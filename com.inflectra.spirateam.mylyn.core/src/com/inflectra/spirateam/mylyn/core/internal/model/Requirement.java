@@ -39,7 +39,7 @@ public class Requirement
 		IMPORTANCE_ID("requirement.importanceId"),
 		RELEASE_ID("requirement.releaseId"),
 		ESTIMATED_EFFORT("requirement.estimatedEffort"),
-		TRANSITION_STATUS("requirement.transitionStatus"),
+		TRANSITION_STATUS("requirement.internal.transitionStatus"),
 		COMMENT("requirement.comment");
 		
 		public static Key fromKey(String name)
