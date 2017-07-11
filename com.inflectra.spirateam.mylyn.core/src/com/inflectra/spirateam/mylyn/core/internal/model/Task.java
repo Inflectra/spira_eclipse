@@ -44,6 +44,7 @@ public class Task extends Artifact
     {
 		//Task-specific attributes
     	TYPE("task.type"),
+    	TYPE_ID("task.typeId"),
 		STATUS_ID("task.statusId"),
 		REQUIREMENT_ID("task.requirementId"),
 		RELEASE_ID("task.releaseId"),
@@ -131,7 +132,7 @@ public class Task extends Artifact
     }
     
     /**
-     * Converts this object into its soap equivalent
+     * Converts this object into its SOAP equivalent
      * @return
      */
     public RemoteTask toSoapObject()
@@ -161,7 +162,7 @@ public class Task extends Artifact
     	remoteTask.setActualEffort(SpiraImportExport.CreateJAXBInteger("ActualEffort", this.actualEffort));
     	remoteTask.setRemainingEffort(SpiraImportExport.CreateJAXBInteger("RemainingEffort", this.remainingEffort));
     	remoteTask.setTaskTypeId(this.taskTypeId);
-            	
+           
         return remoteTask;
     }
     

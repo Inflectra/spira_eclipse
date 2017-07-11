@@ -34,6 +34,7 @@ public class Requirement
     {
 		//Requirement-specific attributes
     	TYPE("requirement.type"),
+    	TYPE_ID("requirement.typeId"),
 		STATUS_ID("requirement.statusId"),
 		AUTHOR_ID("requirement.authorId"),
 		IMPORTANCE_ID("requirement.importanceId"),

@@ -34,7 +34,6 @@ public enum ArtifactAttribute
 	CONCURRENCY_DATE(Artifact.Key.CONCURRENCY_DATE, Messages.ArtifactAttribute_ConcurrencyDate, null, TaskAttribute.TYPE_DATE, ""),
 	
 	//Requirement attributes
-	//TODO: Ensure that all of the workflow fields work properly
 	REQUIREMENT_TYPE(Requirement.Key.TYPE, Messages.RequirementAttribute_Type, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SHORT_TEXT, "RequirementType"),
 	REQUIREMENT_STATUS_ID(Requirement.Key.STATUS_ID, Messages.RequirementAttribute_StatusId, TaskAttribute.STATUS, TaskAttribute.TYPE_SINGLE_SELECT, "", Flag.ATTRIBUTE),
 	REQUIREMENT_AUTHOR_ID(Requirement.Key.AUTHOR_ID, Messages.RequirementAttribute_AuthorId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.PEOPLE, Flag.READ_ONLY),
@@ -42,7 +41,8 @@ public enum ArtifactAttribute
 	REQUIREMENT_RELEASE_ID(Requirement.Key.RELEASE_ID, Messages.RequirementAttribute_ReleaseId, TaskAttribute.VERSION, TaskAttribute.TYPE_SINGLE_SELECT, "ReleaseId",  Flag.ATTRIBUTE),
 	REQUIREMENT_ESTIMATED_EFFORT(Requirement.Key.ESTIMATED_EFFORT, Messages.RequirementAttribute_EstimatedEffort, null, TaskAttribute.TYPE_DOUBLE, "EstimatedEffort", Flag.ATTRIBUTE),
 	REQUIREMENT_NEW_COMMENT(Requirement.Key.COMMENT, Messages.RequirementAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT, ""),
-	REQUIREMENT_TRANSITION_STATUS(Requirement.Key.TRANSITION_STATUS, null, null, "", TaskAttribute.TYPE_SHORT_TEXT),
+	REQUIREMENT_TRANSITION_STATUS(Requirement.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT, ""),
+	REQUIREMENT_TYPE_ID(Requirement.Key.TYPE_ID, Messages.IncidentAttribute_TypeId, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SINGLE_SELECT, "RequirementTypeId", Flag.ATTRIBUTE), 
 	
 	//Incident attributes
 	INCIDENT_OPENER_ID(Incident.Key.OPENER_ID, Messages.IncidentAttribute_OpenerId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.PEOPLE, Flag.READ_ONLY),
@@ -79,8 +79,10 @@ public enum ArtifactAttribute
 	TASK_ACTUAL_EFFORT(Task.Key.ACTUAL_EFFORT, Messages.TaskAttribute_ActualEffort, null, TaskAttribute.TYPE_DOUBLE, Flag.ATTRIBUTE),
 	TASK_REMAINING_EFFORT(Task.Key.REMAINING_EFFORT, Messages.TaskAttribute_RemainingEffort, null, TaskAttribute.TYPE_DOUBLE, Flag.ATTRIBUTE),
 	TASK_PROJECTED_EFFORT(Task.Key.PROJECTED_EFFORT, Messages.TaskAttribute_ProjectedEffort, null, TaskAttribute.TYPE_DOUBLE, Flag.READ_ONLY, Flag.ATTRIBUTE),
-	TASK_NEW_COMMENT(Task.Key.COMMENT, Messages.TaskAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT),
-	TASK_TRANSITION_STATUS(Task.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT);
+	TASK_TRANSITION_STATUS(Task.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT),
+	TASK_TYPE_ID(Task.Key.TYPE_ID, Messages.IncidentAttribute_TypeId, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SINGLE_SELECT, Flag.ATTRIBUTE), 
+	TASK_NEW_COMMENT(Task.Key.COMMENT, Messages.TaskAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT);
+	
 	
 	static Map<String, ArtifactAttribute> attributeByArtifactKey = new HashMap<String, ArtifactAttribute>();
 	static Map<String, String> artifactKeyByTaskKey = new HashMap<String, String>();

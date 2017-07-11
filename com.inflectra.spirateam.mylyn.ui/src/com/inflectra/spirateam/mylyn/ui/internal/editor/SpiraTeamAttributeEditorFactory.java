@@ -61,8 +61,11 @@ public class SpiraTeamAttributeEditorFactory extends AttributeEditorFactory
 			return new IncidentTypeAttributeEditor(getModel(), taskAttribute, editorPage);
 		}
 		//below is brand new for version 5.0
-		else if(taskAttribute.getId().equals(ArtifactAttribute.REQUIREMENT_TYPE.getArtifactKey())) {
+		else if(taskAttribute.getId().equals(ArtifactAttribute.REQUIREMENT_TYPE_ID.getArtifactKey())) {
 			return new RequirementTypeAttributeEditor(getModel(), taskAttribute, editorPage);
+		}
+		else if(taskAttribute.getId().equals(ArtifactAttribute.TASK_TYPE_ID.getArtifactKey())) {
+			return new TaskTypeAttributeEditor(getModel(), taskAttribute, editorPage);
 		}
 		else
 		{

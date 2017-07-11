@@ -12,22 +12,26 @@ import com.inflectra.spirateam.mylyn.core.internal.ArtifactAttribute;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamRepositoryConnector;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamTaskDataHandler;
 
-public class RequirementTypeModifyListener implements ModifyListener {
-
-private RequirementTypeAttributeEditor attributeEditor;
+/**
+ * 
+ * @author peter.geertsema
+ *
+ */
+public class TaskTypeModifyListener implements ModifyListener {
+	private TaskTypeAttributeEditor attributeEditor;
 	
-	public RequirementTypeModifyListener(RequirementTypeAttributeEditor attributeEditor)
+	public TaskTypeModifyListener(TaskTypeAttributeEditor attributeEditor)
 	{
 		this.attributeEditor = attributeEditor;
 	}
 	
-	public RequirementTypeAttributeEditor getAttributeEditor()
+	public TaskTypeAttributeEditor getAttributeEditor()
 	{
 		return this.attributeEditor;
 	}
 	
 	/**
-	 * Called when the requirement type attribute changes
+	 * Called when the task type attribute changes
 	 */
 	@Override
 	public void modifyText(ModifyEvent arg0)
@@ -36,9 +40,9 @@ private RequirementTypeAttributeEditor attributeEditor;
 		{
 			//Get the new value of the data
 			CCombo combo = (CCombo) arg0.getSource();
-			String newRequirementTypeName = combo.getText();
+			String newTaskTypeName = combo.getText();
 						
-			//Tell the data-handler that we've changed requirement type
+			//Tell the data-handler that we've changed task type
 			//and that we need to update the workflow and fields accordingly
 			SpiraTeamTaskEditorPage editorPage = attributeEditor.getEditorPage();
 			if (editorPage != null)
@@ -50,13 +54,13 @@ private RequirementTypeAttributeEditor attributeEditor;
 					SpiraTeamTaskDataHandler dataHandler = connector.getTaskDataHandler();
 					if (dataHandler != null)
 					{
-						Set<TaskAttribute> changedAttributes = dataHandler.changeRequirementType(repository, attributeEditor.getTaskAttribute().getTaskData(), newRequirementTypeName);
-
+						Set<TaskAttribute> changedAttributes = dataHandler.changeTaskType(repository, attributeEditor.getTaskAttribute().getTaskData(), newTaskTypeName);
+	
 						//Now we need to make the editor know that the attributes have changed
 						for (TaskAttribute changedAttribute : changedAttributes)
 						{
 							//Don't send a changed event for Type or we'll get into an infinite loop
-							if (!changedAttribute.getId().equals(ArtifactAttribute.REQUIREMENT_TYPE_ID.getArtifactKey()))
+							if (!changedAttribute.getId().equals(ArtifactAttribute.TASK_TYPE_ID.getArtifactKey()))
 							{
 								editorPage.getModel().attributeChanged(changedAttribute);
 							}
@@ -73,5 +77,4 @@ private RequirementTypeAttributeEditor attributeEditor;
 			//Ignore and leave fields alone
 		}
 	}
-
 }

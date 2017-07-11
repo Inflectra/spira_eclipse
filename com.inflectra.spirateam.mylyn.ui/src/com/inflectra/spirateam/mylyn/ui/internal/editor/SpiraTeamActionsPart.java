@@ -59,13 +59,10 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		
 		if(artifactType.equals(ArtifactType.INCIDENT)) {
 			TaskAttribute attribute = taskData.getRoot().getAttribute(ArtifactAttribute.INCIDENT_TRANSITION_STATUS.getArtifactKey());
-			String artifactKey = ArtifactAttribute.INCIDENT_TRANSITION_STATUS.getArtifactKey();
 			workflowFieldStatus = attribute.getValue();
 		}
 		else if(artifactType.equals(ArtifactType.REQUIREMENT)) {
 			TaskAttribute attribute = taskData.getRoot().getAttribute(ArtifactAttribute.REQUIREMENT_TRANSITION_STATUS.getArtifactKey());
-			String artifactKey = ArtifactAttribute.REQUIREMENT_TRANSITION_STATUS.getArtifactKey();
-			//TODO: Figure out why attribute is null
 			workflowFieldStatus = attribute.getValue();
 		}
 		else if(artifactType.equals(ArtifactType.TASK)) {
@@ -102,9 +99,6 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		TaskAttribute at=data.getRoot();
 
 		selectedOperationAttribute = getTaskData().getRoot().getMappedAttribute(TaskAttribute.OPERATION);
-		//TODO: selectedOperationAttribute is null for Tasks and Requirements. Find out why
-		//When used with an Incident, inside taskData > root > attributeById > values[2] is TaskAttribute.OPERATION
-		//While in Requirements and Tasks, it is null
 		
 		if (selectedOperationAttribute != null
 				&& TaskAttribute.TYPE_OPERATION.equals(selectedOperationAttribute.getMetaData().getType()))
@@ -165,10 +159,7 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 	private void createHyperlinks(Composite buttonComposite, FormToolkit toolkit, TaskOperation selectedOperation)
 	{
 		List<TaskOperation> operations = getTaskData().getAttributeMapper().getTaskOperations(selectedOperationAttribute);
-		TaskData data=getTaskData();
-		TaskAttributeMapper mapper=data.getAttributeMapper();
-		//TODO: Delete above variables when they are no longer needed
-		
+		//TODO: Figure out why Reopen Incident is still an option
 		if (operations.size() > 0)
 		{
 			operationButtons = new ArrayList<Hyperlink>();

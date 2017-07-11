@@ -1828,6 +1828,8 @@ public class SpiraImportExport
 		int projectId = this.storedProjectId.intValue();
 		return this.incidentGetType(projectId);
 	}
+	
+	
 
 	public ArtifactField incidentGetType(int projectId)
 	{
@@ -2311,6 +2313,74 @@ public class SpiraImportExport
 		}
 		return this.taskField_TaskStatus;
 	}
+	
+	public ArtifactField taskGetType()
+	{
+		// Don't return releases if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.taskGetType(projectId);
+	}
+	
+	public ArtifactField taskGetType(int projectId) {
+		try
+		{
+			// Get the list of task types from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of types
+			List<RemoteTaskType> remoteTypes = soap.taskRetrieveTypes().getRemoteTaskType();
+
+			// Convert the SOAP release into the ArtifactField class
+			ArtifactField artifactField = new ArtifactField("TaskType");
+			ArrayList<ArtifactFieldValue> lookupValues = new ArrayList<ArtifactFieldValue>();
+			for (RemoteTaskType remoteType : remoteTypes)
+			{
+				lookupValues.add(new ArtifactFieldValue(remoteType.getTaskTypeId().intValue(), remoteType.getName().getValue()));
+			}
+			artifactField.setValues(lookupValues.toArray(new ArtifactFieldValue[0]));
+			return artifactField;
+		}
+		catch (SpiraException ex)
+		{
+			return null;
+		}
+		catch (WebServiceException ex)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceTaskRetrieveTypesServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+	}
 
 	public ArtifactField taskGetPriority()
 	{
@@ -2365,6 +2435,74 @@ public class SpiraImportExport
 			this.requirementField_Importance.setValues(lookupValues);
 		}
 		return this.requirementField_Importance;
+	}
+	
+	public ArtifactField requirementGetType()
+	{
+		// Don't return releases if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.requirementGetType(projectId);
+	}
+	
+	public ArtifactField requirementGetType(int projectId) {
+		try
+		{
+			// Get the list of requirement types from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of types
+			List<RemoteRequirementType> remoteTypes = soap.requirementRetrieveTypes().getRemoteRequirementType();
+
+			// Convert the SOAP release into the ArtifactField class
+			ArtifactField artifactField = new ArtifactField("RequirementType");
+			ArrayList<ArtifactFieldValue> lookupValues = new ArrayList<ArtifactFieldValue>();
+			for (RemoteRequirementType remoteType : remoteTypes)
+			{
+				lookupValues.add(new ArtifactFieldValue(remoteType.getRequirementTypeId().intValue(), remoteType.getName().getValue()));
+			}
+			artifactField.setValues(lookupValues.toArray(new ArtifactFieldValue[0]));
+			return artifactField;
+		}
+		catch (SpiraException ex)
+		{
+			return null;
+		}
+		catch (WebServiceException ex)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceRequirementRetrieveTypesServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
 	}
 
 	/**
