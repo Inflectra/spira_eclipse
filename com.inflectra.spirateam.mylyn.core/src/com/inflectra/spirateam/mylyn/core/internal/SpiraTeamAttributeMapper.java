@@ -61,7 +61,9 @@ public class SpiraTeamAttributeMapper extends TaskAttributeMapper
 		String taskId = parent.getTaskData().getTaskId();
 		ArtifactType artifactType = ArtifactType.byTaskKey(taskId);
 		ArtifactAttribute attribute = ArtifactAttribute.getByTaskKey(taskAttributeKey, artifactType);
-		return (attribute != null) ? attribute.getArtifactKey() : taskAttributeKey;
+		if(attribute != null)
+			return attribute.getArtifactKey();
+		return taskAttributeKey;
 	}
 	
 	@Override

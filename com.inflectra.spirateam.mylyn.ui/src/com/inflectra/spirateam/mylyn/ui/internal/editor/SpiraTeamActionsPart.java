@@ -2,6 +2,7 @@ package com.inflectra.spirateam.mylyn.ui.internal.editor;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -76,8 +77,9 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 				button.setEnabled(workflowFieldStatus.equals(SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_ACTIVE));
 			}
 		}
-		else
+		else {
 			System.out.println("operataionButtons is null in refresh() method in SpiraTeamActionsPart");
+		}
 	}
 	
 	@Override
@@ -99,6 +101,16 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		TaskAttribute at=data.getRoot();
 
 		selectedOperationAttribute = getTaskData().getRoot().getMappedAttribute(TaskAttribute.OPERATION);
+		//TODO: Find differences in selectedOperationAttribute for artifacts w/ workflow and those w/o workflow
+		//below is for debugging purposes only
+		TaskData taskData = selectedOperationAttribute.getTaskData();
+		Collection<TaskAttribute> collection = taskData.getRoot().getAttributes().values();
+		List<TaskOperation> result = new ArrayList<TaskOperation>();
+		for (TaskAttribute attribute : collection) {
+			if (TaskAttribute.TYPE_OPERATION.equals(attribute.getMetaData().getType())) {
+				result.add(TaskOperation.createFrom(attribute));
+			}
+		}
 		
 		if (selectedOperationAttribute != null
 				&& TaskAttribute.TYPE_OPERATION.equals(selectedOperationAttribute.getMetaData().getType()))
@@ -159,7 +171,18 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 	private void createHyperlinks(Composite buttonComposite, FormToolkit toolkit, TaskOperation selectedOperation)
 	{
 		List<TaskOperation> operations = getTaskData().getAttributeMapper().getTaskOperations(selectedOperationAttribute);
-		//TODO: Figure out why Reopen Incident is still an option
+		//below is for debugging purposes only
+		/*TaskData taskData = selectedOperationAttribute.getTaskData();
+		Collection<TaskAttribute> collection = taskData.getRoot().getAttributes().values();
+		List<TaskOperation> result = new ArrayList<TaskOperation>();
+		for(TaskAttribute attribute: collection) {
+			if(TaskAttribute.TYPE_OPERATION.equals(attribute.getMetaData().getType())) {
+				result.add(TaskOperation.createFrom(attribute));
+			}
+		}*/
+		//above is for debugging purposes only
+		
+		
 		if (operations.size() > 0)
 		{
 			operationButtons = new ArrayList<Hyperlink>();

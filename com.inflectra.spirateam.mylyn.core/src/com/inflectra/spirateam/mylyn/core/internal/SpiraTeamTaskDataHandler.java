@@ -554,8 +554,8 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 				if (requirement.getOwnerId() != null)
 				{
 					//Since we have to be the owner; we are the detector if both are the same
+					//changed from getOpenerId() to getOwnerId()
 					if (requirement.getOwnerId() == requirement.getOwnerId().intValue())
-						//changed from getOpenerId() to getOwnerId()
 					{
 						isDetector = true;
 					}
@@ -589,8 +589,8 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 				if (task.getOwnerId() != null)
 				{
 					//Since we have to be the owner; we are the detector if both are the same
+					//changed from getOpenerId() to getOwnerId()
 					if (task.getOwnerId() == task.getOwnerId().intValue())
-						//changed from getOpenerId() to getOwnerId()
 					{
 						isDetector = true;
 					}
@@ -935,7 +935,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 							//Need to change the status of the Task
 							if (destinationIncidentStatusId != -1)
 							{
-								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.INCIDENT_STATUS_ID, destinationIncidentStatusId + "", projectId);
+								updateTaskAttribute(taskData, changedAttributes, ArtifactAttribute.TASK_STATUS_ID, destinationIncidentStatusId + "", projectId);
 
 								//Need to change the attributes read-only state for the new status
 								updateAttributesForWorkflow(client, taskData, projectId, currentTypeId, destinationIncidentStatusId, changedAttributes);
