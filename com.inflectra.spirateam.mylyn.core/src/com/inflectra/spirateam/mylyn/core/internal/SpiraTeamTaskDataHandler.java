@@ -58,6 +58,8 @@ import com.inflectra.spirateam.mylyn.core.internal.services.SpiraConnectionExcep
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraDataValidationException;
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraException;
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraImportExport;
+import com.inflectra.spirateam.mylyn.core.internal.services.soap.ArrayOfint;
+import com.inflectra.spirateam.mylyn.core.internal.services.soap.ObjectFactory;
 
 /**
  * Maps SpiraTeam artifacts to the lightweight ITask objects
@@ -466,6 +468,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 			createAttribute(data, client, ArtifactAttribute.INCIDENT_ACTUAL_EFFORT);
 			createAttribute(data, client, ArtifactAttribute.INCIDENT_TRANSITION_STATUS);
 			createAttribute(data, client, ArtifactAttribute.INCIDENT_NEW_RESOLUTION);
+			createAttribute(data, client, ArtifactAttribute.INCIDENT_COMPONENT_IDS);
 			
 					
 			// Workflow Transitions
@@ -884,8 +887,6 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 							int currentStatusId = getTaskAttributeIntValue(taskData, ArtifactAttribute.REQUIREMENT_STATUS_ID);
 							
 							int currentTypeId = getTaskAttributeIntValue(taskData, ArtifactAttribute.REQUIREMENT_TYPE_ID);
-							//TODO: Figure out why the above line is throwing a SpiraException
-							//The string value is requirement for some reason
 							
 							
 							//Get all the transitions, even if owner and detector
@@ -1120,6 +1121,32 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 		{
 			//Convert into data validation exception
 			throw new SpiraDataValidationException(NLS.bind(Messages.SpiraTeamTaskDataHandler_FieldIsNotValidInteger, attribute.toString()));
+		}
+	}
+	
+	private ArrayOfint getTaskAttributeArrayOfIntValue(TaskData taskData, ArtifactAttribute attribute) throws SpiraDataValidationException {
+		try
+		{
+			//First get the string value
+			String stringValue = getTaskAttributeStringValue(taskData, attribute);
+			System.out.println("getTaskAttributeArrayOfIntValue");
+			System.out.println(stringValue);
+			
+			//Now parse into an ArrayOfint value
+			if (stringValue == null || stringValue.equals(""))
+			{
+				return null;
+			}
+			
+			ArrayOfint out = new ArrayOfint();
+			
+			
+			return out;
+		}
+		catch (NumberFormatException ex)
+		{
+			//Convert into data validation exception
+			throw new SpiraDataValidationException(NLS.bind(Messages.SpiraTeamTaskDataHandler_FieldIsNotValidDate, attribute.toString()));
 		}
 	}
 	
@@ -1489,7 +1516,9 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 		incident.setEstimatedEffort(getTaskAttributeEffortValue(taskData, ArtifactAttribute.INCIDENT_ESTIMATED_EFFORT));
 		incident.setActualEffort(getTaskAttributeEffortValue(taskData, ArtifactAttribute.INCIDENT_ACTUAL_EFFORT));
 		incident.setRemainingEffort(getTaskAttributeEffortValue(taskData, ArtifactAttribute.INCIDENT_REMAINING_EFFORT));
+		//incident.setComponentIds(getTaskAttributeArrayOfIntValue(taskData, ArtifactAttribute.INCIDENT_COMPONENT_IDS));
 		//TODO: Update Incidents to include componentIds
+		getTaskAttributeArrayOfIntValue(taskData, ArtifactAttribute.INCIDENT_COMPONENT_IDS);
 		
 
 		//Now we need to set the custom property values
@@ -1856,7 +1885,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_ACTUAL_EFFORT, SpiraTeamUtil.effortValuesToString(incident.getActualEffort()), projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_REMAINING_EFFORT, SpiraTeamUtil.effortValuesToString(incident.getRemainingEffort()), projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_PROJECTED_EFFORT, SpiraTeamUtil.effortValuesToString(incident.getProjectedEffort()), projectId);
-
+			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_COMPONENT_IDS, incident.getComponentIds().getInt() + "", projectId);
 			
 			//Used to denote that we have not yet executed a transition
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_TRANSITION_STATUS, SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_ACTIVE, projectId);

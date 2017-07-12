@@ -63,7 +63,7 @@ public enum ArtifactAttribute
 	INCIDENT_TRANSITION_STATUS(Incident.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT, ""),
 	INCIDENT_NEW_RESOLUTION(Incident.Key.RESOLUTION, Messages.IncidentAttribute_NewResolution, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT, "Resolution"),
 	//TODO: Very possible the line below is broken
-	INCIDENT_COMPONENT_IDS(Incident.Key.COMPONENT_IDS, Messages.IncidentAttribute_ComponentIds, null, TaskAttribute.TYPE_MULTI_SELECT, null),
+	INCIDENT_COMPONENT_IDS(Incident.Key.COMPONENT_IDS, Messages.IncidentAttribute_ComponentIds, null, TaskAttribute.TYPE_MULTI_SELECT, ""),
 	
 	//Task attributes
 	TASK_TYPE(Task.Key.TYPE, Messages.TaskAttribute_Type, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SHORT_TEXT),
@@ -142,7 +142,6 @@ public enum ArtifactAttribute
 		}
 	}
 	
-	//TODO: Add support for workflow fields
 	ArtifactAttribute(Requirement.Key artifactKey, String prettyName, String taskKey, String type, String workflowField, Flag firstFlag, Flag... moreFlags)
 	{
 		this.artifactType = ArtifactType.REQUIREMENT;	//Requirement attribute

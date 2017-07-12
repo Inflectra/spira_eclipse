@@ -52,6 +52,7 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 	{
 		super.refresh();
 		
+		
 		//Make the hyperlinks enabled or disabled based on the workflow status field
 		TaskData taskData = getTaskData();
 		//getting the type of artifact
@@ -78,7 +79,8 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 			}
 		}
 		else {
-			System.out.println("operataionButtons is null in refresh() method in SpiraTeamActionsPart");
+			System.out.println("operationButtons is null in refresh() method in SpiraTeamActionsPart");
+			
 		}
 	}
 	

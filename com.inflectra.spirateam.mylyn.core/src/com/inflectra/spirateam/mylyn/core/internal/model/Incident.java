@@ -317,9 +317,8 @@ public class Incident extends Artifact
     }
     
     /**
-     * Gets the value of the testRunStepIds property.
-     * 
-     *     
+     * Gets the value of the testRunStepIds property
+     * @return The value of the testRunStepIds property
      */
     public ArrayOfint getTestRunStepIds() {
         return testRunStepIds;
@@ -334,7 +333,7 @@ public class Incident extends Artifact
     }
     
     /**
-     * @param componentIds - The new value for the componentIds property.
+     * @param componentIds The new value for the componentIds property.
      */
     public void setComponentIds(ArrayOfint componentIds) {
     	if(hasChanged(this.componentIds, componentIds)) {
@@ -361,9 +360,7 @@ public class Incident extends Artifact
     /**
      * Sets the value of the testRunStepIds property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
+     * @param value The new value for the testRunStepIds property
      *     
      */
     public void setTestRunStepIds(ArrayOfint value)
