@@ -203,10 +203,6 @@ public class SpiraTeamUtil
 			return new SpiraException(ex.getMessage());				
 		}
 		Node exceptionMessageNode = exceptionTypeNode.getFirstChild();
-		if (exceptionTypeNode == null)
-		{
-			return new SpiraException(ex.getMessage());				
-		}
 		String exceptionType = exceptionTypeNode.getLocalName();
 		String exceptionMessage = exceptionMessageNode.getTextContent();
 		
@@ -246,8 +242,8 @@ public class SpiraTeamUtil
 		ServiceFaultMessage faultInfo = null;
 		try
 		{
-			Class noparams[] = {};
-			Class cls = ex.getClass();
+			Class<?> noparams[] = {};
+			Class<? extends Exception> cls = ex.getClass();
 			Method getFaultInfo = cls.getDeclaredMethod("getFaultInfo", noparams);
 			faultInfo = (ServiceFaultMessage)getFaultInfo.invoke(ex, null);
 		}

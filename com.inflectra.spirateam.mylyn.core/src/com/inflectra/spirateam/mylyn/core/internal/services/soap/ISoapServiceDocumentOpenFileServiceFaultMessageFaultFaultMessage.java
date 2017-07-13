@@ -16,6 +16,10 @@ public class ISoapServiceDocumentOpenFileServiceFaultMessageFaultFaultMessage
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8577465128545606411L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

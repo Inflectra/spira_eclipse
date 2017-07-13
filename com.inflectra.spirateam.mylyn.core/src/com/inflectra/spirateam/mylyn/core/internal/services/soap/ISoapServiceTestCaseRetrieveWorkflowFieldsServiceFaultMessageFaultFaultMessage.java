@@ -16,6 +16,10 @@ public class ISoapServiceTestCaseRetrieveWorkflowFieldsServiceFaultMessageFaultF
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5060727334414586843L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

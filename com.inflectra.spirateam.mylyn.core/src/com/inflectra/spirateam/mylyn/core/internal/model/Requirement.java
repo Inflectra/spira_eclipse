@@ -85,6 +85,7 @@ public class Requirement
     	
     	//Set the various member variables
         this.name = remoteRequirement.getName().getValue();
+        this.projectName = remoteRequirement.getProjectName().getValue();
         this.description = remoteRequirement.getDescription().getValue();
         this.creationDate = SpiraTeamUtil.convertDatesXml2Java(remoteRequirement.getCreationDate());
         this.lastUpdateDate = SpiraTeamUtil.convertDatesXml2Java(remoteRequirement.getLastUpdateDate());

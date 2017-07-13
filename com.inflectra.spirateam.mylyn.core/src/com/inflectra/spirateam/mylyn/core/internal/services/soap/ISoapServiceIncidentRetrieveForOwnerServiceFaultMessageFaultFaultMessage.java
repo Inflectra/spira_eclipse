@@ -16,6 +16,10 @@ public class ISoapServiceIncidentRetrieveForOwnerServiceFaultMessageFaultFaultMe
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1217432591501100673L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

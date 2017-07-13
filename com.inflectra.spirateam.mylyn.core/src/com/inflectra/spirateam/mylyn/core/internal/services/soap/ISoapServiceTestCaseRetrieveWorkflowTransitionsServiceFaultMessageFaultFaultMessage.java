@@ -16,6 +16,10 @@ public class ISoapServiceTestCaseRetrieveWorkflowTransitionsServiceFaultMessageF
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1516589733791732528L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

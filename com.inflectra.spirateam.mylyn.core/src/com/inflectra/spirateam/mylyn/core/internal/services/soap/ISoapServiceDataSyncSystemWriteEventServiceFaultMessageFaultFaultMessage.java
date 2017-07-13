@@ -16,6 +16,10 @@ public class ISoapServiceDataSyncSystemWriteEventServiceFaultMessageFaultFaultMe
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -362886564043153246L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

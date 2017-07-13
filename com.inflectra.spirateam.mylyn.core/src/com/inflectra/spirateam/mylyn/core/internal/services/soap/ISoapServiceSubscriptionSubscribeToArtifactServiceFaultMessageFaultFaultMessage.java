@@ -16,6 +16,10 @@ public class ISoapServiceSubscriptionSubscribeToArtifactServiceFaultMessageFault
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -606695978884756608L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

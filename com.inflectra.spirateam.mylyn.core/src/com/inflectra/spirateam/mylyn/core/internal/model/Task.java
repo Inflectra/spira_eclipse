@@ -108,6 +108,7 @@ public class Task extends Artifact
         this.releaseId = remoteTask.getReleaseId().getValue();
         this.creatorId = remoteTask.getCreatorId().getValue();
         this.name = remoteTask.getName().getValue();
+        this.projectName = remoteTask.getProjectName().getValue();
         this.description = remoteTask.getDescription().getValue();
         this.creationDate = SpiraTeamUtil.convertDatesXml2Java(remoteTask.getCreationDate());
         this.lastUpdateDate = SpiraTeamUtil.convertDatesXml2Java(remoteTask.getLastUpdateDate());

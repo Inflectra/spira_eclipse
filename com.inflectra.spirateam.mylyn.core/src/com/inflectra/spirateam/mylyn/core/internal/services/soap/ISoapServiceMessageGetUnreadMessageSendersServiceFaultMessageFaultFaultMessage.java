@@ -16,6 +16,10 @@ public class ISoapServiceMessageGetUnreadMessageSendersServiceFaultMessageFaultF
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4905341173768605422L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

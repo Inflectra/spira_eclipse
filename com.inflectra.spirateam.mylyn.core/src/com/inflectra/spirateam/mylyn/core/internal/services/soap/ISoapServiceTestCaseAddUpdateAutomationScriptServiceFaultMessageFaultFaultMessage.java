@@ -16,6 +16,10 @@ public class ISoapServiceTestCaseAddUpdateAutomationScriptServiceFaultMessageFau
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8550373574584563768L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

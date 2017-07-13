@@ -16,6 +16,10 @@ public class ISoapServiceTestSetRetrieveCommentsServiceFaultMessageFaultFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5995967050258505929L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

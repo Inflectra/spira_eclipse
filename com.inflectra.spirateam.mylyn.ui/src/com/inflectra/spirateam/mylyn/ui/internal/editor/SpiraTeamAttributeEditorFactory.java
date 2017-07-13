@@ -1,6 +1,5 @@
 package com.inflectra.spirateam.mylyn.ui.internal.editor;
 
-import java.awt.Color;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.mylyn.internal.tasks.ui.editors.PersonAttributeEditor;

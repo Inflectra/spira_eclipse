@@ -16,6 +16,10 @@ public class ISoapServiceDocumentDeleteFromArtifactServiceFaultMessageFaultFault
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2853025504911298797L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

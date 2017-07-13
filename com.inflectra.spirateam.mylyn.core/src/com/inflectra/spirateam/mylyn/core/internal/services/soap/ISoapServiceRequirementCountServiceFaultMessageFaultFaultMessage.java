@@ -16,6 +16,10 @@ public class ISoapServiceRequirementCountServiceFaultMessageFaultFaultMessage
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6603844873504183656L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

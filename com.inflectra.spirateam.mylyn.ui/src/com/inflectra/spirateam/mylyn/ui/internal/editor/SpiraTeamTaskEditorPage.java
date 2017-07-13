@@ -25,7 +25,6 @@ import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamCorePlugin;
  */
 public class SpiraTeamTaskEditorPage extends AbstractTaskEditorPage
 {
-	private ArtifactType artifactType = null;
 	
 	public SpiraTeamTaskEditorPage(TaskEditor parentEditor)
 	{
@@ -34,16 +33,6 @@ public class SpiraTeamTaskEditorPage extends AbstractTaskEditorPage
 		//Need to see what kind of artifact we're displaying
 		TaskEditorInput input = parentEditor.getTaskEditorInput();
 		ITask task = input.getTask();
-		artifactType = null;
-		if (task != null)
-		{
-			//String taskKey = task.getTaskKey();
-			String taskKey = task.getTaskId();
-			if (taskKey != null)
-			{
-				artifactType = ArtifactType.byTaskKey(taskKey);
-			}
-		}
 		
 		//Set the parts that are visible
 		setNeedsPrivateSection(false);

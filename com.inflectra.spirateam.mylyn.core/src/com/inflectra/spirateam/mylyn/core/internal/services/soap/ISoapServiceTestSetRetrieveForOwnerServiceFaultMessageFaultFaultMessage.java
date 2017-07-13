@@ -16,6 +16,10 @@ public class ISoapServiceTestSetRetrieveForOwnerServiceFaultMessageFaultFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4207639052862536087L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

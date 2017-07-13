@@ -49,6 +49,7 @@ public class Messages extends NLS
 	public static String SpiraTeamAttributeMapper_UnableToRetrieveOptions;
 	
 	public static String ArtifactAttribute_ProjectId;
+	public static String ArtifactAttribute_ProjectName;
 	public static String ArtifactAttribute_ArtifactKey;
 	public static String ArtifactAttribute_Name;
 	public static String ArtifactAttribute_Description;

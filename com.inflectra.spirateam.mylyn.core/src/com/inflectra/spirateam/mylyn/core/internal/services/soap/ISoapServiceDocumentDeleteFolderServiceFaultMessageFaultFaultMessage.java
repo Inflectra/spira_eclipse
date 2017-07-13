@@ -16,6 +16,10 @@ public class ISoapServiceDocumentDeleteFolderServiceFaultMessageFaultFaultMessag
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6360544079845064560L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

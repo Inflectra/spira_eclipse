@@ -16,6 +16,10 @@ public class ISoapServiceTestSetCountForFolderServiceFaultMessageFaultFaultMessa
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2256039331114605831L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

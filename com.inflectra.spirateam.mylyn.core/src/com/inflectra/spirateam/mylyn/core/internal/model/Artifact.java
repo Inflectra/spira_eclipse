@@ -24,6 +24,7 @@ public class Artifact
 {
 	protected Integer artifactId;
 	protected int projectId;
+	protected String projectName;
 	protected Integer ownerId;
 	protected String name;
 	protected String description;
@@ -40,6 +41,7 @@ public class Artifact
 	{
 		//Common attributes
 		PROJECT_ID("common.projectId"),
+		PROJECT_NAME("common.projectName"),
 		ARTIFACT_KEY("common.artifactKey"),
 		ARTIFACT_TYPE("common.artifactType"),
 		NAME("common.name"),
@@ -396,7 +398,14 @@ public class Artifact
 	 {
 		 return concurrencyDate;
 	 }
-
+	 
+	 /**
+	  * @return the project name
+	  */
+	 public String getProjectName() {
+		 return projectName;
+	 }
+	 
 	 /**
 	  * Sets the value of the concurrency date property.
 	  * 
@@ -418,6 +427,8 @@ public class Artifact
 	 {
 		 //First the standard properties
          this.projectId = remoteArtifact.getProjectId().getValue();
+         
+         
 		 this.concurrencyDate = SpiraTeamUtil.convertDatesXml2Java(remoteArtifact.getConcurrencyDate());
 		  
 		 

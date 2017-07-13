@@ -16,6 +16,10 @@ public class ISoapServiceConnectionAuthenticate3ServiceFaultMessageFaultFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8044780288875871777L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

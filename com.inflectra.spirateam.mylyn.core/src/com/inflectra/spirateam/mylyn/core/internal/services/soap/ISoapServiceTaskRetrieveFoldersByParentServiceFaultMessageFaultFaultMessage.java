@@ -16,6 +16,10 @@ public class ISoapServiceTaskRetrieveFoldersByParentServiceFaultMessageFaultFaul
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8048868282546265204L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

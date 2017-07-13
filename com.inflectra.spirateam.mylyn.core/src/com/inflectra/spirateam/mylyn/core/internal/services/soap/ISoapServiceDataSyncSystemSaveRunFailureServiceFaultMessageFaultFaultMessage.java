@@ -16,6 +16,10 @@ public class ISoapServiceDataSyncSystemSaveRunFailureServiceFaultMessageFaultFau
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3001526190252049715L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

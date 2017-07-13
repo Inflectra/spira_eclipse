@@ -16,6 +16,10 @@ public class ISoapServiceDocumentRetrieveFoldersServiceFaultMessageFaultFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5345450146851005462L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

@@ -6,10 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.mylyn.tasks.core.TaskRepository;
 import org.eclipse.mylyn.tasks.core.data.TaskAttribute;
-import org.eclipse.mylyn.tasks.core.data.TaskAttributeMapper;
 import org.eclipse.mylyn.tasks.core.data.TaskData;
 import org.eclipse.mylyn.tasks.core.data.TaskOperation;
 import org.eclipse.mylyn.tasks.ui.TasksUiImages;
@@ -100,7 +98,7 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		}*/
 		
 		TaskData data=getTaskData();
-		TaskAttribute at=data.getRoot();
+		data.getRoot();
 
 		selectedOperationAttribute = getTaskData().getRoot().getMappedAttribute(TaskAttribute.OPERATION);
 		//TODO: Find differences in selectedOperationAttribute for artifacts w/ workflow and those w/o workflow
@@ -227,7 +225,6 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		public void linkActivated(HyperlinkEvent arg0)
 		{
 			//Get the operation name
-			String operationName = (String)arg0.data;
 			
 			//When an action hyperlink is clicked we need to call the function that handles this
 			TaskData taskData = getTaskData();

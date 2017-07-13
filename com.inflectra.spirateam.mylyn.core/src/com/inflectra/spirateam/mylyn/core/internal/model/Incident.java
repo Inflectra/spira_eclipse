@@ -41,7 +41,6 @@ public class Incident extends Artifact
     protected String incidentTypeName;
     protected String openerName;
     protected String ownerName;
-    protected String projectName;
     protected String detectedReleaseVersionNumber;
     protected String resolvedReleaseVersionNumber;
     protected String verifiedReleaseVersionNumber;
@@ -665,18 +664,6 @@ public class Incident extends Artifact
      */
     public String getOwnerName() {
         return ownerName;
-    }
-
-    /**
-     * Gets the value of the projectName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getProjectName() {
-        return projectName;
     }
 
     /**

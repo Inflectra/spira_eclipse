@@ -16,6 +16,10 @@ public class ISoapServiceSystemGetArtifactUrlServiceFaultMessageFaultFaultMessag
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -850576247221341315L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

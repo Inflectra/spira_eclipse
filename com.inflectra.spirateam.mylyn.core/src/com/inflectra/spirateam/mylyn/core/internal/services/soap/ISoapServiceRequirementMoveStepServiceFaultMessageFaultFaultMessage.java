@@ -16,6 +16,10 @@ public class ISoapServiceRequirementMoveStepServiceFaultMessageFaultFaultMessage
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1382975624277720370L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

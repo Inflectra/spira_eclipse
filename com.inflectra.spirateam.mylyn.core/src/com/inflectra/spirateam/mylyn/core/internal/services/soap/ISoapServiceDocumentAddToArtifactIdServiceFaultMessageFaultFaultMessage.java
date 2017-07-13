@@ -16,6 +16,10 @@ public class ISoapServiceDocumentAddToArtifactIdServiceFaultMessageFaultFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4785674484972092563L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

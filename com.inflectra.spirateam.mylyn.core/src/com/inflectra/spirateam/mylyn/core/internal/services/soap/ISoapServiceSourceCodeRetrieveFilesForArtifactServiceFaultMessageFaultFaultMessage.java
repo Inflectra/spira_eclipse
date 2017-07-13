@@ -16,6 +16,10 @@ public class ISoapServiceSourceCodeRetrieveFilesForArtifactServiceFaultMessageFa
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5064486045245156968L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

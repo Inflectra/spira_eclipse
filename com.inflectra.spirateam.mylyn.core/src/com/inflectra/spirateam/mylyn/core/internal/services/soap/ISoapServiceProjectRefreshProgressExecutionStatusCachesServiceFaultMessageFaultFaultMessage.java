@@ -16,6 +16,10 @@ public class ISoapServiceProjectRefreshProgressExecutionStatusCachesServiceFault
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7731884335474153790L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

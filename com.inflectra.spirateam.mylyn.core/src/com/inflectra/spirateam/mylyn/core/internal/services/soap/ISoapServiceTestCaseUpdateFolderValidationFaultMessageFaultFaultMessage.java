@@ -16,6 +16,10 @@ public class ISoapServiceTestCaseUpdateFolderValidationFaultMessageFaultFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5186371326088768693L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
