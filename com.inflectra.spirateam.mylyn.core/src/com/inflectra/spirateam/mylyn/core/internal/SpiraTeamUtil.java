@@ -5,8 +5,11 @@ package com.inflectra.spirateam.mylyn.core.internal;
 
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -55,6 +58,10 @@ public class SpiraTeamUtil
 	public static boolean ValidateServerVersion (SpiraImportExport spiraImportExport)
 	{
 		boolean current = false;
+		if(spiraImportExport.getProductVersionPrimary() >= 5) {
+			//v5.0 or higher
+			current=true;
+		}
 		if (spiraImportExport.getProductVersionPrimary() >= 4)
 		{
 			//v4.0 or higher
@@ -129,6 +136,14 @@ public class SpiraTeamUtil
 			return artifactKey.substring(0, 2);
 		}
 		return null;
+	}
+	
+	public static List<String> createStringListFromIntegerList(List<Integer> input) {
+		List<String> out = new ArrayList<String>();
+		for(Number n: input) {
+			out.add(n.intValue() + "");
+		}
+		return out;
 	}
 	
 	public static Date convertDatesXml2Java(XMLGregorianCalendar xmlCal)
@@ -336,6 +351,23 @@ public class SpiraTeamUtil
 			double effortHours = (double)effortInt / 60.0;
 			String effortHoursRounded = onePlace.format(effortHours);
 			return effortHoursRounded;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param componentId
+	 * @param projectId
+	 * @param client
+	 * @return string representation of the component
+	 */
+	public static String componentIdsToString(Integer componentId, int projectId, SpiraImportExport client) {
+		if(componentId == null)
+			return "";
+		else {
+			Map<String, String> map = SpiraTeamAttributeMapper.getRepositoryOptions(client, ArtifactAttribute.TASK_COMPONENT_ID.getArtifactKey());
+			String out=map.get(componentId + "");
+			return out;
 		}
 	}
 	

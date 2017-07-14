@@ -81,6 +81,7 @@ public class Messages extends NLS
 	public static String TaskAttribute_CreatorId;
 	public static String TaskAttribute_RemainingEffort;
 	public static String TaskAttribute_ProjectedEffort;
+	public static String TaskAttribute_ComponentId;
 	
 	public static String IncidentAttribute_PriorityId;
 	public static String IncidentAttribute_SeverityId;

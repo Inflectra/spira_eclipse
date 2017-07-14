@@ -12,11 +12,9 @@ import org.eclipse.mylyn.tasks.ui.editors.AttributeEditorFactory;
 import org.eclipse.mylyn.tasks.ui.editors.TaskEditor;
 import org.eclipse.mylyn.tasks.ui.editors.TaskEditorInput;
 import org.eclipse.mylyn.tasks.ui.editors.TaskEditorPartDescriptor;
-import org.eclipse.mylyn.tasks.core.ITask;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 
-import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamCorePlugin;
 
 /**
@@ -32,7 +30,6 @@ public class SpiraTeamTaskEditorPage extends AbstractTaskEditorPage
 
 		//Need to see what kind of artifact we're displaying
 		TaskEditorInput input = parentEditor.getTaskEditorInput();
-		ITask task = input.getTask();
 		
 		//Set the parts that are visible
 		setNeedsPrivateSection(false);

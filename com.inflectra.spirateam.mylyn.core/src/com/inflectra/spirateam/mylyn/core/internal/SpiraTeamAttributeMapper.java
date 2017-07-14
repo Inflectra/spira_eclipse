@@ -163,6 +163,15 @@ public class SpiraTeamAttributeMapper extends TaskAttributeMapper
 		{
 			return getOptions(client.incidentGetSeverity(), true);
 		}
+		else if(ArtifactAttribute.INCIDENT_COMPONENT_IDS.getArtifactKey().equals(artifactAttributeKey)) {
+			return getOptions(client.componentsGet(), true);
+		}
+		else if(ArtifactAttribute.REQUIREMENT_COMPONENT_ID.getArtifactKey().equals(artifactAttributeKey)) {
+			return getOptions(client.componentsGet(), true);
+		}
+		else if(ArtifactAttribute.TASK_COMPONENT_ID.getArtifactKey().equals(artifactAttributeKey)) {
+			return getOptions(client.componentsGet(), true);
+		}
 		return null;
 	}
 

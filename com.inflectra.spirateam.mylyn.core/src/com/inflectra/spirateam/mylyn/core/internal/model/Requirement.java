@@ -6,6 +6,7 @@ import java.util.List;
 import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraImportExport;
+import com.inflectra.spirateam.mylyn.core.internal.services.soap.ComponentRetrieveById;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteRequirement;
 /**
  * Represents a single requirement in SpiraTeam
@@ -41,6 +42,7 @@ public class Requirement
 		RELEASE_ID("requirement.releaseId"),
 		ESTIMATED_EFFORT("requirement.estimatedEffort"),
 		TRANSITION_STATUS("requirement.internal.transitionStatus"),
+		COMPONENT_ID("requirement.componentId"),
 		COMMENT("requirement.comment");
 		
 		public static Key fromKey(String name)
@@ -130,7 +132,8 @@ public class Requirement
     	remoteRequirement.setImportanceId(SpiraImportExport.CreateJAXBInteger("ImportanceId", this.importanceId));
     	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("EstimatedEffort", this.estimatedEffort));
     	remoteRequirement.setRequirementTypeId(this.requirementTypeId);
-            	
+    	remoteRequirement.setComponentId(SpiraImportExport.CreateJAXBInteger("ComponentId", this.componentId));
+        
         return remoteRequirement;
     }
     
@@ -193,7 +196,7 @@ public class Requirement
     
     /**
      * 
-     * @return - The value of the componentId property
+     * @return The value of the componentId property
      */
     public Integer getComponentId() {
     	return componentId;
@@ -201,7 +204,7 @@ public class Requirement
     
     /**
      * 
-     * @param componentId - The new value of the componentId property
+     * @param componentId The new value of the componentId property
      */
     public void setComponentId(Integer componentId) {
     	this.componentId=componentId;

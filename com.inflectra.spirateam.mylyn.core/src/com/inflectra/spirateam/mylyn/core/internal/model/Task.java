@@ -36,6 +36,7 @@ public class Task extends Artifact
     protected Integer projectedEffort;
     protected int creatorId;
     protected Integer taskTypeId;
+    protected Integer componentId;
     
     //Contains the collection of comments
     protected List<TaskComment> comments = new ArrayList<TaskComment>();
@@ -59,6 +60,7 @@ public class Task extends Artifact
 		PROJECTED_EFFORT("task.projectedEffort"),
 		REQUIREMENT_NAME("task.requirementName"),
 		TRANSITION_STATUS("task.internal.transitionStatus"),
+		COMPONENT_ID("task.componentId"),
 		COMMENT("task.comment");
 
 		public static Key fromKey(String name)
@@ -130,6 +132,7 @@ public class Task extends Artifact
         this.releaseVersionNumber = remoteTask.getReleaseVersionNumber().getValue();
         this.requirementName = remoteTask.getRequirementName().getValue();
         this.taskTypeId = remoteTask.getTaskTypeId();
+        this.componentId = remoteTask.getComponentId().getValue();
     }
     
     /**
@@ -189,6 +192,21 @@ public class Task extends Artifact
      */
     public int getTaskStatusId() {
         return taskStatusId;
+    }
+    
+    /**
+     * @return The value of the componentId property
+     */
+    public Integer getComponentId() {
+    	return componentId;
+    }
+    
+    /**
+     * Sets the value of the componentId property
+     * @param componentId The new value for the componentId property
+     */
+    public void setComponentId(Integer componentId) {
+    	this.componentId = componentId;
     }
 
     /**

@@ -39,4 +39,9 @@ public class ArtifactFieldValue
 	{
 		return this.active;
 	}
+	
+	@Override
+	public String toString() {
+		return "Active: " + active + ", name: " + name + ", id: " + id;
+	}
 }

@@ -1221,7 +1221,93 @@ public class SpiraImportExport
 			return null;
 		}
 	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @return A list of all the components in the project stored in {@code storedProjectId}
+	 */
+	public ArtifactField componentsGet()
+	{
+		// Don't return releases if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.componentsGet(projectId);
+	}
 
+	/**
+	 * 
+	 * @param projectId
+	 * @return A list of all the components in the given project
+	 */
+	public ArtifactField componentsGet(int projectId)
+	{
+		try
+		{
+			// Get the list of components from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.componentName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.componentName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of components
+			List<RemoteComponent> remoteComponents = soap.componentRetrieve(true, false).getRemoteComponent();
+
+			// Convert the SOAP project component into the ArtifactField class
+			ArtifactField artifactField = new ArtifactField("Component");
+			ArrayList<ArtifactFieldValue> lookupValues = new ArrayList<ArtifactFieldValue>();
+			for (RemoteComponent remoteComponent : remoteComponents)
+			{
+				int componentId = remoteComponent.getComponentId().getValue();
+				lookupValues.add(new ArtifactFieldValue(componentId, remoteComponent.getName().getValue()));
+			}
+			artifactField.setValues(lookupValues.toArray(new ArtifactFieldValue[0]));
+			
+			return artifactField;
+		}
+		catch (SpiraException ex)
+		{
+			return null;
+		}
+		catch (WebServiceException ex)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		} catch (ISoapServiceComponentRetrieveServiceFaultMessageFaultFaultMessage e) {
+			return null;
+		}
+	}
+	
+	
+	
+	
+	
+	
 	public ArtifactField releasesGet(boolean activeOnly, int projectId)
 	{
 		try
@@ -1256,7 +1342,6 @@ public class SpiraImportExport
 				// Indent with spaces. Also need to make releases look slightly
 				// different
 				String indentDisplay = remoteRelease.getIndentLevel().getValue().replaceAll("[A-Z]", " ");
-				//TODO: Possible problem in changing from isIteration() to isActive()
 				if (remoteRelease.isActive())
 				{
 					lookupValues.add(new ArtifactFieldValue(remoteRelease.getReleaseId().getValue(), indentDisplay
