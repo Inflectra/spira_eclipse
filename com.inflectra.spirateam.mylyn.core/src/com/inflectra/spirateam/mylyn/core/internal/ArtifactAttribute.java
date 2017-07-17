@@ -39,7 +39,8 @@ public enum ArtifactAttribute
 	REQUIREMENT_AUTHOR_ID(Requirement.Key.AUTHOR_ID, Messages.RequirementAttribute_AuthorId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.PEOPLE, Flag.READ_ONLY),
 	REQUIREMENT_IMPORTANCE_ID(Requirement.Key.IMPORTANCE_ID, Messages.RequirementAttribute_ImportanceId, TaskAttribute.PRIORITY, TaskAttribute.TYPE_SINGLE_SELECT, "ImportanceId", Flag.ATTRIBUTE),
 	REQUIREMENT_RELEASE_ID(Requirement.Key.RELEASE_ID, Messages.RequirementAttribute_ReleaseId, TaskAttribute.VERSION, TaskAttribute.TYPE_SINGLE_SELECT, "ReleaseId",  Flag.ATTRIBUTE),
-	REQUIREMENT_ESTIMATED_EFFORT(Requirement.Key.ESTIMATED_EFFORT, Messages.RequirementAttribute_EstimatedEffort, null, TaskAttribute.TYPE_DOUBLE, "EstimatedEffort", Flag.ATTRIBUTE),
+	REQUIREMENT_ESTIMATED_EFFORT(Requirement.Key.ESTIMATED_EFFORT, Messages.RequirementAttribute_EstimatedEffort, null, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.ATTRIBUTE, Flag.READ_ONLY),
+	REQUIREMENT_ESTIMATED_POINTS(Requirement.Key.ESTIMATED_POINTS, Messages.RequirementAttribute_EstimatedPoints, null, TaskAttribute.TYPE_DOUBLE, "", Flag.ATTRIBUTE),
 	REQUIREMENT_NEW_COMMENT(Requirement.Key.COMMENT, Messages.RequirementAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT, ""),
 	REQUIREMENT_TRANSITION_STATUS(Requirement.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT, ""),
 	REQUIREMENT_TYPE_ID(Requirement.Key.TYPE_ID, Messages.IncidentAttribute_TypeId, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SINGLE_SELECT, "RequirementTypeId", Flag.ATTRIBUTE), 
@@ -81,7 +82,7 @@ public enum ArtifactAttribute
 	TASK_PROJECTED_EFFORT(Task.Key.PROJECTED_EFFORT, Messages.TaskAttribute_ProjectedEffort, null, TaskAttribute.TYPE_DOUBLE, "", Flag.READ_ONLY, Flag.ATTRIBUTE),
 	TASK_TRANSITION_STATUS(Task.Key.TRANSITION_STATUS, null, null, TaskAttribute.TYPE_SHORT_TEXT, ""),
 	TASK_TYPE_ID(Task.Key.TYPE_ID, Messages.IncidentAttribute_TypeId, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SINGLE_SELECT, "TaskTypeId", Flag.ATTRIBUTE),
-	TASK_COMPONENT_ID(Task.Key.COMPONENT_ID, Messages.TaskAttribute_ComponentId, null, TaskAttribute.TYPE_SHORT_TEXT, "ComponentId", Flag.READ_ONLY, Flag.ATTRIBUTE),
+	TASK_COMPONENT_ID(Task.Key.COMPONENT_ID, Messages.TaskAttribute_ComponentId, null, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.READ_ONLY, Flag.ATTRIBUTE),
 	TASK_NEW_COMMENT(Task.Key.COMMENT, Messages.TaskAttribute_NewComment, TaskAttribute.COMMENT_NEW, TaskAttribute.TYPE_LONG_RICH_TEXT, "");
 	
 	

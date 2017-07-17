@@ -1,12 +1,12 @@
 package com.inflectra.spirateam.mylyn.core.internal.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraImportExport;
-import com.inflectra.spirateam.mylyn.core.internal.services.soap.ComponentRetrieveById;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteRequirement;
 /**
  * Represents a single requirement in SpiraTeam
@@ -25,6 +25,7 @@ public class Requirement
     protected String releaseVersionNumber;
     protected boolean summary;
     protected Integer estimatedEffort;
+    protected BigDecimal estimatedPoints;
     protected Integer componentId;
     protected Integer requirementTypeId;
     
@@ -41,6 +42,7 @@ public class Requirement
 		IMPORTANCE_ID("requirement.importanceId"),
 		RELEASE_ID("requirement.releaseId"),
 		ESTIMATED_EFFORT("requirement.estimatedEffort"),
+		ESTIMATED_POINTS("requirement.estimatedPoints"),
 		TRANSITION_STATUS("requirement.internal.transitionStatus"),
 		COMPONENT_ID("requirement.componentId"),
 		COMMENT("requirement.comment");
@@ -104,6 +106,7 @@ public class Requirement
         this.estimatedEffort = remoteRequirement.getEstimatedEffort().getValue();
         this.componentId = remoteRequirement.getComponentId().getValue();
         this.requirementTypeId = remoteRequirement.getRequirementTypeId();
+        this.estimatedPoints = remoteRequirement.getEstimatePoints().getValue();
     }
     
     /**
@@ -133,6 +136,7 @@ public class Requirement
     	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("EstimatedEffort", this.estimatedEffort));
     	remoteRequirement.setRequirementTypeId(this.requirementTypeId);
     	remoteRequirement.setComponentId(SpiraImportExport.CreateJAXBInteger("ComponentId", this.componentId));
+    	remoteRequirement.setEstimatePoints(SpiraImportExport.CreateJAXBBigDecimal("EstimatePoints", this.estimatedPoints));
         
         return remoteRequirement;
     }
@@ -351,5 +355,21 @@ public class Requirement
 	 */
 	public Integer getRequirementTypeId() {
 		return this.requirementTypeId;
+	}
+	
+	/**
+	 * 
+	 * @return The value of the estimatedPoints property
+	 */
+	public BigDecimal getEstimatedPoints() {
+		return this.estimatedPoints;
+	}
+	
+	/**
+	 * Sets the value of the estimatedEffort property
+	 * @param estimatedPoints The new value for the estimatedPoints property
+	 */
+	public void setEstimatedPoints(BigDecimal estimatedPoints) {
+		this.estimatedPoints = estimatedPoints;
 	}
 }

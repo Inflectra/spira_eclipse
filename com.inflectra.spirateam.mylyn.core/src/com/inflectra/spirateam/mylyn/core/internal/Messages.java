@@ -45,6 +45,7 @@ public class Messages extends NLS
 	public static String SpiraTeamTaskDataHandler_FieldIsNotValidInteger;
 	public static String SpiraTeamTaskDataHandler_FieldIsNotValidEffort;
 	public static String SpiraTeamTaskDataHandler_FieldIsNotValidDate;
+	public static String SpiraTeamTaskDataHandler_FieldIsNotValidBigDecimal;
 	
 	public static String SpiraTeamAttributeMapper_UnableToRetrieveOptions;
 	
@@ -65,6 +66,7 @@ public class Messages extends NLS
 	public static String RequirementAttribute_ImportanceId;
 	public static String RequirementAttribute_ReleaseId;
 	public static String RequirementAttribute_EstimatedEffort;
+	public static String RequirementAttribute_EstimatedPoints;
 	public static String RequirementAttribute_NewComment;
 	
 	public static String TaskAttribute_Type;

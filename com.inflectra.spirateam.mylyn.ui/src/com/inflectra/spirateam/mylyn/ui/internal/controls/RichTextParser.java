@@ -51,7 +51,7 @@ public final class RichTextParser
 	private class RichTextContentHandler extends DefaultHandler
 	{
 
-		private Stack<List> stylesStack = new Stack<List>();
+		private Stack<List<FontStyle>> stylesStack = new Stack<List<FontStyle>>();
 		private String lastTextChunk = null;
 
 		@Override

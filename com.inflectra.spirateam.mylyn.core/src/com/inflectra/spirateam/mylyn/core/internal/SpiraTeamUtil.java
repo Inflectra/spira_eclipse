@@ -260,7 +260,7 @@ public class SpiraTeamUtil
 			Class<?> noparams[] = {};
 			Class<? extends Exception> cls = ex.getClass();
 			Method getFaultInfo = cls.getDeclaredMethod("getFaultInfo", noparams);
-			faultInfo = (ServiceFaultMessage)getFaultInfo.invoke(ex, null);
+			faultInfo = (ServiceFaultMessage)getFaultInfo.invoke(ex);
 		}
 		catch (Exception ex2)
 		{

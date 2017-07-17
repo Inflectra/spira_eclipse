@@ -27,7 +27,7 @@ public class SpiraTeamTaskEditorPage extends AbstractTaskEditorPage
 	public SpiraTeamTaskEditorPage(TaskEditor parentEditor)
 	{
 		super(parentEditor, SpiraTeamCorePlugin.CONNECTOR_KIND);
-
+		
 		//Need to see what kind of artifact we're displaying
 		TaskEditorInput input = parentEditor.getTaskEditorInput();
 		

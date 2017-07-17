@@ -2,7 +2,6 @@ package com.inflectra.spirateam.mylyn.ui.internal.editor;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -101,16 +100,6 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		data.getRoot();
 
 		selectedOperationAttribute = getTaskData().getRoot().getMappedAttribute(TaskAttribute.OPERATION);
-		//TODO: Find differences in selectedOperationAttribute for artifacts w/ workflow and those w/o workflow
-		//below is for debugging purposes only
-		TaskData taskData = selectedOperationAttribute.getTaskData();
-		Collection<TaskAttribute> collection = taskData.getRoot().getAttributes().values();
-		List<TaskOperation> result = new ArrayList<TaskOperation>();
-		for (TaskAttribute attribute : collection) {
-			if (TaskAttribute.TYPE_OPERATION.equals(attribute.getMetaData().getType())) {
-				result.add(TaskOperation.createFrom(attribute));
-			}
-		}
 		
 		if (selectedOperationAttribute != null
 				&& TaskAttribute.TYPE_OPERATION.equals(selectedOperationAttribute.getMetaData().getType()))
