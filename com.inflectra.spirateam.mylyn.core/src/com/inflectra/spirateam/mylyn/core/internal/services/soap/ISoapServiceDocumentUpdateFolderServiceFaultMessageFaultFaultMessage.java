@@ -16,6 +16,10 @@ public class ISoapServiceDocumentUpdateFolderServiceFaultMessageFaultFaultMessag
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6197088888509108634L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

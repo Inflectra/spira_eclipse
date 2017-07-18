@@ -12,7 +12,6 @@ import javax.xml.ws.soap.SOAPFaultException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.osgi.util.NLS;
 
-import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,14 +28,19 @@ import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactAttachment;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactField;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactFieldValue;
+import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactWorkflowField;
 import com.inflectra.spirateam.mylyn.core.internal.model.Incident;
 import com.inflectra.spirateam.mylyn.core.internal.model.IncidentResolution;
 import com.inflectra.spirateam.mylyn.core.internal.model.IncidentWorkflowField;
 import com.inflectra.spirateam.mylyn.core.internal.model.IncidentWorkflowTransition;
 import com.inflectra.spirateam.mylyn.core.internal.model.Requirement;
 import com.inflectra.spirateam.mylyn.core.internal.model.RequirementComment;
+import com.inflectra.spirateam.mylyn.core.internal.model.RequirementWorkflowField;
+import com.inflectra.spirateam.mylyn.core.internal.model.RequirementWorkflowTransition;
 import com.inflectra.spirateam.mylyn.core.internal.model.Task;
 import com.inflectra.spirateam.mylyn.core.internal.model.TaskComment;
+import com.inflectra.spirateam.mylyn.core.internal.model.TaskWorkflowField;
+import com.inflectra.spirateam.mylyn.core.internal.model.TaskWorkflowTransition;
 import com.inflectra.spirateam.mylyn.core.internal.model.ArtifactField.Type;
 import com.inflectra.spirateam.mylyn.core.internal.services.soap.*;
 import com.inflectra.spirateam.mylyn.core.internal.services.SpiraConnectionException;
@@ -221,7 +225,6 @@ public class SpiraImportExport
 	{
 		// Trust all SSL certificates
 		SSLUtilities.trustAllHttpsCertificates();
-
 		// Set the web service URL
 		this.serviceUrl = new URL(baseUrl + WEB_SERVICE_SUFFIX);
 
@@ -289,15 +292,13 @@ public class SpiraImportExport
 	 */
 	public SpiraImportExport(String baseUrl, String userName, String password) throws MalformedURLException, SpiraConnectionException
 	{
-		
 		// Trust all SSL certificates
 		SSLUtilities.trustAllHttpsCertificates();
 
 		// Set the URL, username and password
 		this.serviceUrl = new URL(baseUrl + WEB_SERVICE_SUFFIX);
 		this.userName = userName;
-		//TODO: Make the password not hardcoded
-		this.password = "PleaseChange";
+		this.password = password;
 
 		// Instantiate the SOAP proxy
 		try
@@ -428,8 +429,7 @@ public class SpiraImportExport
 	 */
 	public void setPassword(String password)
 	{
-		//TODO: Change from hardcoding
-		this.password = "PleaseChange";
+		this.password = password;
 	}
 
 	/**
@@ -894,7 +894,23 @@ public class SpiraImportExport
 
 			// Convert the SOAP requirement into the local version
 			Requirement requirement = new Requirement(remoteRequirement);
-
+			
+			// Next we need to re-authenticate
+			success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success) {
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success) {
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(
+						NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+			
 			// Now get any associated comments
 			List<RemoteComment> remoteComments = soap.requirementRetrieveComments(requirementId).getRemoteComment();
 
@@ -1075,6 +1091,17 @@ public class SpiraImportExport
 				IncidentResolution incidentResolution = new IncidentResolution(remoteComment);
 				incident.getResolutions().add(incidentResolution);
 			}
+			
+			success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
 
 			// Now get any associated attachments
 			RemoteSort remoteSort = new RemoteSort();
@@ -1220,7 +1247,85 @@ public class SpiraImportExport
 			return null;
 		}
 	}
+	
+	/**
+	 * 
+	 * @return A list of all the components in the project stored in {@code storedProjectId}
+	 */
+	public ArtifactField componentsGet()
+	{
+		// Don't return releases if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.componentsGet(projectId);
+	}
 
+	/**
+	 * 
+	 * @param projectId
+	 * @return A list of all the components in the given project
+	 */
+	public ArtifactField componentsGet(int projectId)
+	{
+		try
+		{
+			// Get the list of components from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.componentName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.componentName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of components
+			List<RemoteComponent> remoteComponents = soap.componentRetrieve(true, false).getRemoteComponent();
+
+			// Convert the SOAP project component into the ArtifactField class
+			ArtifactField artifactField = new ArtifactField("Component");
+			ArrayList<ArtifactFieldValue> lookupValues = new ArrayList<ArtifactFieldValue>();
+			for (RemoteComponent remoteComponent : remoteComponents)
+			{
+				int componentId = remoteComponent.getComponentId().getValue();
+				lookupValues.add(new ArtifactFieldValue(componentId, remoteComponent.getName().getValue()));
+			}
+			artifactField.setValues(lookupValues.toArray(new ArtifactFieldValue[0]));
+			
+			return artifactField;
+		}
+		catch (SpiraException ex)
+		{
+			return null;
+		}
+		catch (WebServiceException ex)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		} catch (ISoapServiceComponentRetrieveServiceFaultMessageFaultFaultMessage e) {
+			return null;
+		}
+	}
+	
 	public ArtifactField releasesGet(boolean activeOnly, int projectId)
 	{
 		try
@@ -1255,7 +1360,6 @@ public class SpiraImportExport
 				// Indent with spaces. Also need to make releases look slightly
 				// different
 				String indentDisplay = remoteRelease.getIndentLevel().getValue().replaceAll("[A-Z]", " ");
-				//TODO: Possible problem in changing from isIteration() to isActive()
 				if (remoteRelease.isActive())
 				{
 					lookupValues.add(new ArtifactFieldValue(remoteRelease.getReleaseId().getValue(), indentDisplay
@@ -1291,7 +1395,7 @@ public class SpiraImportExport
 			return null;
 		}
 	}
-
+	//begin IncidentWorkflow methods
 	public List<IncidentWorkflowTransition> incidentRetrieveWorkflowTransitions(int currentTypeId, int currentStatusId, boolean isDetector, boolean isOwner)
 			throws SpiraException
 	{
@@ -1327,6 +1431,12 @@ public class SpiraImportExport
 				// this.password);
 				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
 			}
+			// re-authenticate
+			success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
 			// Get the list of workflow transitions
 			List<RemoteWorkflowTransition> remoteTransitions = soap.incidentRetrieveWorkflowTransitions(currentTypeId, currentStatusId, isDetector,
 					isOwner).getRemoteWorkflowTransition();
@@ -1357,7 +1467,7 @@ public class SpiraImportExport
 		}
 	}
 
-	public List<IncidentWorkflowField> incidentRetrieveWorkflowFields(int currentIncidentTypeId, int currentIncidentStatusId) throws SpiraException
+	public List<ArtifactWorkflowField> incidentRetrieveWorkflowFields(int currentIncidentTypeId, int currentIncidentStatusId) throws SpiraException
 	{
 		// Don't return fields if we have no project set
 		if (this.storedProjectId == null)
@@ -1378,7 +1488,7 @@ public class SpiraImportExport
 	 * @return
 	 * @throws SpiraException
 	 */
-	public List<IncidentWorkflowField> incidentRetrieveWorkflowFields(int projectId, int currentIncidentTypeId, int currentIncidentStatusId)
+	public List<ArtifactWorkflowField> incidentRetrieveWorkflowFields(int projectId, int currentIncidentTypeId, int currentIncidentStatusId)
 			throws SpiraException
 	{
 		try
@@ -1409,10 +1519,16 @@ public class SpiraImportExport
 			
 						
 			// Convert the SOAP workflow fields into local versions
-			ArrayList<IncidentWorkflowField> fields = new ArrayList<IncidentWorkflowField>();
+			ArrayList<ArtifactWorkflowField> fields = new ArrayList<ArtifactWorkflowField>();
 			for (RemoteWorkflowField remoteField : remoteFields)
 			{
 				fields.add(new IncidentWorkflowField(remoteField));
+			}
+			// re-authenticate
+			success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
 			}
 
 			// Get the list of workflow-controlled custom-properties
@@ -1448,7 +1564,314 @@ public class SpiraImportExport
 			throw new SpiraException(exception.getMessage());
 		}
 	}
+	//end IncidentWorkflow methods, begin RequirementWorkflow methods
+	public List<RequirementWorkflowTransition> requirementRetrieveWorkflowTransitions(int currentTypeId, int currentStatusId, boolean isDetector, 
+			boolean isOwner) throws SpiraException {
+		// Don't return releases if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.requirementRetrieveWorkflowTransitions(projectId, currentTypeId, currentStatusId, isDetector, isOwner);
+	}
+	
+	public List<RequirementWorkflowTransition> requirementRetrieveWorkflowTransitions(int projectId, int currentTypeId, int currentStatusId, boolean isDetector,
+			boolean isOwner) throws SpiraException {
+		try
+		{
+			// Get the list of requirement statuses from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
 
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+			// Get the list of workflow transitions
+			List<RemoteWorkflowTransition> remoteTransitions = soap.requirementRetrieveWorkflowTransitions(currentTypeId, currentStatusId, isDetector,
+					isOwner).getRemoteWorkflowTransition();
+
+			// Convert the SOAP transitions into local versions
+			List<RequirementWorkflowTransition> transitions = new ArrayList<RequirementWorkflowTransition>();
+			for (RemoteWorkflowTransition remoteTransition : remoteTransitions)
+			{
+				transitions.add(new RequirementWorkflowTransition(remoteTransition));
+			}
+			return transitions;
+		}
+		catch (WebServiceException ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceRequirementRetrieveWorkflowTransitionsServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+	}
+	
+	public List<ArtifactWorkflowField> requirementRetrieveWorkflowFields(int currentrequirementTypeId, int currentrequirementStatusId) throws SpiraException {
+		// Don't return fields if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.requirementRetrieveWorkflowFields(projectId, currentrequirementTypeId, currentrequirementStatusId);
+	}
+
+	public List<ArtifactWorkflowField> requirementRetrieveWorkflowFields(int projectId, int currentRequirementTypeId, int currentRequirementStatusId) 
+			throws SpiraException {
+		try
+		{
+			// Get the list of requirement statuses from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of workflow fields (inactive/required/hidden)
+			List<RemoteWorkflowField> remoteFields = soap.requirementRetrieveWorkflowFields(currentRequirementTypeId, currentRequirementStatusId)
+					.getRemoteWorkflowField();
+			//changed from RemoteWorkflowRequirementField to RemoteWorkflowField
+			
+						
+			// Convert the SOAP workflow fields into local versions
+			ArrayList<ArtifactWorkflowField> fields = new ArrayList<ArtifactWorkflowField>();
+			for (RemoteWorkflowField remoteField : remoteFields)
+			{
+				fields.add(new RequirementWorkflowField(remoteField));
+			}
+			// re-authenticate
+			success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success) {
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of workflow-controlled custom-properties
+			// (inactive/required/hidden)
+			List<RemoteWorkflowCustomProperty> remoteWorkflowCustomProperties = soap.requirementRetrieveWorkflowCustomProperties(currentRequirementTypeId,
+					currentRequirementStatusId).getRemoteWorkflowCustomProperty();
+			//to fix, removed Requirement from object and method names
+			for (RemoteWorkflowCustomProperty remoteWorkflowCustomProperty : remoteWorkflowCustomProperties)
+			{
+				fields.add(new RequirementWorkflowField(remoteWorkflowCustomProperty));
+			}
+
+			return fields;
+		}
+		catch (WebServiceException ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceRequirementRetrieveWorkflowFieldsServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceRequirementRetrieveWorkflowCustomPropertiesServiceFaultMessageFaultFaultMessage exception)
+		{
+			throw new SpiraException(exception.getMessage());
+		}
+		
+	}
+	//end RequirementWorkflow methods, begin TaskWorkflow methods
+	public List<TaskWorkflowTransition> taskRetrieveWorkflowTransitions(int currentTypeId, int currentStatusId, boolean isDetector, 
+			boolean isOwner) throws SpiraException {
+		// Don't return releases if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.taskRetrieveWorkflowTransitions(projectId, currentTypeId, currentStatusId, isDetector, isOwner);
+	}
+	
+	public List<TaskWorkflowTransition> taskRetrieveWorkflowTransitions(int projectId, int currentTypeId, int currentStatusId, boolean isDetector,
+			boolean isOwner) throws SpiraException {
+		try
+		{
+			// Get the list of task statuses from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+			// Get the list of workflow transitions
+			List<RemoteWorkflowTransition> remoteTransitions = soap.taskRetrieveWorkflowTransitions(currentTypeId, currentStatusId, isDetector,
+					isOwner).getRemoteWorkflowTransition();
+
+			// Convert the SOAP transitions into local versions
+			List<TaskWorkflowTransition> transitions = new ArrayList<TaskWorkflowTransition>();
+			for (RemoteWorkflowTransition remoteTransition : remoteTransitions)
+			{
+				transitions.add(new TaskWorkflowTransition(remoteTransition));
+			}
+			return transitions;
+		}
+		catch (WebServiceException ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceTaskRetrieveWorkflowTransitionsServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+	}
+	
+	public List<ArtifactWorkflowField> taskRetrieveWorkflowFields(int currenttaskTypeId, int currenttaskStatusId) throws SpiraException {
+		// Don't return fields if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.taskRetrieveWorkflowFields(projectId, currenttaskTypeId, currenttaskStatusId);
+	}
+
+	public List<ArtifactWorkflowField> taskRetrieveWorkflowFields(int projectId, int currentTaskTypeId, int currentTaskStatusId) 
+			throws SpiraException {
+		try
+		{
+			// Get the list of task statuses from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of workflow fields (inactive/required/hidden)
+			List<RemoteWorkflowField> remoteFields = soap.taskRetrieveWorkflowFields(currentTaskTypeId, currentTaskStatusId)
+					.getRemoteWorkflowField();
+			//changed from RemoteWorkflowTaskField to RemoteWorkflowField
+			
+						
+			// Convert the SOAP workflow fields into local versions
+			ArrayList<ArtifactWorkflowField> fields = new ArrayList<ArtifactWorkflowField>();
+			for (RemoteWorkflowField remoteField : remoteFields)
+			{
+				fields.add(new TaskWorkflowField(remoteField));
+			}
+			// re-authenticate
+			success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success) {
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+			// Get the list of workflow-controlled custom-properties
+			// (inactive/required/hidden)
+			List<RemoteWorkflowCustomProperty> remoteWorkflowCustomProperties = soap.taskRetrieveWorkflowCustomProperties(currentTaskTypeId,
+					currentTaskStatusId).getRemoteWorkflowCustomProperty();
+			//to fix, removed Task from object and method names
+			for (RemoteWorkflowCustomProperty remoteWorkflowCustomProperty : remoteWorkflowCustomProperties)
+			{
+				fields.add(new TaskWorkflowField(remoteWorkflowCustomProperty));
+			}
+
+			return fields;
+		}
+		catch (WebServiceException ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceTaskRetrieveWorkflowFieldsServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage ex)
+		{
+			throw new SpiraException(ex.getMessage());
+		}
+		catch (ISoapServiceTaskRetrieveWorkflowCustomPropertiesServiceFaultMessageFaultFaultMessage exception)
+		{
+			throw new SpiraException(exception.getMessage());
+		}
+		
+	}
+	//end TaskWorkflow methods
 	public ArtifactField incidentGetStatus()
 	{
 		// Don't return releases if we have no project set
@@ -1528,7 +1951,7 @@ public class SpiraImportExport
 		int projectId = this.storedProjectId.intValue();
 		return this.incidentGetType(projectId);
 	}
-
+	
 	public ArtifactField incidentGetType(int projectId)
 	{
 		try
@@ -2011,6 +2434,74 @@ public class SpiraImportExport
 		}
 		return this.taskField_TaskStatus;
 	}
+	
+	public ArtifactField taskGetType()
+	{
+		// Don't return releases if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.taskGetType(projectId);
+	}
+	
+	public ArtifactField taskGetType(int projectId) {
+		try
+		{
+			// Get the list of task types from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of types
+			List<RemoteTaskType> remoteTypes = soap.taskRetrieveTypes().getRemoteTaskType();
+
+			// Convert the SOAP release into the ArtifactField class
+			ArtifactField artifactField = new ArtifactField("TaskType");
+			ArrayList<ArtifactFieldValue> lookupValues = new ArrayList<ArtifactFieldValue>();
+			for (RemoteTaskType remoteType : remoteTypes)
+			{
+				lookupValues.add(new ArtifactFieldValue(remoteType.getTaskTypeId().intValue(), remoteType.getName().getValue()));
+			}
+			artifactField.setValues(lookupValues.toArray(new ArtifactFieldValue[0]));
+			return artifactField;
+		}
+		catch (SpiraException ex)
+		{
+			return null;
+		}
+		catch (WebServiceException ex)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceTaskRetrieveTypesServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+	}
 
 	public ArtifactField taskGetPriority()
 	{
@@ -2065,6 +2556,74 @@ public class SpiraImportExport
 			this.requirementField_Importance.setValues(lookupValues);
 		}
 		return this.requirementField_Importance;
+	}
+	
+	public ArtifactField requirementGetType()
+	{
+		// Don't return releases if we have no project set
+		if (this.storedProjectId == null)
+		{
+			return null;
+		}
+		int projectId = this.storedProjectId.intValue();
+		return this.requirementGetType(projectId);
+	}
+	
+	public ArtifactField requirementGetType(int projectId) {
+		try
+		{
+			// Get the list of requirement types from the SOAP API
+			// First we need to re-authenticate
+			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+
+			// Next we need to connect to the appropriate project
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				// throw new SpiraException (this.userName + "/" +
+				// this.password);
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
+
+			// Get the list of types
+			List<RemoteRequirementType> remoteTypes = soap.requirementRetrieveTypes().getRemoteRequirementType();
+
+			// Convert the SOAP release into the ArtifactField class
+			ArtifactField artifactField = new ArtifactField("RequirementType");
+			ArrayList<ArtifactFieldValue> lookupValues = new ArrayList<ArtifactFieldValue>();
+			for (RemoteRequirementType remoteType : remoteTypes)
+			{
+				lookupValues.add(new ArtifactFieldValue(remoteType.getRequirementTypeId().intValue(), remoteType.getName().getValue()));
+			}
+			artifactField.setValues(lookupValues.toArray(new ArtifactFieldValue[0]));
+			return artifactField;
+		}
+		catch (SpiraException ex)
+		{
+			return null;
+		}
+		catch (WebServiceException ex)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceRequirementRetrieveTypesServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
+		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -2438,7 +2997,16 @@ public class SpiraImportExport
 				TaskComment taskComment = new TaskComment(remoteComment);
 				task.getComments().add(taskComment);
 			}
-
+			// re-authenticate
+			success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+			if (!success) {
+				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
+			}
+			success = soap.connectionConnectToProject(projectId);
+			if (!success)
+			{
+				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
+			}
 			// Now get any associated attachments
 			RemoteSort remoteSort = new RemoteSort();
 			remoteSort.setPropertyName(CreateJAXBString("PropertyName", "UploadDate"));

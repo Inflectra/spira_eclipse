@@ -16,6 +16,10 @@ public class ISoapServiceDataMappingRetrieveArtifactMappingsServiceFaultMessageF
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8959307769647722339L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

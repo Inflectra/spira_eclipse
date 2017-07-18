@@ -4,7 +4,7 @@ import com.inflectra.spirateam.mylyn.core.internal.services.soap.RemoteWorkflowT
 
 public class IncidentWorkflowTransition
 {
-    protected boolean executeByDetector;
+    protected boolean executeByCreator;
     protected boolean executeByOwner;
     protected int incidentStatusIDInput;
     protected String incidentStatusNameInput;
@@ -13,10 +13,10 @@ public class IncidentWorkflowTransition
     protected String name;
     protected int workflowID;
     protected int transitionID;
-    //to get working, removed Incident from all the methods and object names
+    
     public IncidentWorkflowTransition(RemoteWorkflowTransition remoteWorkflowIncidentTransition)
     {
-        this.executeByDetector = remoteWorkflowIncidentTransition.isExecuteByCreator();
+        this.executeByCreator = remoteWorkflowIncidentTransition.isExecuteByCreator();
         //in above line changed from isExecuteByDetector() to isExecuteByCreator()
         this.executeByOwner = remoteWorkflowIncidentTransition.isExecuteByOwner();
         this.incidentStatusIDInput = remoteWorkflowIncidentTransition.getStatusIdInput();
@@ -32,16 +32,16 @@ public class IncidentWorkflowTransition
      * Gets the value of the executeByDetector property.
      * 
      */
-    public boolean isExecuteByDetector() {
-        return executeByDetector;
+    public boolean isExecuteByCreator() {
+        return executeByCreator;
     }
 
     /**
      * Sets the value of the executeByDetector property.
      * 
      */
-    public void setExecuteByDetector(boolean value) {
-        this.executeByDetector = value;
+    public void setExecuteByCreator(boolean value) {
+        this.executeByCreator = value;
     }
 
     /**

@@ -16,6 +16,10 @@ public class ISoapServiceTestCaseRetrieveServiceFaultMessageFaultFaultMessage
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4558767069659218781L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

@@ -16,6 +16,10 @@ public class ISoapServiceTestCaseRetrieveCommentsServiceFaultMessageFaultFaultMe
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5924064944325299446L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

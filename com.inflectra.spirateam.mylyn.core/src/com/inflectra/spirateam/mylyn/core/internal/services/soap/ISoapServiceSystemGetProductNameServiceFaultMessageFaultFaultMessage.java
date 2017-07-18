@@ -16,6 +16,10 @@ public class ISoapServiceSystemGetProductNameServiceFaultMessageFaultFaultMessag
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7579495335985416659L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

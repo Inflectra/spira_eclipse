@@ -16,6 +16,10 @@ public class ISoapServiceCustomPropertyRetrieveCustomListsServiceFaultMessageFau
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1984102791179076202L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

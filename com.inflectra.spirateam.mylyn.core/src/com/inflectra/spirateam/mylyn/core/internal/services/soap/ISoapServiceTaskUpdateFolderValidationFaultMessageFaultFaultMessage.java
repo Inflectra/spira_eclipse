@@ -16,6 +16,10 @@ public class ISoapServiceTaskUpdateFolderValidationFaultMessageFaultFaultMessage
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2941839023585580389L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

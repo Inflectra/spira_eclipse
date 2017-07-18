@@ -16,6 +16,10 @@ public class ISoapServiceDataMappingRemoveArtifactMappingsServiceFaultMessageFau
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5629352344938460635L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

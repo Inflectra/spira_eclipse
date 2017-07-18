@@ -16,6 +16,10 @@ public class ISoapServiceConnectionConnectToProjectServiceFaultMessageFaultFault
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2706232789094746207L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

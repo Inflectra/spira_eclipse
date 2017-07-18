@@ -16,6 +16,10 @@ public class ISoapServiceTaskCreateValidationFaultMessageFaultFaultMessage
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7660919155266218113L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

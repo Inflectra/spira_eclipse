@@ -16,6 +16,10 @@ public class ISoapServiceCustomPropertyAddDefinitionServiceFaultMessageFaultFaul
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5460585012047286023L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

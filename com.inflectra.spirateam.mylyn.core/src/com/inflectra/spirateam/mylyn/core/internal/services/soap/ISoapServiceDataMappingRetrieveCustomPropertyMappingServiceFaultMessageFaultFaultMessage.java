@@ -16,6 +16,10 @@ public class ISoapServiceDataMappingRetrieveCustomPropertyMappingServiceFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -244982167270739575L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

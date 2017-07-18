@@ -61,7 +61,9 @@ public class SpiraTeamAttributeMapper extends TaskAttributeMapper
 		String taskId = parent.getTaskData().getTaskId();
 		ArtifactType artifactType = ArtifactType.byTaskKey(taskId);
 		ArtifactAttribute attribute = ArtifactAttribute.getByTaskKey(taskAttributeKey, artifactType);
-		return (attribute != null) ? attribute.getArtifactKey() : taskAttributeKey;
+		if(attribute != null)
+			return attribute.getArtifactKey();
+		return taskAttributeKey;
 	}
 	
 	@Override
@@ -110,6 +112,9 @@ public class SpiraTeamAttributeMapper extends TaskAttributeMapper
 		{
 			return getOptions(client.releasesGet(true), true);
 		}
+		else if(ArtifactAttribute.REQUIREMENT_TYPE_ID.getArtifactKey().equals(artifactAttributeKey)) {
+			return getOptions(client.requirementGetType(), false);
+		}
 		else if (ArtifactAttribute.TASK_STATUS_ID.getArtifactKey().equals(artifactAttributeKey))
 		{
 			return getOptions(client.taskGetStatus(), false);
@@ -125,6 +130,9 @@ public class SpiraTeamAttributeMapper extends TaskAttributeMapper
 		else if (ArtifactAttribute.TASK_RELEASE_ID.getArtifactKey().equals(artifactAttributeKey))
 		{
 			return getOptions(client.releasesGet(true), true);
+		}
+		else if(ArtifactAttribute.TASK_TYPE_ID.getArtifactKey().equals(artifactAttributeKey)) {
+			return getOptions(client.taskGetType(), false);
 		}
 		else if (ArtifactAttribute.INCIDENT_DETECTED_RELEASE_ID.getArtifactKey().equals(artifactAttributeKey))
 		{
@@ -155,9 +163,18 @@ public class SpiraTeamAttributeMapper extends TaskAttributeMapper
 		{
 			return getOptions(client.incidentGetSeverity(), true);
 		}
+		else if(ArtifactAttribute.INCIDENT_COMPONENT_IDS.getArtifactKey().equals(artifactAttributeKey)) {
+			return getOptions(client.componentsGet(), true);
+		}
+		else if(ArtifactAttribute.REQUIREMENT_COMPONENT_ID.getArtifactKey().equals(artifactAttributeKey)) {
+			return getOptions(client.componentsGet(), true);
+		}
+		else if(ArtifactAttribute.TASK_COMPONENT_ID.getArtifactKey().equals(artifactAttributeKey)) {
+			return getOptions(client.componentsGet(), true);
+		}
 		return null;
 	}
-
+	
 	private static Map<String, String> getOptions(ArtifactField artifactField, boolean allowEmpty)
 	{
 		if (artifactField == null || artifactField.getValues() == null)

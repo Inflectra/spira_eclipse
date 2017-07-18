@@ -13,7 +13,7 @@ public final class RichStringBuilder
 	public RichStringBuilder()
 	{
 		builder = new StringBuilder();
-		fontStyleStack = new Stack();
+		fontStyleStack = new Stack<FontStyle>();
 	}
 
 	public RichStringBuilder append(String text)

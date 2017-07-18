@@ -16,6 +16,10 @@ public class ISoapServiceAutomationEngineRetrieveByIdServiceFaultMessageFaultFau
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3359529296986261115L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

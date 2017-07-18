@@ -16,6 +16,10 @@ public class ISoapServiceRequirementRemoveTestCoverageServiceFaultMessageFaultFa
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9127642653571138826L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

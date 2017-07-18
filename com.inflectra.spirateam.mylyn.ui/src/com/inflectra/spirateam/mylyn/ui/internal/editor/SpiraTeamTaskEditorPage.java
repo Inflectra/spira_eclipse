@@ -12,11 +12,9 @@ import org.eclipse.mylyn.tasks.ui.editors.AttributeEditorFactory;
 import org.eclipse.mylyn.tasks.ui.editors.TaskEditor;
 import org.eclipse.mylyn.tasks.ui.editors.TaskEditorInput;
 import org.eclipse.mylyn.tasks.ui.editors.TaskEditorPartDescriptor;
-import org.eclipse.mylyn.tasks.core.ITask;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 
-import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamCorePlugin;
 
 /**
@@ -25,25 +23,13 @@ import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamCorePlugin;
  */
 public class SpiraTeamTaskEditorPage extends AbstractTaskEditorPage
 {
-	private ArtifactType artifactType = null;
 	
 	public SpiraTeamTaskEditorPage(TaskEditor parentEditor)
 	{
 		super(parentEditor, SpiraTeamCorePlugin.CONNECTOR_KIND);
-
+		
 		//Need to see what kind of artifact we're displaying
 		TaskEditorInput input = parentEditor.getTaskEditorInput();
-		ITask task = input.getTask();
-		artifactType = null;
-		if (task != null)
-		{
-			//String taskKey = task.getTaskKey();
-			String taskKey = task.getTaskId();
-			if (taskKey != null)
-			{
-				artifactType = ArtifactType.byTaskKey(taskKey);
-			}
-		}
 		
 		//Set the parts that are visible
 		setNeedsPrivateSection(false);
@@ -65,29 +51,32 @@ public class SpiraTeamTaskEditorPage extends AbstractTaskEditorPage
 		{
 			TaskEditorPartDescriptor taskEditorPartDescriptor = it.next();
 			
-			if (taskEditorPartDescriptor.getId().equals(ID_PART_COMMENTS))
+			/*if (taskEditorPartDescriptor.getId().equals(ID_PART_COMMENTS))
 			{
 				//All artifacts support comments
-			}
-			if (taskEditorPartDescriptor.getId().equals(ID_PART_ACTIONS) && artifactType.equals(ArtifactType.INCIDENT))
+			}*/
+			
+			/*if (taskEditorPartDescriptor.getId().equals(ID_PART_ACTIONS) && artifactType.equals(ArtifactType.INCIDENT))
 			{
 				//Incidents use a customized Actions Part with workflow operations
+				it.remove();
+			}*/
+			
+			if(taskEditorPartDescriptor.getId().equals(ID_PART_ACTIONS)) {
+				//All artifacts use a customized Actions part with workflow operations
 				it.remove();
 			}
 		}
 		
 		//Add the new Actions Part
-		if (artifactType.equals(ArtifactType.INCIDENT))
-		{
-			descriptors.add(new TaskEditorPartDescriptor(ID_PART_ACTIONS)
-			{
-				@Override
-				public AbstractTaskEditorPart createPart()
-				{
-					return new SpiraTeamActionsPart();
-				}
-			}.setPath(PATH_ACTIONS));
-		}
+		
+		descriptors.add(new TaskEditorPartDescriptor(ID_PART_ACTIONS) {
+			@Override
+			public AbstractTaskEditorPart createPart() {
+				return new SpiraTeamActionsPart();
+			}
+		}.setPath(PATH_ACTIONS));
+		
 		
 		return descriptors;
 	}

@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.mylyn.tasks.core.TaskRepository;
 import org.eclipse.mylyn.tasks.core.data.TaskAttribute;
-import org.eclipse.mylyn.tasks.core.data.TaskAttributeMapper;
 import org.eclipse.mylyn.tasks.core.data.TaskData;
 import org.eclipse.mylyn.tasks.core.data.TaskOperation;
 import org.eclipse.mylyn.tasks.ui.TasksUiImages;
@@ -23,11 +21,15 @@ import org.eclipse.ui.forms.events.IHyperlinkListener;
 import org.eclipse.ui.forms.widgets.*;
 
 import com.inflectra.spirateam.mylyn.core.internal.ArtifactAttribute;
+import com.inflectra.spirateam.mylyn.core.internal.ArtifactType;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamRepositoryConnector;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamTaskDataHandler;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 
-
+/**
+ * Represents the new Actions menu for workflow operations
+ *
+ */
 public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 {	
 	private static final String KEY_OPERATION = "operation"; //$NON-NLS-1$
@@ -47,17 +49,36 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 	{
 		super.refresh();
 		
+		
 		//Make the hyperlinks enabled or disabled based on the workflow status field
 		TaskData taskData = getTaskData();
-		String workflowFieldStatus = taskData.getRoot().getAttribute(ArtifactAttribute.INCIDENT_TRANSITION_STATUS.getArtifactKey()).getValue();
-		//operationButtons is null
+		//getting the type of artifact
+		ArtifactType artifactType = ArtifactType.byTaskKey(taskData.getTaskId());
+		String workflowFieldStatus=null;
+		
+		if(artifactType.equals(ArtifactType.INCIDENT)) {
+			TaskAttribute attribute = taskData.getRoot().getAttribute(ArtifactAttribute.INCIDENT_TRANSITION_STATUS.getArtifactKey());
+			workflowFieldStatus = attribute.getValue();
+		}
+		else if(artifactType.equals(ArtifactType.REQUIREMENT)) {
+			TaskAttribute attribute = taskData.getRoot().getAttribute(ArtifactAttribute.REQUIREMENT_TRANSITION_STATUS.getArtifactKey());
+			workflowFieldStatus = attribute.getValue();
+		}
+		else if(artifactType.equals(ArtifactType.TASK)) {
+			TaskAttribute attribute = taskData.getRoot().getAttribute(ArtifactAttribute.TASK_TRANSITION_STATUS.getArtifactKey());
+			workflowFieldStatus = attribute.getValue();
+		}
+		
+		
 		if (operationButtons != null) {
 			for (Hyperlink button : operationButtons) {
 				button.setEnabled(workflowFieldStatus.equals(SpiraTeamUtil.WORKFLOW_TRANSITION_STATUS_ACTIVE));
 			}
 		}
-		else
-			System.out.println("operataionButtons is null");
+		else {
+			System.out.println("operationButtons is null in refresh() method in SpiraTeamActionsPart");
+			
+		}
 	}
 	
 	@Override
@@ -74,8 +95,12 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		{
 			createCategoryChooser(buttonComposite, toolkit);
 		}*/
+		
+		TaskData data=getTaskData();
+		data.getRoot();
 
 		selectedOperationAttribute = getTaskData().getRoot().getMappedAttribute(TaskAttribute.OPERATION);
+		
 		if (selectedOperationAttribute != null
 				&& TaskAttribute.TYPE_OPERATION.equals(selectedOperationAttribute.getMetaData().getType()))
 		{
@@ -126,14 +151,27 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		attachContextButton.setImage(CommonImages.getImage(TasksUiImages.CONTEXT_ATTACH));
 	}
 	
+	/**
+	 * Method called whenever workflow operations need to be added to the Mylyn UI
+	 * @param buttonComposite
+	 * @param toolkit
+	 * @param selectedOperation
+	 */
 	private void createHyperlinks(Composite buttonComposite, FormToolkit toolkit, TaskOperation selectedOperation)
 	{
 		List<TaskOperation> operations = getTaskData().getAttributeMapper().getTaskOperations(selectedOperationAttribute);
-		TaskData data=getTaskData();
-		TaskAttributeMapper mapper=data.getAttributeMapper();
+		//below is for debugging purposes only
+		/*TaskData taskData = selectedOperationAttribute.getTaskData();
+		Collection<TaskAttribute> collection = taskData.getRoot().getAttributes().values();
+		List<TaskOperation> result = new ArrayList<TaskOperation>();
+		for(TaskAttribute attribute: collection) {
+			if(TaskAttribute.TYPE_OPERATION.equals(attribute.getMetaData().getType())) {
+				result.add(TaskOperation.createFrom(attribute));
+			}
+		}*/
+		//above is for debugging purposes only
 		
-		//operations has a size of 0
-		//TODO: Figure out why it has a size of 0
+		
 		if (operations.size() > 0)
 		{
 			operationButtons = new ArrayList<Hyperlink>();
@@ -176,7 +214,6 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		public void linkActivated(HyperlinkEvent arg0)
 		{
 			//Get the operation name
-			String operationName = (String)arg0.data;
 			
 			//When an action hyperlink is clicked we need to call the function that handles this
 			TaskData taskData = getTaskData();
@@ -209,7 +246,6 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 		@Override
 		public void linkExited(HyperlinkEvent arg0)
 		{
-			// TODO Auto-generated method stub
 			
 		}
 	}

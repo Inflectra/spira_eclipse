@@ -16,6 +16,10 @@ public class ISoapServiceCustomPropertyRetrieveForArtifactTypeServiceFaultMessag
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1671008014126443811L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

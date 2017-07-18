@@ -41,7 +41,6 @@ public class Incident extends Artifact
     protected String incidentTypeName;
     protected String openerName;
     protected String ownerName;
-    protected String projectName;
     protected String detectedReleaseVersionNumber;
     protected String resolvedReleaseVersionNumber;
     protected String verifiedReleaseVersionNumber;
@@ -149,8 +148,6 @@ public class Incident extends Artifact
         this.verifiedReleaseVersionNumber = remoteIncident.getVerifiedReleaseVersionNumber().getValue();
         this.incidentStatusOpenStatus = remoteIncident.getIncidentStatusOpenStatus().getValue();
         this.componentIds = remoteIncident.getComponentIds().getValue();
-        
-        
     }
     
     /**
@@ -164,7 +161,7 @@ public class Incident extends Artifact
     	
         //First the artifact base properties
     	ExtractGeneralProperties(remoteIncident);
-
+    	
     	//Next the incident-specific ones
     	remoteIncident.setIncidentId(SpiraImportExport.CreateJAXBInteger("IncidentId",this.artifactId));
     	remoteIncident.setOwnerId(SpiraImportExport.CreateJAXBInteger("OwnerId",this.ownerId));
@@ -172,14 +169,13 @@ public class Incident extends Artifact
     	remoteIncident.setDescription(SpiraImportExport.CreateJAXBString("Description", this.description));
     	remoteIncident.setCreationDate(SpiraImportExport.CreateJAXBXMLGregorianCalendar("CreationDate", SpiraTeamUtil.convertDatesJava2Xml(this.creationDate)));
     	remoteIncident.setLastUpdateDate(SpiraTeamUtil.convertDatesJava2Xml(this.lastUpdateDate));
-
+    	
     	remoteIncident.setPriorityId(SpiraImportExport.CreateJAXBInteger("PriorityId",this.priorityId));
     	remoteIncident.setSeverityId(SpiraImportExport.CreateJAXBInteger("SeverityId",this.severityId));
     	remoteIncident.setIncidentStatusId(SpiraImportExport.CreateJAXBInteger("IncidentStatusId",this.incidentStatusId));
     	remoteIncident.setIncidentTypeId(SpiraImportExport.CreateJAXBInteger("IncidentTypeId",this.incidentTypeId));
     	remoteIncident.setOpenerId(SpiraImportExport.CreateJAXBInteger("OpenerId",this.openerId));
     	remoteIncident.setTestRunStepIds(SpiraImportExport.CreateJAXBArrayOfInt("TestRunStepIds", this.testRunStepIds));
-    	//changed above to work with a list of int's instead of a singular int
     	remoteIncident.setDetectedReleaseId(SpiraImportExport.CreateJAXBInteger("DetectedReleaseId",this.detectedReleaseId));
     	remoteIncident.setResolvedReleaseId(SpiraImportExport.CreateJAXBInteger("ResolvedReleaseId",this.resolvedReleaseId));
     	remoteIncident.setVerifiedReleaseId(SpiraImportExport.CreateJAXBInteger("VerifiedReleaseId",this.verifiedReleaseId));
@@ -320,9 +316,8 @@ public class Incident extends Artifact
     }
     
     /**
-     * Gets the value of the testRunStepIds property.
-     * 
-     *     
+     * Gets the value of the testRunStepIds property
+     * @return The value of the testRunStepIds property
      */
     public ArrayOfint getTestRunStepIds() {
         return testRunStepIds;
@@ -337,7 +332,7 @@ public class Incident extends Artifact
     }
     
     /**
-     * @param componentIds - The new value for the componentIds property.
+     * @param componentIds The new value for the componentIds property.
      */
     public void setComponentIds(ArrayOfint componentIds) {
     	if(hasChanged(this.componentIds, componentIds)) {
@@ -364,9 +359,7 @@ public class Incident extends Artifact
     /**
      * Sets the value of the testRunStepIds property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
+     * @param value The new value for the testRunStepIds property
      *     
      */
     public void setTestRunStepIds(ArrayOfint value)
@@ -671,18 +664,6 @@ public class Incident extends Artifact
      */
     public String getOwnerName() {
         return ownerName;
-    }
-
-    /**
-     * Gets the value of the projectName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getProjectName() {
-        return projectName;
     }
 
     /**

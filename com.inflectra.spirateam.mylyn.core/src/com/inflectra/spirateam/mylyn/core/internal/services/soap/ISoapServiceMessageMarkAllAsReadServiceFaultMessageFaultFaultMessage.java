@@ -16,6 +16,10 @@ public class ISoapServiceMessageMarkAllAsReadServiceFaultMessageFaultFaultMessag
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1282254744767766022L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

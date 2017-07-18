@@ -16,6 +16,10 @@ public class ISoapServiceIncidentRetrieveWorkflowCustomPropertiesServiceFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7557534635844163473L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

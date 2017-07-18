@@ -1,1 +1,0 @@
-Note that this folder (not the soap subfolder) has been cleared for 5.0 by Peter Geertsema

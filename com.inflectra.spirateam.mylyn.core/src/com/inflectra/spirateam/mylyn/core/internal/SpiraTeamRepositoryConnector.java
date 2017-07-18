@@ -203,7 +203,13 @@ public class SpiraTeamRepositoryConnector extends AbstractRepositoryConnector
 		//We need to get the project id from the cache
 		try
 		{
-			SpiraImportExport client = clientManager.getSpiraTeamClient(taskRepository);
+			SpiraImportExport client;
+			if(clientManager != null)
+				client = clientManager.getSpiraTeamClient(taskRepository);
+			else {
+				clientManager = getClientManager();
+				client = clientManager.getSpiraTeamClient(taskRepository);
+			}
 			if (client != null)
 			{
 				//Now make sure that the version is current enough

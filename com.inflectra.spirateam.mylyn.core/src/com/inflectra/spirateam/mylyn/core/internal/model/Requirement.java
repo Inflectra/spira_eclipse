@@ -1,5 +1,6 @@
 package com.inflectra.spirateam.mylyn.core.internal.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class Requirement
     protected Integer releaseId;
     protected String releaseVersionNumber;
     protected boolean summary;
-    //changed planned to estimated
     protected Integer estimatedEffort;
+    protected BigDecimal estimatedPoints;
     protected Integer componentId;
     protected Integer requirementTypeId;
     
@@ -35,11 +36,15 @@ public class Requirement
     {
 		//Requirement-specific attributes
     	TYPE("requirement.type"),
+    	TYPE_ID("requirement.typeId"),
 		STATUS_ID("requirement.statusId"),
 		AUTHOR_ID("requirement.authorId"),
 		IMPORTANCE_ID("requirement.importanceId"),
 		RELEASE_ID("requirement.releaseId"),
-		PLANNED_EFFORT("requirement.plannedEffort"),
+		ESTIMATED_EFFORT("requirement.estimatedEffort"),
+		ESTIMATED_POINTS("requirement.estimatedPoints"),
+		TRANSITION_STATUS("requirement.internal.transitionStatus"),
+		COMPONENT_ID("requirement.componentId"),
 		COMMENT("requirement.comment");
 		
 		public static Key fromKey(String name)
@@ -84,6 +89,7 @@ public class Requirement
     	
     	//Set the various member variables
         this.name = remoteRequirement.getName().getValue();
+        this.projectName = remoteRequirement.getProjectName().getValue();
         this.description = remoteRequirement.getDescription().getValue();
         this.creationDate = SpiraTeamUtil.convertDatesXml2Java(remoteRequirement.getCreationDate());
         this.lastUpdateDate = SpiraTeamUtil.convertDatesXml2Java(remoteRequirement.getLastUpdateDate());
@@ -100,6 +106,7 @@ public class Requirement
         this.estimatedEffort = remoteRequirement.getEstimatedEffort().getValue();
         this.componentId = remoteRequirement.getComponentId().getValue();
         this.requirementTypeId = remoteRequirement.getRequirementTypeId();
+        this.estimatedPoints = remoteRequirement.getEstimatePoints().getValue();
     }
     
     /**
@@ -126,9 +133,11 @@ public class Requirement
     	remoteRequirement.setStatusId(SpiraImportExport.CreateJAXBInteger("StatusId", this.statusId));
     	remoteRequirement.setReleaseId(SpiraImportExport.CreateJAXBInteger("ReleaseId", this.releaseId));
     	remoteRequirement.setImportanceId(SpiraImportExport.CreateJAXBInteger("ImportanceId", this.importanceId));
-    	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("PlannedEffort", this.estimatedEffort));
+    	remoteRequirement.setEstimatedEffort(SpiraImportExport.CreateJAXBInteger("EstimatedEffort", this.estimatedEffort));
     	remoteRequirement.setRequirementTypeId(this.requirementTypeId);
-            	
+    	remoteRequirement.setComponentId(SpiraImportExport.CreateJAXBInteger("ComponentId", this.componentId));
+    	remoteRequirement.setEstimatePoints(SpiraImportExport.CreateJAXBBigDecimal("EstimatePoints", this.estimatedPoints));
+        
         return remoteRequirement;
     }
     
@@ -191,7 +200,7 @@ public class Requirement
     
     /**
      * 
-     * @return - The value of the componentId property
+     * @return The value of the componentId property
      */
     public Integer getComponentId() {
     	return componentId;
@@ -199,7 +208,7 @@ public class Requirement
     
     /**
      * 
-     * @param componentId - The new value of the componentId property
+     * @param componentId The new value of the componentId property
      */
     public void setComponentId(Integer componentId) {
     	this.componentId=componentId;
@@ -304,7 +313,6 @@ public class Requirement
 
     /**
      * Gets the value of the estimatedEffort property.
-     * Changed from planned in 4.0 to estimated in 5.0
      * @return
      *     possible object is
      *     {@link Integer }
@@ -316,7 +324,6 @@ public class Requirement
 
     /**
      * Sets the value of the estimatedEffort property.
-     * Changed from planned in 4.0 to estimated in 5.0
      * @param value
      *     allowed object is
      *     {@link Integer }
@@ -348,5 +355,21 @@ public class Requirement
 	 */
 	public Integer getRequirementTypeId() {
 		return this.requirementTypeId;
+	}
+	
+	/**
+	 * 
+	 * @return The value of the estimatedPoints property
+	 */
+	public BigDecimal getEstimatedPoints() {
+		return this.estimatedPoints;
+	}
+	
+	/**
+	 * Sets the value of the estimatedEffort property
+	 * @param estimatedPoints The new value for the estimatedPoints property
+	 */
+	public void setEstimatedPoints(BigDecimal estimatedPoints) {
+		this.estimatedPoints = estimatedPoints;
 	}
 }

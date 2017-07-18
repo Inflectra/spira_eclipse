@@ -16,6 +16,10 @@ public class ISoapServiceDataSyncSystemRetrieveByIdServiceFaultMessageFaultFault
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1872326941091101066L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

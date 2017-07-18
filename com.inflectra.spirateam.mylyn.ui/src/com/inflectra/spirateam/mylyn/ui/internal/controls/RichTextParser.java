@@ -51,7 +51,7 @@ public final class RichTextParser
 	private class RichTextContentHandler extends DefaultHandler
 	{
 
-		private Stack<List> stylesStack = new Stack<List>();
+		private Stack<List<FontStyle>> stylesStack = new Stack<List<FontStyle>>();
 		private String lastTextChunk = null;
 
 		@Override
@@ -72,7 +72,7 @@ public final class RichTextParser
 				return;
 			}
 
-			List lastStyles = lastFontStyles(true);
+			List<FontStyle> lastStyles = lastFontStyles(true);
 			if (lastStyles != null)
 			{
 				StyleRange range = transform(lastStyles);
@@ -94,12 +94,12 @@ public final class RichTextParser
 				return;
 			}
 
-			List lastStyles = lastFontStyles(false);
+			List<FontStyle> lastStyles = lastFontStyles(false);
 			if (lastTextChunk == null)
 			{
 				if (lastStyles == null)
 				{
-					lastStyles = new ArrayList();
+					lastStyles = new ArrayList<FontStyle>();
 					stylesStack.add(lastStyles);
 				}
 			}
@@ -162,9 +162,9 @@ public final class RichTextParser
 			return range;
 		}
 
-		private List lastFontStyles(boolean remove)
+		private List<FontStyle> lastFontStyles(boolean remove)
 		{
-			List lastStyles = null;
+			List<FontStyle> lastStyles = null;
 			if (stylesStack.size() > 0)
 			{
 				if (remove)

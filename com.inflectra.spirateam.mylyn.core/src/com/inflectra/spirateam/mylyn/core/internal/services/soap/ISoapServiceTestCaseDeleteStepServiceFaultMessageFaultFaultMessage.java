@@ -16,6 +16,10 @@ public class ISoapServiceTestCaseDeleteStepServiceFaultMessageFaultFaultMessage
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -784288537765738212L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

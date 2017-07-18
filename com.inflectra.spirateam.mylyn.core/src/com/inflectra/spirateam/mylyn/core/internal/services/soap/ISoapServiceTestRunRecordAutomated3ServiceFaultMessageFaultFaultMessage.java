@@ -16,6 +16,10 @@ public class ISoapServiceTestRunRecordAutomated3ServiceFaultMessageFaultFaultMes
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4142979497188766946L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

@@ -36,7 +36,7 @@ import com.inflectra.spirateam.mylyn.ui.internal.SpiraTeamImages;
 
 public class RichText extends Composite
 {
-	private List<StyleRange> cachedStyles = Collections.synchronizedList(new LinkedList());
+	private List<StyleRange> cachedStyles = Collections.synchronizedList(new LinkedList<StyleRange>());
 
 	private ToolBar toolBar;
 	private StyledText styledText;
@@ -280,7 +280,7 @@ public class RichText extends Composite
 		// handle the pasting of styles would be to access the Clipboard
 		// directly and
 		// parse the RTF text.
-		cachedStyles = Collections.synchronizedList(new LinkedList());
+		cachedStyles = Collections.synchronizedList(new LinkedList<StyleRange>());
 		Point sel = styledText.getSelectionRange();
 		int startX = sel.x;
 		for (int i = sel.x; i <= sel.x + sel.y - 1; i++)
@@ -533,9 +533,9 @@ public class RichText extends Composite
 		return toolBar;
 	}
 
-	private List translateStyle(StyleRange range)
+	private List<FontStyle> translateStyle(StyleRange range)
 	{
-		List list = new ArrayList();
+		List<FontStyle> list = new ArrayList<FontStyle>();
 
 		if ((range.fontStyle & SWT.BOLD) != 0)
 		{

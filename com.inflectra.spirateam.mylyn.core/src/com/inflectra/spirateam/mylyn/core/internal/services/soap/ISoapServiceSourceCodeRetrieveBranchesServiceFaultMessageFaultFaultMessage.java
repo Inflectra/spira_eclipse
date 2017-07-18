@@ -16,6 +16,10 @@ public class ISoapServiceSourceCodeRetrieveBranchesServiceFaultMessageFaultFault
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8999636524354257906L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */

@@ -5,8 +5,11 @@ package com.inflectra.spirateam.mylyn.core.internal;
 
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -55,6 +58,10 @@ public class SpiraTeamUtil
 	public static boolean ValidateServerVersion (SpiraImportExport spiraImportExport)
 	{
 		boolean current = false;
+		if(spiraImportExport.getProductVersionPrimary() >= 5) {
+			//v5.0 or higher
+			current=true;
+		}
 		if (spiraImportExport.getProductVersionPrimary() >= 4)
 		{
 			//v4.0 or higher
@@ -131,6 +138,14 @@ public class SpiraTeamUtil
 		return null;
 	}
 	
+	public static List<String> createStringListFromIntegerList(List<Integer> input) {
+		List<String> out = new ArrayList<String>();
+		for(Number n: input) {
+			out.add(n.intValue() + "");
+		}
+		return out;
+	}
+	
 	public static Date convertDatesXml2Java(XMLGregorianCalendar xmlCal)
 	{
 		if (xmlCal == null)
@@ -203,10 +218,6 @@ public class SpiraTeamUtil
 			return new SpiraException(ex.getMessage());				
 		}
 		Node exceptionMessageNode = exceptionTypeNode.getFirstChild();
-		if (exceptionTypeNode == null)
-		{
-			return new SpiraException(ex.getMessage());				
-		}
 		String exceptionType = exceptionTypeNode.getLocalName();
 		String exceptionMessage = exceptionMessageNode.getTextContent();
 		
@@ -246,10 +257,10 @@ public class SpiraTeamUtil
 		ServiceFaultMessage faultInfo = null;
 		try
 		{
-			Class noparams[] = {};
-			Class cls = ex.getClass();
+			Class<?> noparams[] = {};
+			Class<? extends Exception> cls = ex.getClass();
 			Method getFaultInfo = cls.getDeclaredMethod("getFaultInfo", noparams);
-			faultInfo = (ServiceFaultMessage)getFaultInfo.invoke(ex, null);
+			faultInfo = (ServiceFaultMessage)getFaultInfo.invoke(ex);
 		}
 		catch (Exception ex2)
 		{
@@ -340,6 +351,23 @@ public class SpiraTeamUtil
 			double effortHours = (double)effortInt / 60.0;
 			String effortHoursRounded = onePlace.format(effortHours);
 			return effortHoursRounded;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param componentId
+	 * @param projectId
+	 * @param client
+	 * @return string representation of the component
+	 */
+	public static String componentIdsToString(Integer componentId, int projectId, SpiraImportExport client) {
+		if(componentId == null)
+			return "";
+		else {
+			Map<String, String> map = SpiraTeamAttributeMapper.getRepositoryOptions(client, ArtifactAttribute.TASK_COMPONENT_ID.getArtifactKey());
+			String out=map.get(componentId + "");
+			return out;
 		}
 	}
 	

@@ -36,6 +36,7 @@ public class Task extends Artifact
     protected Integer projectedEffort;
     protected int creatorId;
     protected Integer taskTypeId;
+    protected Integer componentId;
     
     //Contains the collection of comments
     protected List<TaskComment> comments = new ArrayList<TaskComment>();
@@ -44,6 +45,7 @@ public class Task extends Artifact
     {
 		//Task-specific attributes
     	TYPE("task.type"),
+    	TYPE_ID("task.typeId"),
 		STATUS_ID("task.statusId"),
 		REQUIREMENT_ID("task.requirementId"),
 		RELEASE_ID("task.releaseId"),
@@ -57,6 +59,8 @@ public class Task extends Artifact
 		REMAINING_EFFORT("task.remainingEffort"),
 		PROJECTED_EFFORT("task.projectedEffort"),
 		REQUIREMENT_NAME("task.requirementName"),
+		TRANSITION_STATUS("task.internal.transitionStatus"),
+		COMPONENT_ID("task.componentId"),
 		COMMENT("task.comment");
 
 		public static Key fromKey(String name)
@@ -106,6 +110,7 @@ public class Task extends Artifact
         this.releaseId = remoteTask.getReleaseId().getValue();
         this.creatorId = remoteTask.getCreatorId().getValue();
         this.name = remoteTask.getName().getValue();
+        this.projectName = remoteTask.getProjectName().getValue();
         this.description = remoteTask.getDescription().getValue();
         this.creationDate = SpiraTeamUtil.convertDatesXml2Java(remoteTask.getCreationDate());
         this.lastUpdateDate = SpiraTeamUtil.convertDatesXml2Java(remoteTask.getLastUpdateDate());
@@ -127,10 +132,11 @@ public class Task extends Artifact
         this.releaseVersionNumber = remoteTask.getReleaseVersionNumber().getValue();
         this.requirementName = remoteTask.getRequirementName().getValue();
         this.taskTypeId = remoteTask.getTaskTypeId();
+        this.componentId = remoteTask.getComponentId().getValue();
     }
     
     /**
-     * Converts this object into its soap equivalent
+     * Converts this object into its SOAP equivalent
      * @return
      */
     public RemoteTask toSoapObject()
@@ -160,7 +166,7 @@ public class Task extends Artifact
     	remoteTask.setActualEffort(SpiraImportExport.CreateJAXBInteger("ActualEffort", this.actualEffort));
     	remoteTask.setRemainingEffort(SpiraImportExport.CreateJAXBInteger("RemainingEffort", this.remainingEffort));
     	remoteTask.setTaskTypeId(this.taskTypeId);
-            	
+           
         return remoteTask;
     }
     
@@ -186,6 +192,21 @@ public class Task extends Artifact
      */
     public int getTaskStatusId() {
         return taskStatusId;
+    }
+    
+    /**
+     * @return The value of the componentId property
+     */
+    public Integer getComponentId() {
+    	return componentId;
+    }
+    
+    /**
+     * Sets the value of the componentId property
+     * @param componentId The new value for the componentId property
+     */
+    public void setComponentId(Integer componentId) {
+    	this.componentId = componentId;
     }
 
     /**

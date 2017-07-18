@@ -16,6 +16,10 @@ public class ISoapServiceTestCaseCreateParameterTokenServiceFaultMessageFaultFau
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1779304538989476770L;
+	/**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
