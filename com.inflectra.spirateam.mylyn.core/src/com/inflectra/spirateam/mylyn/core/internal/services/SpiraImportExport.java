@@ -128,6 +128,13 @@ public class SpiraImportExport
 		}
 		return jaxBoolean;
 	}
+	
+	public static JAXBElement<ArrayOfRemoteLinkedArtifact> CreateJAXBArrayOfRemoteLinkedArtifact(String fieldName, ArrayOfRemoteLinkedArtifact value) {
+		JAXBElement<ArrayOfRemoteLinkedArtifact> out = new JAXBElement<>(new QName(WEB_SERVICE_NAMESPACE_DATA_OBJECTS, fieldName), ArrayOfRemoteLinkedArtifact.class, value);
+		if(value == null)
+			out.setNil(true);
+		return out;
+	}
 
 	/***
 	 * Creates a JAXB web service IntegerList element from a Java IntegerList
@@ -754,11 +761,14 @@ public class SpiraImportExport
 
 			// Call the appropriate method
 			RemoteDocument remoteDocument = artifactAttachment.toSoapObject();
-			//remoteDocument.setArtifactId(SpiraImportExport.CreateJAXBInteger("ArtifactId", artifactId));
-			//Could be a problem
-			remoteDocument.setArtifactTypeId(CreateJAXBInteger("ArtifactId", artifactId).getValue());
 			
-			remoteDocument.setArtifactTypeId(SpiraImportExport.CreateJAXBInteger("ArtifactTypeId", artifactTypeId).getValue());
+			RemoteLinkedArtifact remoteLinkedArtifact = new RemoteLinkedArtifact();
+			remoteLinkedArtifact.setArtifactId(artifactId);
+			remoteLinkedArtifact.setArtifactTypeId(artifactTypeId);
+			ArrayOfRemoteLinkedArtifact array = new ArrayOfRemoteLinkedArtifact();
+			array.getRemoteLinkedArtifact().add(remoteLinkedArtifact);
+			
+			remoteDocument.setAttachedArtifacts(CreateJAXBArrayOfRemoteLinkedArtifact("AttachedArtifacts", array));
 			remoteDocument = soap.documentAddFile(remoteDocument, attachmentData);
 
 			// See if we have to add a new comment

@@ -36,7 +36,7 @@ public enum ArtifactAttribute
 	//Requirement attributes
 	REQUIREMENT_TYPE(Requirement.Key.TYPE, Messages.RequirementAttribute_Type, TaskAttribute.TASK_KIND, TaskAttribute.TYPE_SHORT_TEXT, "RequirementType"),
 	REQUIREMENT_STATUS_ID(Requirement.Key.STATUS_ID, Messages.RequirementAttribute_StatusId, TaskAttribute.STATUS, TaskAttribute.TYPE_SINGLE_SELECT, "", Flag.ATTRIBUTE),
-	REQUIREMENT_AUTHOR_ID(Requirement.Key.AUTHOR_ID, Messages.RequirementAttribute_AuthorId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.PEOPLE, Flag.READ_ONLY),
+	REQUIREMENT_AUTHOR_ID(Requirement.Key.AUTHOR_ID, Messages.RequirementAttribute_AuthorId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SINGLE_SELECT, "", Flag.PEOPLE),
 	REQUIREMENT_IMPORTANCE_ID(Requirement.Key.IMPORTANCE_ID, Messages.RequirementAttribute_ImportanceId, TaskAttribute.PRIORITY, TaskAttribute.TYPE_SINGLE_SELECT, "ImportanceId", Flag.ATTRIBUTE),
 	REQUIREMENT_RELEASE_ID(Requirement.Key.RELEASE_ID, Messages.RequirementAttribute_ReleaseId, TaskAttribute.VERSION, TaskAttribute.TYPE_SINGLE_SELECT, "ReleaseId",  Flag.ATTRIBUTE),
 	REQUIREMENT_ESTIMATED_EFFORT(Requirement.Key.ESTIMATED_EFFORT, Messages.RequirementAttribute_EstimatedEffort, null, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.ATTRIBUTE, Flag.READ_ONLY),
@@ -47,7 +47,7 @@ public enum ArtifactAttribute
 	REQUIREMENT_COMPONENT_ID(Requirement.Key.COMPONENT_ID, Messages.TaskAttribute_ComponentId, TaskAttribute.COMPONENT, TaskAttribute.TYPE_SINGLE_SELECT, "ComponentId", Flag.ATTRIBUTE),
 	
 	//Incident attributes
-	INCIDENT_OPENER_ID(Incident.Key.OPENER_ID, Messages.IncidentAttribute_OpenerId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SHORT_TEXT, "", Flag.PEOPLE, Flag.READ_ONLY),
+	INCIDENT_OPENER_ID(Incident.Key.OPENER_ID, Messages.IncidentAttribute_OpenerId, TaskAttribute.USER_REPORTER, TaskAttribute.TYPE_SINGLE_SELECT, "", Flag.PEOPLE),
 	INCIDENT_PRIORITY_ID(Incident.Key.PRIORITY_ID, Messages.IncidentAttribute_PriorityId, TaskAttribute.PRIORITY, TaskAttribute.TYPE_SINGLE_SELECT, "PriorityId", Flag.ATTRIBUTE),
 	INCIDENT_SEVERITY_ID(Incident.Key.SEVERITY_ID, Messages.IncidentAttribute_SeverityId, TaskAttribute.SEVERITY, TaskAttribute.TYPE_SINGLE_SELECT, "SeverityId", Flag.ATTRIBUTE),
 	INCIDENT_STATUS_ID(Incident.Key.STATUS_ID, Messages.IncidentAttribute_StatusId, TaskAttribute.STATUS, TaskAttribute.TYPE_SINGLE_SELECT, "", Flag.ATTRIBUTE, Flag.READ_ONLY),

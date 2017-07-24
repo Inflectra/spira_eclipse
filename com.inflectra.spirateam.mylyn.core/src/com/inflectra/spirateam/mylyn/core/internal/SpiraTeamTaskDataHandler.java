@@ -1223,6 +1223,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 		//Now we need to set the requirement-specific attributes
 		//requirement.setAuthorId(getTaskAttributeIntValue(taskData, ArtifactAttribute.REQUIREMENT_AUTHOR_ID));
 		requirement.setReleaseId(getTaskAttributeIntegerValue(taskData, ArtifactAttribute.REQUIREMENT_RELEASE_ID));
+		requirement.setAuthorId(getTaskAttributeIntegerValue(taskData, ArtifactAttribute.REQUIREMENT_AUTHOR_ID));
 		requirement.setImportanceId(getTaskAttributeIntegerValue(taskData, ArtifactAttribute.REQUIREMENT_IMPORTANCE_ID));
 		requirement.setEstimatedPoints(getTaskAttributeBigDecimalValue(taskData, ArtifactAttribute.REQUIREMENT_ESTIMATED_POINTS));
 		requirement.setStatusId(getTaskAttributeIntegerValue(taskData, ArtifactAttribute.REQUIREMENT_STATUS_ID));
@@ -1230,7 +1231,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 		requirement.setRequirementTypeId(getTaskAttributeIntegerValue(taskData, ArtifactAttribute.REQUIREMENT_TYPE_ID));
 		
 		//Now we need to set the custom property values
-		updateCustomPropertiesFromTaskData(requirement, taskData);
+
 		
 		//Now we need to see if any new comments were submitted
 		TaskAttribute newCommentAttribute = taskData.getRoot().getAttribute(ArtifactAttribute.REQUIREMENT_NEW_COMMENT.getArtifactKey());
@@ -1512,6 +1513,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 
 		//Now we need to set the incident-specific attributes
 		incident.setPriorityId(getTaskAttributeIntegerValue(taskData, ArtifactAttribute.INCIDENT_PRIORITY_ID));
+		incident.setOpenerId(getTaskAttributeIntegerValue(taskData, ArtifactAttribute.INCIDENT_OPENER_ID));
 		incident.setSeverityId(getTaskAttributeIntegerValue(taskData, ArtifactAttribute.INCIDENT_SEVERITY_ID));
 		incident.setIncidentStatusId(getTaskAttributeIntValue(taskData, ArtifactAttribute.INCIDENT_STATUS_ID));
 		incident.setIncidentTypeId(getTaskAttributeIntValue(taskData, ArtifactAttribute.INCIDENT_TYPE_ID));
@@ -1859,7 +1861,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 			Requirement requirement = (Requirement)artifact;
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_TYPE, ArtifactType.REQUIREMENT.getDisplayName(), projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_STATUS_ID, requirement.getStatusId() + "", projectId);
-			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_AUTHOR_ID, requirement.getAuthorName(), projectId);
+			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_AUTHOR_ID, requirement.getAuthorId() + "", projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_IMPORTANCE_ID, requirement.getImportanceId() + "", projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_RELEASE_ID, requirement.getReleaseId() + "", projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.REQUIREMENT_ESTIMATED_EFFORT, SpiraTeamUtil.effortValuesToString(requirement.getEstimatedEffort()), projectId);
@@ -1900,7 +1902,7 @@ public class SpiraTeamTaskDataHandler extends AbstractTaskDataHandler
 		{
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.URL, repository.getRepositoryUrl() + ArtifactType.INCIDENT.getBaseUrl() + artifact.getArtifactId(), projectId);
 			Incident incident = (Incident)artifact;
-			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_OPENER_ID, incident.getOpenerName(), projectId);
+			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_OPENER_ID, incident.getOpenerId() + "", projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_PRIORITY_ID, incident.getPriorityId() + "", projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_SEVERITY_ID, incident.getSeverityId() + "", projectId);
 			updateTaskAttribute(data, changedAttributes, ArtifactAttribute.INCIDENT_STATUS_ID, incident.getIncidentStatusId() + "", projectId);
