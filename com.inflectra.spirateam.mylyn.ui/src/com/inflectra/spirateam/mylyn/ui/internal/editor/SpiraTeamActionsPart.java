@@ -27,7 +27,7 @@ import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamTaskDataHandler;
 import com.inflectra.spirateam.mylyn.core.internal.SpiraTeamUtil;
 
 /**
- * Represents the new Actions menu for workflow operations
+ * Represents the new Operations menu for workflow operations
  *
  */
 public class SpiraTeamActionsPart extends AbstractTaskEditorPart
@@ -160,17 +160,6 @@ public class SpiraTeamActionsPart extends AbstractTaskEditorPart
 	private void createHyperlinks(Composite buttonComposite, FormToolkit toolkit, TaskOperation selectedOperation)
 	{
 		List<TaskOperation> operations = getTaskData().getAttributeMapper().getTaskOperations(selectedOperationAttribute);
-		//below is for debugging purposes only
-		/*TaskData taskData = selectedOperationAttribute.getTaskData();
-		Collection<TaskAttribute> collection = taskData.getRoot().getAttributes().values();
-		List<TaskOperation> result = new ArrayList<TaskOperation>();
-		for(TaskAttribute attribute: collection) {
-			if(TaskAttribute.TYPE_OPERATION.equals(attribute.getMetaData().getType())) {
-				result.add(TaskOperation.createFrom(attribute));
-			}
-		}*/
-		//above is for debugging purposes only
-		
 		
 		if (operations.size() > 0)
 		{

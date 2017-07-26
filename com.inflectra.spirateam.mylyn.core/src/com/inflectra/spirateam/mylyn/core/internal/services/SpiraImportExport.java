@@ -1428,8 +1428,6 @@ public class SpiraImportExport
 			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
 			}
 
@@ -1437,20 +1435,13 @@ public class SpiraImportExport
 			success = soap.connectionConnectToProject(projectId);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
 			}
-			// re-authenticate
-			success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
-			if (!success)
-			{
-				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
-			}
+			
 			// Get the list of workflow transitions
 			List<RemoteWorkflowTransition> remoteTransitions = soap.incidentRetrieveWorkflowTransitions(currentTypeId, currentStatusId, isDetector,
 					isOwner).getRemoteWorkflowTransition();
-
+			
 			// Convert the SOAP transitions into local versions
 			ArrayList<IncidentWorkflowTransition> transitions = new ArrayList<IncidentWorkflowTransition>();
 			for (RemoteWorkflowTransition remoteTransition : remoteTransitions)
@@ -1508,8 +1499,6 @@ public class SpiraImportExport
 			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
 			}
 
@@ -1517,15 +1506,12 @@ public class SpiraImportExport
 			success = soap.connectionConnectToProject(projectId);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
 			}
 
 			// Get the list of workflow fields (inactive/required/hidden)
 			List<RemoteWorkflowField> remoteFields = soap.incidentRetrieveWorkflowFields(currentIncidentTypeId, currentIncidentStatusId)
 					.getRemoteWorkflowField();
-			//changed from RemoteWorkflowIncidentField to RemoteWorkflowField
 			
 						
 			// Convert the SOAP workflow fields into local versions
@@ -1545,7 +1531,7 @@ public class SpiraImportExport
 			// (inactive/required/hidden)
 			List<RemoteWorkflowCustomProperty> remoteWorkflowCustomProperties = soap.incidentRetrieveWorkflowCustomProperties(currentIncidentTypeId,
 					currentIncidentStatusId).getRemoteWorkflowCustomProperty();
-			//to fix, removed Incident from object and method names
+			
 			for (RemoteWorkflowCustomProperty remoteWorkflowCustomProperty : remoteWorkflowCustomProperties)
 			{
 				fields.add(new IncidentWorkflowField(remoteWorkflowCustomProperty));
@@ -1595,8 +1581,6 @@ public class SpiraImportExport
 			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
 			}
 
@@ -1604,10 +1588,9 @@ public class SpiraImportExport
 			success = soap.connectionConnectToProject(projectId);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
 			}
+			
 			// Get the list of workflow transitions
 			List<RemoteWorkflowTransition> remoteTransitions = soap.requirementRetrieveWorkflowTransitions(currentTypeId, currentStatusId, isDetector,
 					isOwner).getRemoteWorkflowTransition();
@@ -1657,8 +1640,6 @@ public class SpiraImportExport
 			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
 			}
 
@@ -1666,8 +1647,6 @@ public class SpiraImportExport
 			success = soap.connectionConnectToProject(projectId);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
 			}
 
@@ -1971,8 +1950,6 @@ public class SpiraImportExport
 			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
 			}
 
@@ -1980,8 +1957,6 @@ public class SpiraImportExport
 			success = soap.connectionConnectToProject(projectId);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
 			}
 
@@ -2570,7 +2545,6 @@ public class SpiraImportExport
 	
 	public ArtifactField requirementGetType()
 	{
-		// Don't return releases if we have no project set
 		if (this.storedProjectId == null)
 		{
 			return null;
@@ -2587,8 +2561,6 @@ public class SpiraImportExport
 			boolean success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthenticationException(Messages.SpiraImportExport_UnableToAuthenticate);
 			}
 
@@ -2596,8 +2568,6 @@ public class SpiraImportExport
 			success = soap.connectionConnectToProject(projectId);
 			if (!success)
 			{
-				// throw new SpiraException (this.userName + "/" +
-				// this.password);
 				throw new SpiraAuthorizationException(NLS.bind(Messages.SpiraImportExport_UnableToConnectToProject, projectId));
 			}
 
@@ -2628,6 +2598,7 @@ public class SpiraImportExport
 		}
 		catch (ISoapServiceRequirementRetrieveTypesServiceFaultMessageFaultFaultMessage exception)
 		{
+			exception.printStackTrace();
 			return null;
 		}
 		catch (ISoapServiceConnectionAuthenticate2ServiceFaultMessageFaultFaultMessage exception)

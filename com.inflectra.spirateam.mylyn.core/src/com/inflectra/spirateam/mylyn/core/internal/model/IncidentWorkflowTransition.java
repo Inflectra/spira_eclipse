@@ -195,4 +195,9 @@ public class IncidentWorkflowTransition
     public void setTransitionID(int value) {
         this.transitionID = value;
     }
+    
+    @Override
+    public String toString() {
+    	return this.name;
+    }
 }

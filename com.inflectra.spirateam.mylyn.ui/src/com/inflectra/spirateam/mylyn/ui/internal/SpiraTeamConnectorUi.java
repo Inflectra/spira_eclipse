@@ -102,7 +102,6 @@ public class SpiraTeamConnectorUi extends AbstractRepositoryConnectorUi
 	{
 		
 		//Display the appropriate overlay depending on artifact type
-		//ArtifactType artifactType = ArtifactType.byTaskKey(repositoryTask.getTaskKey());
 		ArtifactType artifactType = ArtifactType.byTaskKey(repositoryTask.getTaskId());
 		
 		if (artifactType == ArtifactType.REQUIREMENT)
