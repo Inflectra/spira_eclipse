@@ -201,4 +201,9 @@ public class TaskWorkflowTransition {
     public void setTransitionID(int value) {
         this.transitionID = value;
     }
+    
+    @Override
+    public String toString() {
+    	return this.name;
+    }
 }
