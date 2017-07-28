@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.inflectra.spirateam.mylyn.feature_4.0.0.201305101649.jar" id="com.inflectra.spirateam.mylyn.feature" version="4.0.0.201305101649">
-      <category name="spirateam"/>
+   <description url="https://www.inflectra.com/Downloads/Eclipse">
+      SpiraTeam update site
+   </description>
+   <feature url="features/com.inflectra.spirateam.mylyn.featurew_5.0.0.201707281107.jar" id="com.inflectra.spirateam.mylyn.featurew" version="5.0.0.201707281107">
+      <category name="SpiraTeam"/>
    </feature>
-   <feature url="features/com.inflectra.spirateam.mylyn.feature_4.0.0.201305101751.jar" id="com.inflectra.spirateam.mylyn.feature" version="4.0.0.201305101751">
-      <category name="spirateam"/>
-   </feature>
-   <category-def name="spirateam" label="SpiraTeam">
+   <category-def name="SpiraTeam" label="SpiraTeam Plugin">
       <description>
          Features related to SpiraTest, SpiraPlan and SpiraTeam from Inflectra Corporation.
       </description>

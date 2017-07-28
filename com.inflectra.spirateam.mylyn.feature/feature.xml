@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.inflectra.spirateam.mylyn.featurew"
-      label="SpiraTeam Feature"
+      label="SpiraTeam"
       version="5.0.0.qualifier"
       provider-name="Inflectra Corporation"
       plugin="com.inflectra.spirateam.mylyn.ui">
 
-   <description url="http://www.inflectra.com/SpiraTeam/Downloads">
+   <description url="https://www.inflectra.com/SpiraTeam/Downloads">
       This feature integrates SpiraTeam with Eclipse using the Mylyn
 task-focused interface. Useful for developers who want to be
 able to review requirements, complete tasks and fix incidents
@@ -439,7 +439,7 @@ or its licensors’ names or any of their respective trademarks.
    </license>
 
    <url>
-      <update label="Inflectra Download Site" url="http://www.inflectra.com/Downloads/Eclipse"/>
+      <update label="Inflectra Download Site" url="https://www.inflectra.com/Downloads/Eclipse"/>
    </url>
 
    <requires>
@@ -454,7 +454,7 @@ or its licensors’ names or any of their respective trademarks.
       <import plugin="org.eclipse.ui.forms" version="3.4.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.mylyn.context.core" version="3.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.mylyn.tasks.ui" version="3.8.0" match="greaterOrEqual"/>
-      <import plugin="com.inflectra.spirateam.mylyn.core" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="com.inflectra.spirateam.mylyn.core" version="5.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.mylyn.commons.core" version="3.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.mylyn.commons.net" version="3.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.mylyn.commons.ui" version="3.8.0" match="greaterOrEqual"/>
